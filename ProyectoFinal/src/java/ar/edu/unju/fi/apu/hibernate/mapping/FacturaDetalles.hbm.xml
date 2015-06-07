@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/06/2015 16:27:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="final_visual" name="ar.edu.unju.fi.apu.dominio.hibernate.FacturaDetalles" optimistic-lock="version" table="factura_detalles">
+    <id name="codigo" type="int">
+      <column name="codigo"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="ar.edu.unju.fi.apu.dominio.hibernate.EncabezadoFacturas" fetch="select" name="encabezadoFacturas">
+      <column length="9" name="factura" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="ar.edu.unju.fi.apu.dominio.hibernate.Productos" fetch="select" name="productos">
+      <column name="producto" not-null="true"/>
+    </many-to-one>
+    <property name="precioVenta" type="big_decimal">
+      <column name="precio_venta" not-null="true" precision="5"/>
+    </property>
+    <property name="cantidad" type="int">
+      <column name="cantidad" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>
