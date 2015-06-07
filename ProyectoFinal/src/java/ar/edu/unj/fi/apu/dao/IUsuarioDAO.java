@@ -5,7 +5,7 @@
  */
 package ar.edu.unj.fi.apu.dao;
 
-import ar.edu.unju.fi.apu.modelo.dominio.Usuarios;
+import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
 
 
 
@@ -14,6 +14,6 @@ import ar.edu.unju.fi.apu.modelo.dominio.Usuarios;
  * @author Ivan
  */
 public interface IUsuarioDAO {
-      Usuarios validarUsuario(String nombreUsuario, String password);
-      Usuarios obtenerUsuario(String nombreUsuario);
+      Usuario validarUsuario(String nombreUsuario, String password);
+      Usuario obtenerUsuario(String nombreUsuario);
 }
