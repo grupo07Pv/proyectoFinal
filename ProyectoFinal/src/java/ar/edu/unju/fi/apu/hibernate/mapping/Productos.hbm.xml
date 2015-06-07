@@ -2,18 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 07/06/2015 16:27:15 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="final_visual" name="ar.edu.unju.fi.apu.dominio.hibernate.Productos" optimistic-lock="version" table="productos">
+  <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.Producto" optimistic-lock="version" table="productos">
     <id name="codigo" type="int">
       <column name="codigo"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="ar.edu.unju.fi.apu.dominio.hibernate.TipoProducto" fetch="select" name="tipoProducto">
+    <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" fetch="select" name="tipoProducto">
       <column name="producto" not-null="true"/>
     </many-to-one>
     <property name="nombre" type="string">
       <column length="45" name="nombre" not-null="true"/>
     </property>
-    <property name="precio" type="big_decimal">
+    <property name="precio" type="double">
       <column name="precio" not-null="true" precision="5"/>
     </property>
     <property name="stock" type="int">
@@ -25,11 +25,5 @@
     <property name="estado" type="boolean">
       <column name="estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="facturaDetalleses" table="factura_detalles">
-      <key>
-        <column name="producto" not-null="true"/>
-      </key>
-      <one-to-many class="ar.edu.unju.fi.apu.dominio.hibernate.FacturaDetalles"/>
-    </set>
   </class>
 </hibernate-mapping>

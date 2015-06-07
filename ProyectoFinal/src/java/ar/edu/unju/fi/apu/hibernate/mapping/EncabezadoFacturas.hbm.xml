@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 07/06/2015 16:27:15 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="final_visual" name="ar.edu.unju.fi.apu.dominio.hibernate.EncabezadoFacturas" optimistic-lock="version" table="encabezado_facturas">
+  <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.EncabezadoFactura" optimistic-lock="version" table="encabezado_facturas">
     <id name="codigo" type="string">
       <column length="9" name="codigo"/>
       <generator class="assigned"/>
@@ -13,11 +13,5 @@
     <property name="cliente" type="string">
       <column length="45" name="cliente"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="facturaDetalleses" table="factura_detalles">
-      <key>
-        <column length="9" name="factura" not-null="true"/>
-      </key>
-      <one-to-many class="ar.edu.unju.fi.apu.dominio.hibernate.FacturaDetalles"/>
-    </set>
   </class>
 </hibernate-mapping>

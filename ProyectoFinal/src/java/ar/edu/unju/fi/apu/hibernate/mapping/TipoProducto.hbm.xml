@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 07/06/2015 16:27:15 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="final_visual" name="ar.edu.unju.fi.apu.dominio.hibernate.TipoProducto" optimistic-lock="version" table="tipo_producto">
+  <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" optimistic-lock="version" table="tipo_producto">
     <id name="codigo" type="int">
       <column name="codigo"/>
       <generator class="assigned"/>
@@ -13,11 +13,5 @@
     <property name="estado" type="boolean">
       <column name="estado" not-null="true"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="productoses" table="productos">
-      <key>
-        <column name="producto" not-null="true"/>
-      </key>
-      <one-to-many class="ar.edu.unju.fi.apu.dominio.hibernate.Productos"/>
-    </set>
   </class>
 </hibernate-mapping>
