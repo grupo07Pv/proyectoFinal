@@ -1,5 +1,5 @@
 package ar.edu.unju.fi.apu.modelo.dominio;
-// Generated 07/06/2015 16:27:13 by Hibernate Tools 4.3.1
+// Generated 08/06/2015 18:13:05 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -13,13 +13,13 @@ public class FacturaDetalle  implements java.io.Serializable {
      private int codigo;
      private EncabezadoFactura encabezadoFacturas;
      private Producto productos;
-     private double precioVenta;
+     private BigDecimal precioVenta;
      private int cantidad;
 
     public FacturaDetalle() {
     }
 
-    public FacturaDetalle(int codigo, EncabezadoFactura encabezadoFacturas, Producto productos, double precioVenta, int cantidad) {
+    public FacturaDetalle(int codigo, EncabezadoFactura encabezadoFacturas, Producto productos, BigDecimal precioVenta, int cantidad) {
        this.codigo = codigo;
        this.encabezadoFacturas = encabezadoFacturas;
        this.productos = productos;
@@ -48,11 +48,11 @@ public class FacturaDetalle  implements java.io.Serializable {
     public void setProductos(Producto productos) {
         this.productos = productos;
     }
-    public  double getPrecioVenta() {
+    public BigDecimal getPrecioVenta() {
         return this.precioVenta;
     }
     
-    public void setPrecioVenta(double precioVenta) {
+    public void setPrecioVenta(BigDecimal precioVenta) {
         this.precioVenta = precioVenta;
     }
     public int getCantidad() {

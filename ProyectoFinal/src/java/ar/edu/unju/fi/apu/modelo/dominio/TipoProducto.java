@@ -1,5 +1,5 @@
 package ar.edu.unju.fi.apu.modelo.dominio;
-// Generated 07/06/2015 16:27:13 by Hibernate Tools 4.3.1
+// Generated 08/06/2015 18:13:05 by Hibernate Tools 4.3.1
 
 
 
@@ -13,7 +13,7 @@ public class TipoProducto  implements java.io.Serializable {
      private int codigo;
      private String nombre;
      private boolean estado;
-    
+ 
 
     public TipoProducto() {
     }
@@ -24,7 +24,7 @@ public class TipoProducto  implements java.io.Serializable {
         this.nombre = nombre;
         this.estado = estado;
     }
-
+ 
    
     public int getCodigo() {
         return this.codigo;
@@ -47,8 +47,7 @@ public class TipoProducto  implements java.io.Serializable {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
-
+ 
 
 
 
