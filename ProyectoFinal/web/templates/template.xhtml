@@ -36,12 +36,12 @@
                     </h:form>
                 </ui:insert>
             </div>
-            <div>
+            <div id="contenedor_central">
                 <div id="left">
                     <ui:insert name="left">
                         <p:imageSwitch effect="fade" id="fadeEffect">
                             <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
-                                <p:graphicImage value="/resources/images/#{imagen}" id="image" />
+                                <p:graphicImage value="/resources/images/#{imagen}" id="image"/>
                             </ui:repeat>
                         </p:imageSwitch>
                     </ui:insert>
