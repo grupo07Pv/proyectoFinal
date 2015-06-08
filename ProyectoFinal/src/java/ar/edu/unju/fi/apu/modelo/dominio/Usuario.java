@@ -1,5 +1,5 @@
 package ar.edu.unju.fi.apu.modelo.dominio;
-// Generated 07/06/2015 16:27:13 by Hibernate Tools 4.3.1
+// Generated 08/06/2015 18:13:05 by Hibernate Tools 4.3.1
 
 
 
