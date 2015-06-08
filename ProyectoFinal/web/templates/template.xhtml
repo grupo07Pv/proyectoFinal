@@ -8,7 +8,6 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <script src="../resources/js/calendar_es.js" type="text/javascript"></script>
         <title>Sistema de Ventas</title>
@@ -19,27 +18,33 @@
             <div id="top">
                 <ui:insert name="top">
                     <div id="titulo">
-                        <center><h1>VEGAMES</h1></center>
+                        <center><h1>VeGaMES</h1></center>
                     </div>
-                   <h:form rendered="true">
+                    <h:form rendered="true">
                         <p:menubar>
-                                    <p:menuitem value="Facturas" />
-                                <p:submenu label="Productos">
-                                    <p:menuitem value="Productos" />
-                                    <p:menuitem value="Tipo de Productos" />
-                                </p:submenu>
-                                <p:menuitem value="Volver" />
-                                <f:facet name="options">
-                                    <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}  "/>
-                                    <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
-                                </f:facet>
-                            </p:menubar>
+                            <p:menuitem value="Facturas" />
+                            <p:submenu label="Productos">
+                                <p:menuitem value="Productos" />
+                                <p:menuitem value="Tipo de Productos" />
+                            </p:submenu>
+                            <p:menuitem value="Volver" />
+                            <f:facet name="options">
+                                <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado}  "/>
+                                <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                            </f:facet>
+                        </p:menubar>
                     </h:form>
                 </ui:insert>
             </div>
             <div>
                 <div id="left">
-                    <ui:insert name="left">Left</ui:insert>
+                    <ui:insert name="left">
+                        <p:imageSwitch effect="fade" id="fadeEffect">
+                            <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
+                                <p:graphicImage value="/resources/images/#{imagen}" id="image" />
+                            </ui:repeat>
+                        </p:imageSwitch>
+                    </ui:insert>
                 </div>
                 <div id="content" class="left_content">
                     <ui:insert name="content">Content</ui:insert>
@@ -47,7 +52,7 @@
             </div>
             <div id="bottom">
                 <ui:insert name="bottom">
-                    <center>Desarrollado por Alumnos Grupo 07 Programación Visual - UNJu - Analista Programador Universitario</center>
+                    <center>Desarrollado por Grupo 07 de Programación Visual 2015 - UNJu - Analista Programador Universitario</center>
                 </ui:insert>
             </div>
         </div>
