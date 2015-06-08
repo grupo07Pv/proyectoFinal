@@ -45,6 +45,17 @@ public class LoginFormBean {
         }
         return resultado;
     }
+    
+    public String getNombreUsuarioValidado() {
+        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
+        return usuario.getNombreUsuario();
+    }
+    public String cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        return "/index?faces-redirect=true";
+    }
     /**
      * @return the nombreUsuario
      */
