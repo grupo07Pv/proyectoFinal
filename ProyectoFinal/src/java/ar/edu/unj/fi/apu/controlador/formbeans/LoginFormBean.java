@@ -29,7 +29,7 @@ public class LoginFormBean {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario válido", "Usuario válido");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValido", usuario);
-            resultado = "menu?faces-redirect=true";
+            resultado = "pruebaEntrada?faces-redirect=true";
         } else {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credencial inválida", "Credencial inválida");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
@@ -46,6 +46,14 @@ public class LoginFormBean {
         FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         return "/index?faces-redirect=true";
+    }
+    public boolean verificarSesion() {
+        boolean sesionValida = false;
+        Usuario usuario = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
+        if (usuario!=null){
+            sesionValida = true;
+        }
+        return sesionValida ;
     }
     /**
      * @return the nombreUsuario
