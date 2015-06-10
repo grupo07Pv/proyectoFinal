@@ -22,7 +22,7 @@ public class TipoProducto  implements java.io.Serializable {
     public TipoProducto(int codigo, String nombre, boolean estado) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.estado = estado;
+        this.estado = true;
     }
  
    

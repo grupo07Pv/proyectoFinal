@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <div id="content" class="left_content"> 
+            <ui:define name="content">
+                <p:growl id="grwMensajeTipoProductos" showDetail="true" widgetVar="mensajesTipoProductos"/>
+                <p:panel id="pnlTipoProductos" >
+                    <h:form id="frTipoProductos" >
+                        <p:dataTable id="tblTipoProductos" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip"
+                                     paginator="true" rows="5">
+                            <p:column headerText="Codigo" style="width: 65px">
+                                <p:outputLabel value="#{tip.codigo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="width: 110px">
+                                <p:outputLabel value="#{tip.nombre}"/>
+                            </p:column>
+                          <!--  <p:column headerText="Editar" style="width: 38px;">
+                                        <p:commandButton icon="ui-icon-pencil" update=":frmModificacionTipoProducto:dlgModificacionTipoProducto"
+                                                         oncomplete="PF('modificacionTipoProducto').show()" actionListener="#{propietarioFormBean.obtenerPropietario(p)}"/>
+                            </p:column>
+                          -->
+                        </p:dataTable>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+            </div>
+        </ui:composition>
+
+    </body>
+</html>

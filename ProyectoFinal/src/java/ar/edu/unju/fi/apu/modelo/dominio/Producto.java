@@ -30,7 +30,7 @@ public class Producto  implements java.io.Serializable {
         this.precio = precio;
         this.stock = stock;
         this.foto = foto;
-        this.estado = estado;
+        this.estado = true;
     }
 
    
