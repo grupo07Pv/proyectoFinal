@@ -13,8 +13,8 @@ import java.util.List;
  * @author Ivan
  */
 public interface ITipoProductoDAO {
-     public void agregarProducto (TipoProducto tipoProducto);
-    public void modificarProducto (TipoProducto tipoProducto);
-    public void eliminarProducto (TipoProducto tipoProducto);
+     public void agregarTipoProducto (TipoProducto tipoProducto);
+    public void modificarTipoProducto (TipoProducto tipoProducto);
+    public void eliminarTipoProducto (TipoProducto tipoProducto);
     public List<TipoProducto> obtenerTodos();
 }

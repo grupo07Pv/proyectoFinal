@@ -21,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
 public class TipoProductoDAOImp implements ITipoProductoDAO{
 
     @Override
-    public void agregarProducto(TipoProducto tipoProducto) {
+    public void agregarTipoProducto(TipoProducto tipoProducto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(tipoProducto);
@@ -30,7 +30,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
     }
 
     @Override
-    public void modificarProducto(TipoProducto tipoProducto) {
+    public void modificarTipoProducto(TipoProducto tipoProducto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(tipoProducto);
@@ -39,7 +39,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
     }
 
     @Override
-    public void eliminarProducto(TipoProducto tipoProducto) {
+    public void eliminarTipoProducto(TipoProducto tipoProducto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(tipoProducto);

@@ -14,7 +14,7 @@
             <ui:define name="content">
                 <p:growl id="grwMensajeTipoProductos" showDetail="true" widgetVar="mensajesTipoProductos"/>
                 <p:panel id="pnlTipoProductos" >
-                    <h:form id="frTipoProductos" >
+                    <h:form id="frmTipoProductos" >
                         <p:dataTable id="tblTipoProductos" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip"
                                      paginator="true" rows="5">
                             <p:column headerText="Codigo" style="width: 65px">
@@ -23,14 +23,43 @@
                             <p:column headerText="Nombre" style="width: 110px">
                                 <p:outputLabel value="#{tip.nombre}"/>
                             </p:column>
-                          <!--  <p:column headerText="Editar" style="width: 38px;">
+                            <p:column headerText="Editar" style="width: 38px;">
                                         <p:commandButton icon="ui-icon-pencil" update=":frmModificacionTipoProducto:dlgModificacionTipoProducto"
-                                                         oncomplete="PF('modificacionTipoProducto').show()" actionListener="#{propietarioFormBean.obtenerPropietario(p)}"/>
+                                                         oncomplete="PF('modificacionTipoProducto').show()" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tip)}"/>
                             </p:column>
-                          -->
                         </p:dataTable>
+                        <br/>
+                        <p:commandButton id="btnCrearTipoProducto" value="Nuevo Tipo de Producto" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
+                                         oncomplete="PF('altaTipoProducto').show()" update="frmAltaTipoProducto:dlgAltaTipoProducto" />       
                     </h:form>
                 </p:panel>
+                
+                <h:form id="frmAltaTipoProducto">
+                    <p:dialog id="dlgAltaTipoProducto" resizable="false" modal="true" showEffect="explode" hideEffect="explode"
+                              widgetVar="altaTipoProducto" header="Alta Tipo Producto">
+                        <h:panelGrid id="pnlAltaTipoProducto" columns="2" cellspacing="3">
+                            <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                            <p:inputText id="txtCodigo" required="true" size="11" maxlength="11"
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/> 
+                            <p:outputLabel for="txtNombre" value="Nombre: "/>
+                            <p:inputText id="txtCodigo" required="true" size="40" maxlength="40"
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                            <h:panelGroup/>
+                            <p:commandButton  id="btnNuevoTipoProducto" value="GRABAR" update=":grwMensajeTipoProductos"
+                                              actionListener="#{tipoProductoFormBean.visualizarVentanaConfirmaAlta()}"/>
+                        </h:panelGrid>      
+                    </p:dialog>
+                </h:form>
+                
+                <h:form id="frmConfirmaAltaTipoProducto">
+                    <p:confirmDialog id="dlgConfirmaAltaTipoProducto" message="¿Confirma Alta de Tipo Producto?" 
+                                     header="Confirmacion de Operacion" severity="alert" widgetVar="confirmaAltaTipoProducto">
+                        <p:commandButton icon="btnConfirmaAltaTipoProducto" value="SI" 
+                                         update=":frmTipoProductos:tblTipoProductos" actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
+                        <p:commandButton icon="btnNoConfirmaAltaTipoProducto" value="NO" 
+                                         oncomplete="PF('confirmaAltaTipoProducto').hide();PF('altaTipoProducto').hide()"/>
+                    </p:confirmDialog>
+                </h:form>
             </ui:define>
             </div>
         </ui:composition>
