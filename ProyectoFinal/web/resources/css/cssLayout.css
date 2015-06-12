@@ -9,6 +9,7 @@
 
 #contenedor_central{
     height: 500px;
+    
 }
 #bottom {
     position: relative;
@@ -19,6 +20,7 @@
 #left {
     width: 60em;
     margin:  auto;
+   padding-left: 12em;
 }
 
 #right {
