@@ -17,21 +17,28 @@
         <div id="contenedor">  
             <div id="top">
                 <ui:insert name="top">
-                    <div id="titulo">
-                        <center><h1>VeGaMES</h1></center>
-                    </div>
-                    <h:form rendered="true">
-                        <p:menubar>
-                            <p:menuitem value="Facturas" />
-                            <p:submenu label="Productos">
-                                <p:menuitem value="Productos" />
-                                <p:menuitem value="Tipo de Productos" outcome="/vistas/tipoProductos.xhtml"/>
-                            </p:submenu>
-                            <p:menuitem value="Volver" />
-                            <f:facet name="options">
+                    <p:menubar  id="menuSesion">
+                        <f:facet name="options">
                                 <p:outputLabel value="Bienvenido  "/>
                                 <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
-                            </f:facet>
+                         </f:facet>
+                    </p:menubar>
+                    <h:form rendered="true" id="formTop" >
+                        <p:menubar style="padding-top: 10px; 
+                                            background-color: #000000   ;
+                                              color: #ffffff;">
+                            <p:menuitem  ><p:graphicImage style="padding-top: 10px"  value="/resources/images/1.jpg" /></p:menuitem>
+                             <p:menuitem  > <h1>VeGaMES</h1></p:menuitem>
+                            <p:menuitem style="margin-top: 35px;
+                                                margin-left: 40px;
+                                                 color: #ffffff;" value="Facturas" />
+                            <p:submenu   style="margin-top: 35px;
+                                                color:#ffffff" label="Productos" >
+                                <p:menuitem value="Productos" />
+                                <p:menuitem  value="Tipo de Productos" outcome="/vistas/tipoProductos.xhtml"/>
+                            </p:submenu>
+                            <p:menuitem style="margin-top: 35px;
+                                                color: #ffffff;" value="Volver" />     
                         </p:menubar>
                     </h:form>
                 </ui:insert>

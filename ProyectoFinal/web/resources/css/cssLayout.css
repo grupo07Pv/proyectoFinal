@@ -1,16 +1,10 @@
 #top {
     position: relative;
-    background-color: #036fab;
-    color: white;
-    padding: 5px;
     margin: 0px 0px 10px 0px;
 }
 #contenedor{
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.7);
-    margin: 0 auto;
-    padding: 2px;
-    text-align: left;
-    width: 1060px;
+    margin: 0 auto; 
+    text-align: left;  
 }
 
 #contenedor_central{
@@ -23,10 +17,8 @@
     margin: 10px 0px 0px 0px;
 }
 #left {
-    float: left;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
+    width: 60em;
+    margin:  auto;
 }
 
 #right {
@@ -53,3 +45,27 @@
     padding: 5px;
     margin: 0px 170px 0px 170px;
 }
+
+#menuSesion{
+    font-size: 0.9em;
+    padding-bottom: 12px;
+    height: 20px;
+    background-color: #E0E0E0;
+    border-color: #E0E0E0;
+    margin-bottom: 20px;
+}
+
+body{
+    background-color: #909090 
+}
+
+#formTop{
+    width: 60em;
+    margin:  auto;
+    border: 4px;
+    border:solid;
+    border-color: #484848;
+    border-width: 2px;
+    border-radius: 5px;
+}
+
