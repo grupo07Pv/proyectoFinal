@@ -56,5 +56,17 @@ public class ProductoDAOImp implements IProductoDAO{
         List productos = criteria.list();
         return productos;
     }
+
+    @Override
+    public Producto obtenerProducto(int codigo) {
+        Producto producto=null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria =session.createCriteria(Producto.class);
+        criteria.add(Restrictions.eq("codigo", codigo));
+        if (!(criteria.list().isEmpty())){
+            producto=(Producto) criteria.list().get(0);
+        }
+        return producto;
+    }
     
 }

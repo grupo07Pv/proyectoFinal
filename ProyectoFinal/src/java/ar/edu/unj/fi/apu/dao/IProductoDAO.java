@@ -17,4 +17,5 @@ public interface IProductoDAO {
     public void modificarProducto (Producto producto);
     public void eliminarProducto (Producto producto);
     public List<Producto> obtenerTodos();
+    public Producto obtenerProducto(int codigo);
 }

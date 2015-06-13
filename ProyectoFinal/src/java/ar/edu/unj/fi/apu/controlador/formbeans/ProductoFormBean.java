@@ -9,7 +9,9 @@ import ar.edu.unj.fi.apu.controlador.beans.ProductoBean;
 import ar.edu.unj.fi.apu.dao.IProductoDAO;
 import ar.edu.unj.fi.apu.dao.imp.mysql.ProductoDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Producto;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -17,7 +19,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -79,8 +84,40 @@ public class ProductoFormBean {
         IProductoDAO productoDAO = new ProductoDAOImp();
         try{
             InputStream inputStream = this.archivo.getInputstream();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] bytes = new byte [16384];
+            while ((nRead = inputStream.read(bytes,0,bytes.length)) != -1){
+                buffer.write(bytes, 0,nRead);
+            }
+            buffer.flush();
+            this.productoBean.getProducto().setFoto(buffer.toByteArray());
+            System.out.println(this.productoBean.getProducto().getFoto().length);
         }catch(Exception e){
         
+        }
+        productoDAO.modificarProducto(this.productoBean.getProducto());
+        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificacionProducto').hide();PF('modificacionProducto').hide()");
+    }
+    public void limpiarFormulario(){
+        this.productoBean.setProducto(new Producto());
+    }
+    
+    public StreamedContent getArchivoFoto() throws IOException{
+        IProductoDAO productoDAO = new ProductoDAOImp();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE){
+            return new DefaultStreamedContent();
+        }
+        else{
+            String codigo = context.getExternalContext().getRequestParameterMap().get("codigo");
+            Producto producto = productoDAO.obtenerProducto(Integer.parseInt(codigo));
+            if(producto.getFoto()==null){
+                return null;
+            }else{
+                return new DefaultStreamedContent(new ByteArrayInputStream(producto.getFoto()));
+            }
         }
     }
     
