@@ -24,8 +24,7 @@
                                 <p:outputLabel value="#{tip.nombre}"/>
                             </p:column>
                             <p:column headerText="Editar" style="width: 38px;">
-                                        <p:commandButton icon="ui-icon-pencil" update=":frmModificacionTipoProducto:dlgModificacionTipoProducto"
-                                                         oncomplete="PF('modificacionTipoProducto').show()" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tip)}"/>
+                                        <p:commandButton icon="ui-icon-pencil" />
                             </p:column>
                         </p:dataTable>
                         <br/>
@@ -47,8 +46,7 @@
                             <p:inputText id="txtNombre" required="true" size="45" maxlength="45" 
                                          value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
                             <h:panelGroup/>
-                            <p:commandButton  id="btnNuevoTipoProducto" value="GRABAR" update=":grwMensajeTipoProductos"
-                                              actionListener="#{tipoProductoFormBean.visualizarVentanaConfirmaAlta()}"/>
+                            <p:commandButton  id="btnNuevoTipoProducto" type="button" value="GRABAR" onclick="PF('confirmaAltaTipoProducto').show()"/>
                         </h:panelGrid>      
                     </p:dialog>
                 </h:form>
