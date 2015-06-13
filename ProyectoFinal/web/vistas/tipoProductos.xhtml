@@ -64,6 +64,34 @@
                     </p:confirmDialog>
                 </h:form>
                 
+                <h:form id="frmModificacionTipoProducto">
+                    <p:dialog id="dlgModificacionTipoProducto" resizable="false" modal="true" showEffect="explode" hideEffect="explode"
+                              widgetVar="modificacionTipoProducto" header="Modificacion Tipo Producto">
+                        <h:panelGrid id="pnlModificacionTipoProducto" columns="2" cellspacing="3">
+                            <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                            <p:inputText id="txtCodigo" required="true" size="11" maxlength="11"
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}">
+                                <f:convertNumber integerOnly="true"/>
+                            </p:inputText> 
+                            <p:outputLabel for="txtNombre" value="Nombre: "/>
+                            <p:inputText id="txtNombre" required="true" size="45" maxlength="45" 
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                            <h:panelGroup/>
+                            <p:commandButton  id="btnModificarTipoProducto" type="button" value="MODIFICAR" onclick="PF('confirmaModificacionTipoProducto').show()"/>
+                        </h:panelGrid>      
+                    </p:dialog>
+                </h:form>
+                
+                <h:form id="frmConfirmaModificacionTipoProducto">
+                    <p:confirmDialog id="dlgModificacionAltaTipoProducto" message="¿Confirma Modificacion de Tipo Producto?" 
+                                     header="Confirmacion de Operacion" severity="alert" widgetVar="confirmaModificacionTipoProducto">
+                        <p:commandButton icon="btnConfirmaModificacionTipoProducto" value="SI" 
+                                         update=":frmTipoProductos:tblTipoProductos" actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
+                        <p:commandButton icon="btnNoConfirmaModificacionTipoProducto" value="NO" 
+                                         oncomplete="PF('confirmaModificacionTipoProducto').hide();PF('modificacionTipoProducto').hide()"/>
+                    </p:confirmDialog>
+                </h:form>
+                
                 <h:form id="frmConfirmaBajaTipoProducto">
                     <p:confirmDialog id="dlgConfirmaBajaTipoProducto" message="¿Confirma Baja de Tipo Producto?" 
                                      header="Confirmacion de Operacion" severity="alert" widgetVar="confirmaBajaTipoProducto">
