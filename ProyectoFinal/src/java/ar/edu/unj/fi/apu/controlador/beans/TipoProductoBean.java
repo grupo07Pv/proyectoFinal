@@ -21,6 +21,7 @@ public class TipoProductoBean {
      * Creates a new instance of TipoProductoBean
      */
     public TipoProductoBean() {
+        tipoProducto = new TipoProducto();
     }
 
     public TipoProducto getTipoProducto() {

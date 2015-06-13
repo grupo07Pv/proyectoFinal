@@ -30,7 +30,7 @@
                         </p:dataTable>
                         <br/>
                         <p:commandButton id="btnCrearTipoProducto" value="Nuevo Tipo de Producto" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
-                                         oncomplete="PF('altaTipoProducto').show()" update="frmAltaTipoProducto:dlgAltaTipoProducto" />       
+                                         oncomplete="PF('altaTipoProducto').show()" update=":frmAltaTipoProducto:dlgAltaTipoProducto" />       
                     </h:form>
                 </p:panel>
                 
@@ -40,9 +40,11 @@
                         <h:panelGrid id="pnlAltaTipoProducto" columns="2" cellspacing="3">
                             <p:outputLabel for="txtCodigo" value="Codigo: "/>
                             <p:inputText id="txtCodigo" required="true" size="11" maxlength="11"
-                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/> 
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}">
+                                <f:convertNumber integerOnly="true"/>
+                            </p:inputText> 
                             <p:outputLabel for="txtNombre" value="Nombre: "/>
-                            <p:inputText id="txtCodigo" required="true" size="40" maxlength="40"
+                            <p:inputText id="txtNombre" required="true" size="45" maxlength="45" 
                                          value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
                             <h:panelGroup/>
                             <p:commandButton  id="btnNuevoTipoProducto" value="GRABAR" update=":grwMensajeTipoProductos"
