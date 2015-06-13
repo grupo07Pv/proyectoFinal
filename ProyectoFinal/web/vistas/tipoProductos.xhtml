@@ -27,6 +27,9 @@
                                         <p:commandButton icon="ui-icon-pencil" update=":frmModificacionTipoProducto:dlgModificacionTipoProducto"
                                                          oncomplete="PF('modificacionTipoProducto').show()" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tip)}"/>
                             </p:column>
+                            <p:column headerText="Eliminar" style="width: 38px;">
+                                <p:commandButton icon="ui-icon-trash" onclick="PF('')"/>
+                            </p:column>
                         </p:dataTable>
                         <br/>
                         <p:commandButton id="btnCrearTipoProducto" value="Nuevo Tipo de Producto" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
@@ -60,6 +63,16 @@
                                          update=":frmTipoProductos:tblTipoProductos" actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
                         <p:commandButton icon="btnNoConfirmaAltaTipoProducto" value="NO" 
                                          oncomplete="PF('confirmaAltaTipoProducto').hide();PF('altaTipoProducto').hide()"/>
+                    </p:confirmDialog>
+                </h:form>
+                
+                <h:form id="frmConfirmaBajaTipoProducto">
+                    <p:confirmDialog id="dlgConfirmaBajaTipoProducto" message="¿Confirma Baja de Tipo Producto?" 
+                                     header="Confirmacion de Operacion" severity="alert" widgetVar="confirmaBajaTipoProducto">
+                        <p:commandButton icon="btnConfirmaBajaTipoProducto" value="SI" 
+                                         update=":frmTipoProductos:tblTipoProductos" actionListener="#{tipoProductoFormBean.eliminarTipoProducto()}"/>
+                        <p:commandButton icon="btnNoConfirmaBajaTipoProducto" value="NO" 
+                                         oncomplete="PF('confirmaBajaTipoProducto').hide()"/>
                     </p:confirmDialog>
                 </h:form>
             </ui:define>
