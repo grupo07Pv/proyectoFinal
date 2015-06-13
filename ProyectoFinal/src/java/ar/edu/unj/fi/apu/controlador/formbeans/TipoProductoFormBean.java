@@ -9,6 +9,7 @@ import ar.edu.unj.fi.apu.controlador.beans.TipoProductoBean;
 import ar.edu.unj.fi.apu.dao.ITipoProductoDAO;
 import ar.edu.unj.fi.apu.dao.imp.mysql.TipoProductoDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,7 +24,7 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean
 @RequestScoped
-public class TipoProductoFormBean {
+public class TipoProductoFormBean implements Serializable{
     @ManagedProperty (value = "#{tipoProductoBean}")
     private TipoProductoBean tipoProductoBean;
     /**
