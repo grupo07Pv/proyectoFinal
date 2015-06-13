@@ -6,6 +6,7 @@
 package ar.edu.unj.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -15,7 +16,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class TipoProductoBean {
+public class TipoProductoBean implements Serializable{
     private TipoProducto tipoProducto;
     /**
      * Creates a new instance of TipoProductoBean
