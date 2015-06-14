@@ -29,7 +29,7 @@
                             </p:column>
                         </p:dataTable>
                         <br/>
-                        <p:commandButton type="button" value="Agregar" onclick="PF('altaTipoProd').show()"/>
+                        <p:commandButton type="button" value="Agregar" onclick="PF('altaTipoProd').show();"/>
                     </h:form>   
                 </p:panel>
 
@@ -38,8 +38,9 @@
                               widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
                         <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
                             <p:outputLabel for="txtCodigo" value="Codigo: "/> 
-                            <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
-
+                            <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}">
+                                <f:convertNumber integerOnly="true"/>
+                            </p:inputText>
                             <p:outputLabel for="txtNombre" value="Nombre: "/>
                             <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
                                          value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
