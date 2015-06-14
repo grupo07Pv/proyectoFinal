@@ -13,7 +13,7 @@
         <title>Sistema de Ventas</title>
         <style>
 
-</style>
+        </style>
     </h:head>
 
     <h:body >
@@ -22,26 +22,26 @@
                 <ui:insert name="top">
                     <p:menubar  id="menuSesion">
                         <f:facet name="options">
-                                <p:outputLabel value="Bienvenido  "/>
-                                <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
-                         </f:facet>
+                            <p:outputLabel value="Bienvenido  "/>
+                            <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                        </f:facet>
                     </p:menubar>
                     <h:form rendered="true" id="formTop" >
                         <p:menubar style="padding-top: 10px; 
-                                              background-color:#000000 ;
-                                              color: #ffffff;">
+                                   background-color:#000000 ;
+                                   color: #ffffff;">
                             <p:menuitem  ><p:graphicImage style="padding-top: 10px; width: 75px; height: 75px;"  value="/resources/images/logo.png"/></p:menuitem>
-                             <p:menuitem  > <h1>VeGaMES</h1></p:menuitem>
+                            <p:menuitem  > <h1>VeGaMES</h1></p:menuitem>
                             <p:menuitem style="margin-top: 35px;
-                                                margin-left: 40px;
-                                                 color: #ffffff;" value="Facturas" />
+                                        margin-left: 40px;
+                                        color: #ffffff;" value="Facturas" />
                             <p:submenu   style="margin-top: 35px;
-                                                color:#ffffff" label="Productos" >
+                                         color:#ffffff" label="Productos" >
                                 <p:menuitem value="Productos" />
                                 <p:menuitem  value="Tipo de Productos" outcome="/vistas/tipoProductos.xhtml"/>
                             </p:submenu>
                             <p:menuitem style="margin-top: 35px;
-                                                color: #ffffff;" value="Volver" />     
+                                        color: #ffffff;" value="Volver" />     
                         </p:menubar>
                     </h:form>
                 </ui:insert>
@@ -51,7 +51,7 @@
                     <ui:insert name="left">
                         <p:imageSwitch effect="fade" id="fadeEffect">
                             <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
-                                <p:graphicImage value="/resources/images/#{imagen}" id="image"/>
+                                <p:graphicImage value="/resources/images/#{imagen}" id="image" style="width: 350px; height: 200px;"/>
                             </ui:repeat>
                         </p:imageSwitch>
                     </ui:insert>
@@ -60,30 +60,30 @@
                     <ui:insert name="content">Content</ui:insert>
                 </div>
             </div>
-           
-                <ui:insert name="bottom">
-                    <div class="footer" align="center" id="iconos">
-                        <ui:insert name="content" ><p style="font-size: 20px;
-                                                            font-weight: bold;
-                                                            color: #ffffff">Tambien puedes seguirnos en</p></ui:insert>
-    
-   			<a href="https://es-la.facebook.com/"><h:graphicImage url="/resources/images/fb.png" alt=""/></a>
-   			<a href="https://twitter.com/"><h:graphicImage url="/resources/images/tw.png" alt=""/></a>
-    			<a href="https://plus.google.com/"><h:graphicImage url="/resources/images/go.png" alt=""/></a>
-		</div>
-                    <br/>
-                    
-                    <div class="marcas">
-                        
-                          <a href="https://es-la.facebook.com/"><h:graphicImage style="margin-left: 50px;
-                                                                                       margin-right: 105px" url="/resources/images/steel.png" alt=""/></a>
-                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/benq.png" alt=""/></a>
-                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/geforce.png" alt=""/></a>
-                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/radeon.png" alt=""/></a>
-                          <a href="https://es-la.facebook.com/"><h:graphicImage  url="/resources/images/xfx.png" alt=""/></a>
-                    </div>
-                </ui:insert>
-        
+
+            <ui:insert name="bottom">
+                <div class="footer" align="center" id="iconos">
+                    <ui:insert name="content" ><p style="font-size: 20px;
+                                                  font-weight: bold;
+                                                  color: #ffffff">Tambien puedes seguirnos en</p></ui:insert>
+
+                    <a href="https://es-la.facebook.com/"><h:graphicImage url="/resources/images/fb.png" alt=""/></a>
+                    <a href="https://twitter.com/"><h:graphicImage url="/resources/images/tw.png" alt=""/></a>
+                    <a href="https://plus.google.com/"><h:graphicImage url="/resources/images/go.png" alt=""/></a>
+                </div>
+                <br/>
+
+                <div class="marcas">
+
+                    <a href="https://es-la.facebook.com/"><h:graphicImage style="margin-left: 50px;
+                                                                          margin-right: 105px" url="/resources/images/steel.png" alt=""/></a>
+                    <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/benq.png" alt=""/></a>
+                    <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/geforce.png" alt=""/></a>
+                    <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/radeon.png" alt=""/></a>
+                    <a href="https://es-la.facebook.com/"><h:graphicImage  url="/resources/images/xfx.png" alt=""/></a>
+                </div>
+            </ui:insert>
+
         </div>
     </h:body>
 
