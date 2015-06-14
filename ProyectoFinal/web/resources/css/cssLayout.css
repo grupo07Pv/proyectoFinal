@@ -55,10 +55,15 @@
     background-color: #E0E0E0;
     border-color: #E0E0E0;
     margin-bottom: 20px;
+ 
 }
 
 body{
     background-color: #909090; 
+    background-image: url("#{resource['images/lol.png']}");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment:fixed;
 }
 
 #formTop{
@@ -71,12 +76,4 @@ body{
     border-radius: 5px;
 }
 
-iconos{
-     background-color: #909090; 
-    
-}
 
-footerTexto{
-    
-    
-}

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.controlador.formbeans;
 
 import ar.edu.unj.fi.apu.controlador.beans.TipoProductoBean;
@@ -14,7 +9,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
@@ -23,7 +18,7 @@ import org.primefaces.context.RequestContext;
  * @author Ivan
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class TipoProductoFormBean implements Serializable{
     @ManagedProperty (value = "#{tipoProductoBean}")
     private TipoProductoBean tipoProductoBean;
@@ -59,6 +54,7 @@ public class TipoProductoFormBean implements Serializable{
     }
     
     public void grabarNuevoTipoProducto (){
+        tipoProductoBean.getTipoProducto().setEstado(true);
         ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
         tipoProductoDAO.agregarTipoProducto(tipoProductoBean.getTipoProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
