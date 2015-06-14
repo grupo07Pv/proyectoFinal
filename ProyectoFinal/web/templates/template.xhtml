@@ -11,10 +11,13 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <script src="../resources/js/calendar_es.js" type="text/javascript"></script>
         <title>Sistema de Ventas</title>
+        <style>
+
+</style>
     </h:head>
 
-    <h:body>
-        <div id="contenedor">  
+    <h:body >
+        <div id="contenedor"  >  
             <div id="top">
                 <ui:insert name="top">
                     <p:menubar  id="menuSesion">
@@ -25,7 +28,7 @@
                     </p:menubar>
                     <h:form rendered="true" id="formTop" >
                         <p:menubar style="padding-top: 10px; 
-                                            background-color:burlywood  ;
+                                              background-color:#000000 ;
                                               color: #ffffff;">
                             <p:menuitem  ><p:graphicImage style="padding-top: 10px; width: 75px; height: 75px;"  value="/resources/images/logo.png"/></p:menuitem>
                              <p:menuitem  > <h1>VeGaMES</h1></p:menuitem>
@@ -61,12 +64,24 @@
                 <ui:insert name="bottom">
                     <div class="footer" align="center" id="iconos">
                         <ui:insert name="content" ><p style="font-size: 20px;
-                                                               font-weight: bold">Tambien puedes seguirnos en</p></ui:insert>
-                     
+                                                            font-weight: bold;
+                                                            color: #ffffff">Tambien puedes seguirnos en</p></ui:insert>
+    
    			<a href="https://es-la.facebook.com/"><h:graphicImage url="/resources/images/fb.png" alt=""/></a>
    			<a href="https://twitter.com/"><h:graphicImage url="/resources/images/tw.png" alt=""/></a>
     			<a href="https://plus.google.com/"><h:graphicImage url="/resources/images/go.png" alt=""/></a>
 		</div>
+                    <br/>
+                    
+                    <div class="marcas">
+                        
+                          <a href="https://es-la.facebook.com/"><h:graphicImage style="margin-left: 50px;
+                                                                                       margin-right: 105px" url="/resources/images/steel.png" alt=""/></a>
+                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/benq.png" alt=""/></a>
+                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/geforce.png" alt=""/></a>
+                          <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/radeon.png" alt=""/></a>
+                          <a href="https://es-la.facebook.com/"><h:graphicImage  url="/resources/images/xfx.png" alt=""/></a>
+                    </div>
                 </ui:insert>
         
         </div>
