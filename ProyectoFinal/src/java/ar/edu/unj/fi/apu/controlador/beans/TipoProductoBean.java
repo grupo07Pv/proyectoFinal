@@ -3,14 +3,14 @@ package ar.edu.unj.fi.apu.controlador.beans;
 import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Ivan
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class TipoProductoBean implements Serializable{
     private TipoProducto tipoProducto;
     /**
