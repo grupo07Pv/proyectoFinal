@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -13,52 +12,54 @@
             </ui:define>
 
             <ui:define name="content">
-                <p:growl id="grwMensajeTipoProd" showDetail="true" widgetVar="mensajesTipoProd"/>
-                <p:panel id="pnlTipoProd">
-                    <h:form id="frmTipoProd">
-                        <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
-                                     paginator="true" rows="5">
-                            <p:column headerText="CODIGO" style="width: 35px;">
-                                <p:outputLabel value="#{tipo.codigo}"/>
-                            </p:column>
-                            <p:column headerText="NOMBRE" style="width: 50px;">
-                                <p:outputLabel value="#{tipo.nombre}"/>
-                            </p:column>
-                            <p:column headerText="Editar" style="width: 18px;">
-                                <p:commandButton icon="ui-icon-pencil" type="button"/>
-                            </p:column>
-                        </p:dataTable>
-                        <br/>
-                        <p:commandButton type="button" value="Agregar" onclick="PF('altaTipoProd').show()"/>
-                    </h:form>   
-                </p:panel>
+                <div id="tooplate_middle">
+                    <p:growl id="grwMensajeTipoProd" showDetail="true" widgetVar="mensajesTipoProd"/>
+                    <p:panel id="pnlTipoProd">
+                        <h:form id="frmTipoProd">
+                            <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
+                                         paginator="true" rows="5">
+                                <p:column headerText="CODIGO" style="width: 35px;">
+                                    <p:outputLabel value="#{tipo.codigo}"/>
+                                </p:column>
+                                <p:column headerText="NOMBRE" style="width: 50px;">
+                                    <p:outputLabel value="#{tipo.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Editar" style="width: 18px;">
+                                    <p:commandButton icon="ui-icon-pencil" type="button"/>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton id="btnAgregarTipoProd" value="Agregar" type="button" onclick="PF('altaTipoProd').show()"/>
+                        </h:form>  
+                    </p:panel>
 
-                <h:form id="frmAltaTipoProd">
-                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="transfer" hideEffect="bounce"
-                              widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
-                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
-                            <p:outputLabel for="txtCodigo" value="Codigo: "/> 
-                            <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
+                    <h:form id="frmAltaTipoProd">
+                        <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="transfer" hideEffect="bounce"
+                                  widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
+                            <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
+                                <p:outputLabel for="txtCodigo" value="Codigo: "/> 
+                                <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
 
-                            <p:outputLabel for="txtNombre" value="Nombre: "/>
-                            <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
-                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                                <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
+                                             value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
 
-                            <h:panelGroup/>
-                            <p:commandButton id="btnNuevoTipoProd" type="button" value="GRABAR"
-                                             onclick="PF('confirmaAltaTipoProd').show()" />
-                        </h:panelGrid>
-                    </p:dialog>
-                </h:form>    
+                                <h:panelGroup/>
+                                <p:commandButton id="btnNuevoTipoProd" type="button" value="GRABAR"
+                                                 oncomplete="PF('confirmaAltaTipoProd').show()" />
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>    
 
-                <h:form id="frmConfirmarAltaTipoProd">
-                    <p:confirmDialog id="dlgConfirmaAltaTipoProd" message="¿Confirma Alta de Tipo?" header="CONFIRMACION DE OPERACION"
-                                     severity="alert" widgetVar="confirmaAltaTipoProd">
-                        <p:commandButton icon="btnConfirmaAltaSI" value="SI" update=":frmTipoProd:tblTipoProd"
-                                         actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
-                        <p:commandButton icon="btnConfirmaAltaNO" value="NO" oncomplete="PF('confirmaAltaTipoProd').hide();PF('altaTipoProd').hide()"/>
-                    </p:confirmDialog>
-                </h:form>
+                    <h:form id="frmConfirmarAltaTipoProd">
+                        <p:confirmDialog id="dlgConfirmaAltaTipoProd" message="¿Confirma Alta de Tipo?" header="CONFIRMACION DE OPERACION"
+                                         severity="alert" widgetVar="confirmaAltaTipoProd">
+                            <p:commandButton icon="btnConfirmaAltaSI" value="SI" update=":frmTipoProd:tblTipoProd"
+                                             actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
+                            <p:commandButton icon="btnConfirmaAltaNO" value="NO" oncomplete="PF('confirmaAltaTipoProd').hide();PF('altaTipoProd').hide()"/>
+                        </p:confirmDialog>
+                    </h:form>
+                </div>
             </ui:define>
 
         </ui:composition>

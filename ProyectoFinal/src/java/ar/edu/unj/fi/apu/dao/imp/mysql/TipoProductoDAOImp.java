@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.dao.imp.mysql;
 
 import ar.edu.unj.fi.apu.dao.ITipoProductoDAO;
@@ -55,6 +50,18 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         criteria.addOrder(Order.asc("nombre"));
         List productos = criteria.list();
         return productos;
+    }
+
+    @Override
+    public TipoProducto obtenerTipoProducto(int codigo) {
+        TipoProducto tipoProducto=null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria =session.createCriteria(TipoProducto.class);
+        criteria.add(Restrictions.eq("codigo", codigo));
+        if (!(criteria.list().isEmpty())){
+            tipoProducto=(TipoProducto) criteria.list().get(0);
+        }
+        return tipoProducto;
     }
     
 }

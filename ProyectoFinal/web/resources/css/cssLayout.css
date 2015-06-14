@@ -58,6 +58,13 @@
  
 }
 
+#tooplate_middle{
+    clear: both;
+    height: 30px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+
 body{
     background-color: #909090; 
     background-image: url("#{resource['images/lol.png']}");
