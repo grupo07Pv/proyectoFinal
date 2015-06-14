@@ -72,7 +72,7 @@
                                 <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
-                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="productoConverter">
+                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter">
                                     <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
                                 </h:selectOneMenu>
 

@@ -5,9 +5,9 @@
  */
 package ar.edu.unj.fi.apu.controlador.converters;
 
-import ar.edu.unj.fi.apu.dao.IProductoDAO;
-import ar.edu.unj.fi.apu.dao.imp.mysql.ProductoDAOImp;
-import ar.edu.unju.fi.apu.modelo.dominio.Producto;
+import ar.edu.unj.fi.apu.dao.ITipoProductoDAO;
+import ar.edu.unj.fi.apu.dao.imp.mysql.TipoProductoDAOImp;
+import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -21,21 +21,21 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Ivan
  */
-@FacesConverter("productoConverter")
-public class ProductoConverter implements Converter{
-    List <Producto> productos;
+@FacesConverter("tipoProductoConverter")
+public class TipoProductoConverter implements Converter{
+    List <TipoProducto> productos;
     
-    public ProductoConverter(){
+    public TipoProductoConverter(){
         productos=new ArrayList<>();
-        IProductoDAO productoDAO = new ProductoDAOImp();
-        productos=productoDAO.obtenerTodos();   
+        ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
+        productos=tipoProductoDAO.obtenerTodos();   
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         try{
-           IProductoDAO productoDAO = new ProductoDAOImp();
-           return productoDAO.obtenerProducto(Integer.parseInt(value));
+           ITipoProductoDAO productoDAO = new TipoProductoDAOImp();
+           return productoDAO.obtenerTipoProducto(Integer.parseInt(value));
        }
        catch(Exception exception){
            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid player"));
@@ -46,12 +46,10 @@ public class ProductoConverter implements Converter{
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
      if (value != ""){
-            Producto producto = (Producto)value;
-            return String.valueOf(producto.getCodigo());
+            TipoProducto tipoProducto = (TipoProducto)value;
+            return String.valueOf(tipoProducto.getCodigo());
         }else{
             return "";
         }
     }
 }
-    
-

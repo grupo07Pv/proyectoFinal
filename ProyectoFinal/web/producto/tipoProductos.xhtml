@@ -30,37 +30,34 @@
                             </p:column>
                         </p:dataTable>
                         <br/>
-                        <p:commandButton type="button" value="Agregar" onclick="PF('altaTipoProd').show();"/>
+                        <p:commandButton id="btnAgregarTipoProd" value="Agregar" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
+                                         oncomplete="PF('altaTipoProd').show()"/>
                     </h:form>   
                 </p:panel>
-
+                
                 <h:form id="frmAltaTipoProd">
-                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="transfer" hideEffect="bounce"
-                              widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
-                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
-                            <p:outputLabel for="txtCodigo" value="Codigo: "/> 
-                            <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}">
-                                <f:convertNumber integerOnly="true"/>
-                            </p:inputText>
+                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="slide" hideEffect="bounce"
+                              widgetVar="altaTipoProd" header="Alta de Tipo de Producto">
+                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
+                            <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                            <p:inputText id="txtCodigo" required="true" size="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
+                            
                             <p:outputLabel for="txtNombre" value="Nombre: "/>
-                            <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
-                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
-
+                            <p:inputText id="txtNombre" required="true" size="30" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
                             <h:panelGroup/>
-                            <p:commandButton id="btnNuevoTipoProd" type="button" value="GRABAR"
-                                             onclick="PF('confirmaAltaTipoProd').show()" />
+                            <p:commandButton id="btnNuevoTipoProd" icon="ui-icon-plus" value="NUEVO"
+                                             oncomplete="PF('confirmarAltaTipo').show()"/>
                         </h:panelGrid>
                     </p:dialog>
-                </h:form>    
-
-                <h:form id="frmConfirmarAltaTipoProd">
-                    <p:confirmDialog id="dlgConfirmaAltaTipoProd" message="¿Confirma Alta de Tipo?" header="CONFIRMACION DE OPERACION"
-                                     severity="alert" widgetVar="confirmaAltaTipoProd">
-                        <p:commandButton icon="btnConfirmaAltaSI" value="SI" update=":frmTipoProd:tblTipoProd"
-                                         actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
-                        <p:commandButton icon="btnConfirmaAltaNO" value="NO" oncomplete="PF('confirmaAltaTipoProd').hide();PF('altaTipoProd').hide()"/>
-                    </p:confirmDialog>
                 </h:form>
+                
+                <p:confirmDialog id="dlgConfirmarAltaTipo" message="¿Confirma Alta del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
+                    severity="alert" widgetVar="confirmarAltaTipo">
+                    <p:commandButton icon="ui-icon-check" value="SI" update=":frmTipoProd:tblTipoProd"
+                                     actionListener="#{tipoProductoFormBean.grabarNuevoTipoProducto()}"/>
+                    <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmarAltaTipo').hide();PF('altaTipoProd').hide();"/>
+                </p:confirmDialog>
+                
             </ui:define>
 
         </ui:composition>
