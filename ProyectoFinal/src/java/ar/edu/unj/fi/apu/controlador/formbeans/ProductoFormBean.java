@@ -54,6 +54,7 @@ public class ProductoFormBean {
         return productoDAO.obtenerTodos();
     }
     public void agregarProducto (){
+        productoBean.getProducto().setEstado(true);
         IProductoDAO productoDAO=new ProductoDAOImp();
         
         try{
