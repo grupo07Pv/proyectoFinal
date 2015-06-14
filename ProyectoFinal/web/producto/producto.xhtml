@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="left">
+                
+            </ui:define>
+            <ui:define name="content">
+                <div>
+                    <p:growl id="grwMensajeProducto" showDetail="true" widgetVar="mensajesProductos"/>
+                    <p:panel id="pnlPaciente" rendered="true">
+                        <h:form id="frmProductos" >
+                            <p:dataTable id="tblProductos" value="#{productoFormBean.obtenerProductos()}" 
+                                         var="pro" rows="4"  paginator="true" >
+                                <p:column headerText="Foto" style="width: 90px;" >
+                                    <p:panel rendered="#{pro.conFoto}" style="border-style: none; height: 70px;">
+                                        <p:graphicImage width="60" value="#{productoFormBean.archivoFoto}" height="60" cache="false" rendered="#{pro.conFoto}">
+                                            <f:param name="codigo" value="#{pro.codigo}"/>
+                                        </p:graphicImage>
+                                    </p:panel>
+                                </p:column>
+                                <p:column headerText="Codigo" style="width: 60px;">
+                                    <p:outputLabel value="#{pro.codigo}"/>
+                                </p:column>
+                                <p:column headerText="Nombre" style="width: 95px;">
+                                    <p:outputLabel value="#{pro.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Tipo de Producto" style="width: 95px;">
+                                    <p:outputLabel value="#{pro.tipoProducto.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Stock" style="width: 85px;">
+                                    <p:outputLabel value="#{pro.stock}"/>
+                                </p:column>
+                                <p:column headerText="Precio" style="width: 65px;">
+                                    <p:outputLabel value="#{pro.precio}"/>
+                                </p:column>
+                            
+                            </p:dataTable>
+                             <br/>
+                            <p:commandButton id="btnCrearProducto" icon="ui-icon-plus" value="Nuevo Producto"
+                                             actionListener="#{productoFormBean.limpiarFormulario()}"
+                                             oncomplete="PF('altaProductos').show();"
+                                             update=":frmAltaProducto:dlgAltaProducto"/>
+                        </h:form>
+                    </p:panel>
+                    <h:form id="frmAltaProducto"  enctype="multipart/form-data">
+                        <p:dialog id="dlgAltaProducto" modal="true"
+                                  header="Alta de Producto"
+                                  showEffect="explode"
+                                  hideEffect="explode"
+                                  widgetVar="altaProductos">
+                            <h:panelGrid id="pnlGridProducto" columns="2" cellpadding="4">
+                                <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}"/>
+
+                                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"/>
+
+                                <p:outputLabel for="txtStock" value="Stock: "/>
+                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}">
+                                    <f:convertNumber integerOnly="true"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="txtPrecio" value="Precio: "/>
+                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+
+                                <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
+                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="productoConverter">
+                                    <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
+                                </h:selectOneMenu>
+
+                                <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
+                                <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
+                                              style="font-size: 12px; "/>
+
+                            </h:panelGrid>
+                            <p:commandButton id="btnNuevoProducto" value="Grabar"
+                                             oncomplete="PF('confirmaAltaProducto').show()">
+                            </p:commandButton>  
+                        </p:dialog>
+                        <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION" 
+                                         message="¿Confirma Alta de Producto?" severity="alert" widgetVar="confirmaAltaProducto">
+
+                            <p:commandButton value="SI" update=":frmProducto:tblProductos" ajax="false" icon="ui-icon-check"
+                                             actionListener="#{productoFormBean.agregarProducto()}" oncomplete="PF('confirmaAltaProducto').hide();PF('altaProducto').hide()"/>
+
+                            <p:commandButton value="NO" icon="ui-icon-close" oncomplete="PF('confirmaAltaProducto').hide()"/>
+                        </p:confirmDialog>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
