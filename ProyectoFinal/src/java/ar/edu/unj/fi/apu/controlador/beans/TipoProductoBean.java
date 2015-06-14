@@ -18,7 +18,6 @@ public class TipoProductoBean implements Serializable{
      */
     public TipoProductoBean() {
         tipoProducto = new TipoProducto();
-        tipoProducto.setEstado(true);
     }
 
     public TipoProducto getTipoProducto() {

@@ -10,7 +10,7 @@
 
         <ui:composition template="./../templates/template.xhtml">
             <ui:define name="left">
-                
+
             </ui:define>
             <ui:define name="content">
                 <div>
@@ -41,15 +41,16 @@
                                 <p:column headerText="Precio" style="width: 65px;">
                                     <p:outputLabel value="#{pro.precio}"/>
                                 </p:column>
-                            
+
                             </p:dataTable>
-                             <br/>
+                            <br/>
                             <p:commandButton id="btnCrearProducto" icon="ui-icon-plus" value="Nuevo Producto"
                                              actionListener="#{productoFormBean.limpiarFormulario()}"
                                              oncomplete="PF('altaProductos').show();"
                                              update=":frmAltaProducto:dlgAltaProducto"/>
                         </h:form>
                     </p:panel>
+                    
                     <h:form id="frmAltaProducto"  enctype="multipart/form-data">
                         <p:dialog id="dlgAltaProducto" modal="true"
                                   header="Alta de Producto"
@@ -81,10 +82,11 @@
                                               style="font-size: 12px; "/>
 
                             </h:panelGrid>
-                            <p:commandButton id="btnNuevoProducto" value="Grabar"
-                                             oncomplete="PF('confirmaAltaProducto').show()">
+                            <p:commandButton id="btnNuevoProducto" type="button" value="Grabar"
+                                             onclick="PF('confirmaAltaProducto').show()">
                             </p:commandButton>  
                         </p:dialog>
+                        
                         <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION" 
                                          message="¿Confirma Alta de Producto?" severity="alert" widgetVar="confirmaAltaProducto">
 

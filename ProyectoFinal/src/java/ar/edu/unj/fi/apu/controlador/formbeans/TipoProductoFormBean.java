@@ -64,13 +64,13 @@ public class TipoProductoFormBean implements Serializable{
         ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
         tipoProductoDAO.modificarTipoProducto(tipoProductoBean.getTipoProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaModificacionTipoProducto').hide();PF('modificacionTipoProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide()");
     }
     public void eliminarTipoProducto (){
         tipoProductoBean.getTipoProducto().setEstado(false);
         ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
         tipoProductoDAO.modificarTipoProducto(tipoProductoBean.getTipoProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaBajaTipoProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmaBajaTipo').hide()");
     }
 }

@@ -1,6 +1,9 @@
 package ar.edu.unju.fi.apu.modelo.dominio;
 // Generated 08/06/2015 18:13:05 by Hibernate Tools 4.3.1
 
+import java.util.Objects;
+
+
 
 
 
@@ -13,8 +16,33 @@ public class TipoProducto  implements java.io.Serializable {
      private int codigo;
      private String nombre;
      private boolean estado;
- 
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + this.codigo;
+        hash = 71 * hash + Objects.hashCode(this.nombre);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoProducto other = (TipoProducto) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return true;
+    }
+ 
     public TipoProducto() {
     }
 

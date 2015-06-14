@@ -29,6 +29,7 @@ public class ProductoBean {
      * Creates a new instance of ProductoBean
      */
     public ProductoBean() {
+        producto = new Producto();
     }
   
 }
