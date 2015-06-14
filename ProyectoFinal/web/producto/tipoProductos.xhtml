@@ -12,37 +12,37 @@
             </ui:define>
 
             <ui:define name="content">
-                <div id="tooplate_middle">
-                    <p:growl id="grwMensajeTipoProd" showDetail="true" widgetVar="mensajesTipoProd"/>
-                    <p:panel id="pnlTipoProd">
-                        <h:form id="frmTipoProd">
-                            <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
-                                         paginator="true" rows="5">
-                                <p:column headerText="CODIGO" style="width: 35px;">
-                                    <p:outputLabel value="#{tipo.codigo}"/>
-                                </p:column>
-                                <p:column headerText="NOMBRE" style="width: 50px;">
-                                    <p:outputLabel value="#{tipo.nombre}"/>
-                                </p:column>
-                                <p:column headerText="Editar" style="width: 18px;">
-                                    <p:commandButton icon="ui-icon-pencil" type="button"/>
-                                </p:column>
-                            </p:dataTable>
-                            <br/>
-                            <p:commandButton id="btnAgregarTipoProd" value="Agregar" type="button" onclick="PF('altaTipoProd').show()"/>
-                        </h:form>  
-                    </p:panel>
+                <p:growl id="grwMensajeTipoProd" showDetail="true" widgetVar="mensajesTipoProd"/>
+                <p:panel id="pnlTipoProd">
+                    <h:form id="frmTipoProd">
+                        <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
+                                     paginator="true" rows="5">
+                            <p:column headerText="CODIGO" style="width: 35px;">
+                                <p:outputLabel value="#{tipo.codigo}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" style="width: 50px;">
+                                <p:outputLabel value="#{tipo.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Editar" style="width: 18px;">
+                                <p:commandButton icon="ui-icon-pencil" type="button"/>
+                            </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <p:commandButton type="button" value="Agregar" onclick="PF('altaTipoProd').show();"/>
+                    </h:form>   
+                </p:panel>
 
-                    <h:form id="frmAltaTipoProd">
-                        <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="transfer" hideEffect="bounce"
-                                  widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
-                            <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
-                                <p:outputLabel for="txtCodigo" value="Codigo: "/> 
-                                <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
-
-                                <p:outputLabel for="txtNombre" value="Nombre: "/>
-                                <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
-                                             value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                <h:form id="frmAltaTipoProd">
+                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="transfer" hideEffect="bounce"
+                              widgetVar="altaTipoProd" header="Alta de Tipo de Productos">
+                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellspacing="3">
+                            <p:outputLabel for="txtCodigo" value="Codigo: "/> 
+                            <p:inputText id="txtCodigo" required="true" size="8" maxlength="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}">
+                                <f:convertNumber integerOnly="true"/>
+                            </p:inputText>
+                            <p:outputLabel for="txtNombre" value="Nombre: "/>
+                            <p:inputText id="txtNombre" required="true" size="15" maxlength="20"
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
 
                                 <h:panelGroup/>
                                 <p:commandButton id="btnNuevoTipoProd" type="button" value="GRABAR"
