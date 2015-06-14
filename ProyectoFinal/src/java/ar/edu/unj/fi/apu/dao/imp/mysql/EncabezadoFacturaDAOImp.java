@@ -21,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
 public class EncabezadoFacturaDAOImp implements IEncabezadoFacturaDAO{
 
     @Override
-    public void agregarProducto(EncabezadoFactura encabezadoFactura) {
+    public void agregarEncabezadoFactura(EncabezadoFactura encabezadoFactura) {
       Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(encabezadoFactura);
@@ -30,7 +30,7 @@ public class EncabezadoFacturaDAOImp implements IEncabezadoFacturaDAO{
     }
 
     @Override
-    public void modificarProducto(EncabezadoFactura encabezadoFactura) {
+    public void modificarEncabezadoFactura(EncabezadoFactura encabezadoFactura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(encabezadoFactura);

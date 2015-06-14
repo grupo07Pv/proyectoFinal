@@ -13,7 +13,7 @@ import java.util.List;
  * @author Ivan
  */
 public interface IEncabezadoFacturaDAO {
-    public void agregarProducto (EncabezadoFactura encabezadoFactura);
-    public void modificarProducto (EncabezadoFactura encabezadoFactura);
+    public void agregarEncabezadoFactura (EncabezadoFactura encabezadoFactura);
+    public void modificarEncabezadoFactura (EncabezadoFactura encabezadoFactura);
     public List<EncabezadoFactura> obtenerTodos();
 }

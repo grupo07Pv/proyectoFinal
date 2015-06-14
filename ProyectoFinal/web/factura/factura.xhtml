@@ -2,15 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./../templates/template.xhtml">
 
             <ui:define name="content">
-                <p:outputLabel value="Numero de Factura" />
-                <p:inputText value=""/>
+                <p:growl id="grwMensajeFactura" showDetail="true" widgetVar="MensajeFactura"/>
+                <p:panel id="pnlFactura" rendered="true">
+                    <h:form id="frmFactura">
+                    <p:outputLabel value="Codigo de Factura" />
+                    <p:inputText value="#{facturaFormBean.facturaBean.encabezadoFactura.codigo}" disabled="true"/>
+                
+                    <p:outputLabel for="txtFecha" value="Fecha"/>
+                    <p:calendar id="txtFecha" value="#{facturaFormBean.facturaBean.encabezadoFactura.fecha}"
+                                locale="es" pattern="dd-MM-yyyy" mask="true" disabled="true"/>
+                    <p:outputLabel for="txtCliente" value="Cliente"/>
+                    <p:inputText value="#{facturaFormBean.facturaBean.encabezadoFactura.cliente}"/>
+                    <h:form id="frmDetalleFactura">
+                        <p:dataTable id="tblFactura" value="#{detalleFacturaFormBean.obtenerDetalles()}" var="det"
+                                     paginator="true" rows="5">
+                            <p:column headerText="Cantidad" style="width: 40px;">
+                                <p:outputLabel value="#{det.cantidad}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion" style="width: 95px;">
+                                <p:outputLabel value="#{det.productos.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Precio" style="width: 60px;">
+                                <p:outputLabel value="#{det.productos.precio}"/>
+                            </p:column>
+                            <p:column headerText="Precio" style="width: 60px;">
+                                <p:outputLabel value="#{det.precioVenta}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <p:commandButton id="btnAgregarFactura" value="Imprimir Factura"/>
+                        </h:form>
+                    </h:form>
+                </p:panel>
             </ui:define>
 
         </ui:composition>
