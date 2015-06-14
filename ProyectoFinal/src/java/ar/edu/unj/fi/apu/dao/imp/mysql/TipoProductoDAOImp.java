@@ -47,7 +47,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(TipoProducto.class);
         criteria.add(Restrictions.eq("estado", true));
-        criteria.addOrder(Order.asc("nombre"));
+        criteria.addOrder(Order.asc("codigo"));
         List productos = criteria.list();
         return productos;
     }

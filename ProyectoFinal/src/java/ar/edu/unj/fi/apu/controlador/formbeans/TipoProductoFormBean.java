@@ -58,7 +58,7 @@ public class TipoProductoFormBean implements Serializable{
         ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
         tipoProductoDAO.agregarTipoProducto(tipoProductoBean.getTipoProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaAltaTipoProducto').hide();PF('altaTipoProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmarAltaTipo').hide();PF('altaTipoProd').hide()");
     }
     public void actualizarTipoProducto (){
         ITipoProductoDAO tipoProductoDAO = new TipoProductoDAOImp();
