@@ -120,6 +120,9 @@ public class ProductoFormBean {
             }
         }
     }
+    public StreamedContent getArchivoFotoModif() throws IOException{
+        return (new DefaultStreamedContent(new ByteArrayInputStream(this.productoBean.getProducto().getFoto())));
+    }
     
     public UploadedFile getArchivo() {
         return archivo;

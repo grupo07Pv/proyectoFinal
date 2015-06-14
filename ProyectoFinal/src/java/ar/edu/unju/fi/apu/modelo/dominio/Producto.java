@@ -84,9 +84,13 @@ public class Producto  implements java.io.Serializable {
         this.estado = estado;
     }
 
-
-
-
+      public boolean getConFoto(){
+        boolean resu = false;
+        if( foto != null){
+            resu = true;
+        }
+        return resu;
+    }
 }
 
 

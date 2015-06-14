@@ -30,5 +30,5 @@ public class ProductoBean {
      */
     public ProductoBean() {
     }
-    
+  
 }

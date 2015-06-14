@@ -18,13 +18,71 @@
                             <p:dataTable id="tblProductos" value="#{productoFormBean.obtenerProductos()}"
                                          var="pro" rows="5" paginator="true">
                                 <p:column headerText="Producto" style="width: 100px;">
-                                    <p:panel rendered="">
-                                        
+                                    <p:panel rendered="#{pro.conFoto}" style="border-style: none; height: 70px;">
+                                        <p:graphicImage width="70" value="#{productoFormBean.archivoFoto}" height="70" 
+                                                        cache="false" rendered="#{pro.conFoto}">
+                                            <f:param name="codigo" value="#{pro.codigo}" />
+                                        </p:graphicImage>
                                     </p:panel>
                                 </p:column>
+                                <p:column headerText="Codigo" style="width: 60px;">
+                                    <p:outputLabel   value="#{pro.codigo}"/>
+                                </p:column>
+                                <p:column headerText="Descripcion" style="width: 95px;">
+                                    <p:outputLabel   value="#{pro.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Tipo Producto" style="width: 95px;">
+                                    <p:outputLabel   value="#{pro.tipoProducto}"/>
+                                </p:column>
+                                <p:column headerText="Precio" style="width: 65px;">
+                                    <p:outputLabel   value="#{pro.precio.toString}"/>
+                                </p:column>
+                                <p:column headerText="Cantidad" style="width: 65px;">
+                                    <p:outputLabel   value="#{pro.stock}"/>
+                                </p:column>
                             </p:dataTable>
+                            <br/>
+                            <p:commandButton id="btnCrearProducto" type="button" icon="ui-icon-plus" value="Nuevo Producto"
+                                             actionListener="#{productoFormBean.limpiarFormulario()}"
+                                             oncomplete="PF('altaProductos').show();"
+                                             update=":frmAltaProducto:dlgAltaProducto"/>
                         </h:form>
                     </p:panel>
+                    <h:form id="frmAltaProducto" enctype="multipart/form-data">
+                        <p:dialog id="dlgAltaProducto" modal="true"
+                                  header="Alta Productos" showEffect="explode"
+                                  hideEffect="explode" widgetVar="altaProductos">
+                            <h:panelGrid id="pnlGridProducto" columns="2" cellpadding="4">
+                                <p:outputLabel for="txtCodigo" value="Codigo"/>
+                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}"/>
+                                    
+                                <p:outputLabel for="txtNombre" value="Nombre"/>
+                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"/>
+                                             
+                                <p:outputLabel for="txtPrecio" value="Precio"/>
+                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+                            
+                                <p:outputLabel for="txtStock" value="Stock"/>
+                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}"/>
+                                
+                                <p:outputLabel for="txtTipoProducto" value="Producto: "/>
+                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="productoConverter">
+                                    <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
+                                </h:selectOneMenu>
+                                
+                                <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
+                                <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
+                                              style="font-size: 12px; "/>
+                            </h:panelGrid>
+                            <p:commandButton id="btnNuevoProducto" value="GRABAR"
+                                             oncomplete="PF('confirmaAltaProducto').show()"
+                        </p:dialog>
+                        <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION"
+                                         message="¿Confirma Alta Producto?" severity="alert" widgetVar="confirmaAltaProducto">
+                                         
+                            <p:commandButton  value="Si" update=":frmProducto:tblProductos"/>
+                        </p:confirmDialog>
+                    </h:form>
                 </div>
             </ui:define>
 
