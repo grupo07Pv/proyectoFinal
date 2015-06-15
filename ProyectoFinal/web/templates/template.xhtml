@@ -22,15 +22,15 @@
                 <ui:insert name="top">
                     <p:menubar  id="menuSesion">
                         <f:facet name="options">
-                            <p:outputLabel value="Bienvenido  "/>
-                            <p:commandButton value="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                            <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
+                            <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
                         </f:facet>
                     </p:menubar>
                     <h:form rendered="true" id="formTop" >
                         <p:menubar style="padding-top: 10px; 
                                    background-color:#000000 ;
                                    color: #ffffff;">
-                            <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png"/></a></p:menuitem>
+                            <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
                            
                             <p:submenu  style="margin-top: 35px;
                                        margin-left: 40px;

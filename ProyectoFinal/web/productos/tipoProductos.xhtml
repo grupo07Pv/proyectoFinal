@@ -25,9 +25,9 @@
                                 <p:outputLabel value="#{tipo.nombre}"/>
                             </p:column>
                             <p:column headerText="Editar" style="width: 18px;">
-                                <p:commandButton icon="ui-icon-pencil" update=":frmModificaTipoProd:dlgModificaTipoProd" 
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" update=":frmModificaTipoProd:dlgModificaTipoProd" 
                                                  actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}" oncomplete="PF('modificarTipoProd').show()"/>
-                                <p:commandButton icon="ui-icon-minus" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
                                                  oncomplete="PF('confirmaBajaTipo').show()"/>
                             </p:column>
                         </p:dataTable>
@@ -83,7 +83,7 @@
                     </p:confirmDialog>
 
                 </h:form>
-
+                
                 <p:confirmDialog id="dlgConfirmaBajaTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
                                  severity="alert" widgetVar="confirmaBajaTipo">
                     <p:commandButton icon="ui-icon-check" value="SI" update=":frmTipoProd:tblTipoProd"
