@@ -16,7 +16,7 @@ public class Factura  implements java.io.Serializable {
      private Date fecha;
      private String cliente;
      private Set<DetalleFactura> detalles = new HashSet(0);
-     
+
     public Factura() {
     }
 
@@ -53,18 +53,14 @@ public class Factura  implements java.io.Serializable {
         this.cliente = cliente;
     }
 
-    public Set<DetalleFactura> getListaDetalles() {
+     public Set<DetalleFactura> getDetalles() {
         return detalles;
     }
 
-    public void setListaDetalles(Set<DetalleFactura> listaDetalles) {
-        this.detalles = listaDetalles;
+    public void setDetalles(Set<DetalleFactura> detalles) {
+        this.detalles = detalles;
     }
-
-
-
-
-
+     
 }
 
 
