@@ -54,7 +54,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
 
     @Override
     public TipoProducto obtenerTipoProducto(int codigo) {
-        TipoProducto tipoProducto=null;
+        TipoProducto tipoProducto = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria =session.createCriteria(TipoProducto.class);
         criteria.add(Restrictions.eq("codigo", codigo));

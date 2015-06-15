@@ -37,10 +37,10 @@
 }
 
 .left_content {
-    background-color: #dddddd;
+    background-color: transparent;
     padding: 5px;
-    margin-left: 170px;
-    margin-right: 170px;
+    margin-left: 190px;
+    margin-right: 190px;
 }
 
 .right_content {
@@ -72,6 +72,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat; 
     background-attachment:fixed;
+    margin: 0px;
 }
 
 #formTop{
