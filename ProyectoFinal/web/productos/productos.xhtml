@@ -50,14 +50,14 @@
                                              update=":frmAltaProducto:dlgAltaProducto"/>
                         </h:form>
                     </p:panel>
-                    
+
                     <h:form id="frmAltaProducto"  enctype="multipart/form-data">
                         <p:dialog id="dlgAltaProducto" modal="true"
                                   header="Alta de Producto"
                                   showEffect="explode"
                                   hideEffect="explode"
                                   widgetVar="altaProductos">
-                            <h:panelGrid id="pnlGridProducto" columns="2" cellpadding="4">
+                            <h:panelGrid id="pnlAltaProducto" columns="2" cellpadding="4">
                                 <p:outputLabel for="txtCodigo" value="Codigo: "/>
                                 <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}"/>
 
@@ -86,7 +86,7 @@
                                              onclick="PF('confirmaAltaProducto').show()">
                             </p:commandButton>  
                         </p:dialog>
-                        
+
                         <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION" 
                                          message="¿Confirma Alta de Producto?" severity="alert" widgetVar="confirmaAltaProducto">
 

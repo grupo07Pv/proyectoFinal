@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.dao.imp.mysql;
 
 import ar.edu.unj.fi.apu.dao.IProductoDAO;
@@ -16,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 public class ProductoDAOImp implements IProductoDAO{
 

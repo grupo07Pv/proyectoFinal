@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.modelo.dominio.FacturaDetalle;
@@ -11,9 +6,9 @@ import javax.faces.bean.RequestScoped;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
-@ManagedBean
+@ManagedBean (name = "detalleBean")
 @RequestScoped
 public class DetalleFacturaBean {
     private FacturaDetalle facturaDetalle;

@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.controlador.formbeans;
 
 import ar.edu.unj.fi.apu.controlador.beans.UsuarioBean;
 import ar.edu.unj.fi.apu.dao.IUsuarioDAO;
-import ar.edu.unj.fi.apu.dao.imp.mysql.UsuarioDAOImpl;
+import ar.edu.unj.fi.apu.dao.imp.mysql.UsuarioDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
 @RequestScoped
@@ -43,7 +38,7 @@ public class UsuarioFormBean {
     }
     public boolean validarUsuario (String nombre){
         Usuario usuario = new Usuario(); 
-        IUsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         usuario = usuarioDAO.obtenerUsuario(nombre);
         if (usuario.getNombreUsuario() != "admin")
         {   

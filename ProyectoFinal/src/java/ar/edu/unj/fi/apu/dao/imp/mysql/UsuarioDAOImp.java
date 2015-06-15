@@ -7,7 +7,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-public class UsuarioDAOImpl implements IUsuarioDAO{
+/**
+ *
+ * @author Grupo 7 - VeGaMES
+ */
+
+public class UsuarioDAOImp implements IUsuarioDAO{
 
     @Override
     public Usuario validarUsuario(String nombreUsuario, String password) {

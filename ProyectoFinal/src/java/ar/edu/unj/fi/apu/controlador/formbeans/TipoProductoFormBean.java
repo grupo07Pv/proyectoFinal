@@ -15,7 +15,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
 @ViewScoped

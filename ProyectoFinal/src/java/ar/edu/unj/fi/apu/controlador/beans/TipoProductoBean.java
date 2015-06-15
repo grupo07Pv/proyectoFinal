@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
 @ViewScoped

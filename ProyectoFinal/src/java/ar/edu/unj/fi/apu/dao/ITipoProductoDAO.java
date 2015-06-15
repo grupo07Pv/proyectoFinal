@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 public interface ITipoProductoDAO {
     public void agregarTipoProducto (TipoProducto tipoProducto);

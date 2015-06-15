@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 public class TipoProductoDAOImp implements ITipoProductoDAO{
 

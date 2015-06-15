@@ -1,13 +1,17 @@
 package ar.edu.unj.fi.apu.controlador.formbeans;
 
 import ar.edu.unj.fi.apu.dao.IUsuarioDAO;
-import ar.edu.unj.fi.apu.dao.imp.mysql.UsuarioDAOImpl;
+import ar.edu.unj.fi.apu.dao.imp.mysql.UsuarioDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+/**
+ *
+ * @author Grupo 7 - VeGaMES
+ */
 @ManagedBean
 @RequestScoped
 public class LoginFormBean {
@@ -23,7 +27,7 @@ public class LoginFormBean {
 
     public String validarUsuario() {
         String resultado = null;
-        IUsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, password);
         if (usuario != null) {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario válido", "Usuario válido");

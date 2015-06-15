@@ -32,13 +32,15 @@
                                    color: #ffffff;">
                             <p:menuitem  ><p:graphicImage style="padding-top: 10px; width: 75px; height: 75px;"  value="/resources/images/logo.png"/></p:menuitem>
                             <p:menuitem  > <h1>VeGaMES</h1></p:menuitem>
-                            <p:menuitem style="margin-top: 35px;
-                                        margin-left: 40px;
-                                        color: #ffffff;" value="Facturas" outcome="/factura/factura.xhtml" />
+                            <p:submenu style="margin-top: 35px;
+                                       margin-left: 40px;
+                                       color: #ffffff;" label="Facturas">
+                                <p:menuitem value="Nueva"  outcome="/facturas/facturas"/>
+                            </p:submenu>
                             <p:submenu   style="margin-top: 35px;
                                          color:#ffffff" label="Productos" >
-                                <p:menuitem value="Productos" outcome="/producto/producto.xhtml" />
-                                <p:menuitem  value="Tipo de Productos" outcome="/producto/tipoProductos.xhtml"/>
+                                <p:menuitem value="Productos" outcome="/productos/productos" />
+                                <p:menuitem  value="Tipo de Productos" outcome="/productos/tipoProductos"/>
                             </p:submenu>
                             <p:menuitem style="margin-top: 35px;
                                         color: #ffffff;" value="Volver" />     
@@ -64,8 +66,8 @@
             <ui:insert name="bottom">
                 <div class="footer" align="center" id="iconos">
                     <p style="font-size: 20px;
-                                                  font-weight: bold;
-                                                  color: #ffffff">Tambien puedes seguirnos en</p>
+                       font-weight: bold;
+                       color: #ffffff">Tambien puedes seguirnos en</p>
 
                     <a href="https://es-la.facebook.com/"><h:graphicImage url="/resources/images/fb.png" alt=""/></a>
                     <a href="https://twitter.com/"><h:graphicImage url="/resources/images/tw.png" alt=""/></a>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.dao.imp.mysql;
 
 import ar.edu.unj.fi.apu.dao.IFacturaDetalleDAO;
@@ -15,12 +10,12 @@ import org.hibernate.criterion.Order;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
 
     @Override
-    public void agregarProducto(FacturaDetalle facturaDetalle) {
+    public void agregarDetalle(FacturaDetalle facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(facturaDetalle);
@@ -29,7 +24,7 @@ public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
     }
 
     @Override
-    public void modificarProducto(FacturaDetalle facturaDetalle) {
+    public void modificarDetalle(FacturaDetalle facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(facturaDetalle);
@@ -38,12 +33,20 @@ public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
     }
 
     @Override
+    public void eliminarDetalle(FacturaDetalle facturaDetalle) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(facturaDetalle);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
     public List<FacturaDetalle> obtenerTodos() {
          Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(FacturaDetalle.class);
         criteria.addOrder(Order.asc("codigo"));
         List productos = criteria.list();
         return productos;
-    }
-    
+    }    
 }

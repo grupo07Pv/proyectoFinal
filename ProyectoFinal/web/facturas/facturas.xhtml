@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="left"/>
+
+            <ui:define name="content">
+                <p:growl id="grwMensajeFactura" showDetail="true" widgetVar="MensajeFactura"/>
+                <p:panel id="pnlFactura" rendered="true">
+                    <h:form id="frmFactura">
+                        <p:outputLabel for="txtCodigoFac" value="Codigo de Factura" />
+                        <p:inputText id="txtCodigoFac" value="#{facturaFormBean.facturaBean.encabezadoFactura.codigo}"/>
+
+                        <p:outputLabel for="txtFecha" value="Fecha"/>
+                        <p:calendar id="txtFecha" value="#{facturaFormBean.facturaBean.encabezadoFactura.fecha}"
+                                    locale="es" size="8" maxlength="8" pattern="dd-MM-yyyy" mask="true" />
+
+                        <p:outputLabel for="txtCliente" value="Cliente"/>
+                        <p:inputText id="txtCliente" value="#{facturaFormBean.facturaBean.encabezadoFactura.cliente}"/>
+
+                        <h:form id="frmDetalleFactura">
+                            <p:dataTable id="tblDetalleFactura" value="#{detalleFormBean.obtenerDetalles()}" var="det"
+                                         paginator="true" rows="5">
+                                <p:column headerText="Cantidad" style="width: 40px;">
+                                    <p:outputLabel value="#{det.cantidad}"/>
+                                </p:column>
+                                <p:column headerText="Descripcion" style="width: 95px;">
+                                    <p:outputLabel value="#{det.productos.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Precio" style="width: 60px;">
+                                    <p:outputLabel value="#{det.productos.precio}"/>
+                                </p:column>
+                                <p:column headerText="Precio" style="width: 60px;">
+                                    <p:outputLabel value="#{det.precioVenta}"/>
+                                </p:column>
+                                <p:column style="width: 40px;">
+                                    <p:commandButton icon="ui-icon-pencil" alt="Modificar"/>
+                                    <p:commandButton icon="ui-icon-trash" alt="Eliminar"/>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton id="btnNuevoDetalle" icon="ui-icon-plus" value="Nuevo" type="button"
+                                             onclick="PF('altaDetalle').show()"/>
+                        </h:form>
+                        <br/>
+                        <p:commandButton id="btnAgregarFactura" value="Imprimir Factura" />
+                    </h:form>
+                </p:panel>
+
+                <h:form id="frmAltaDetalle">
+                    <p:dialog id="dlgAltaDetalle" modal="true" header="Alta de Detalle" widgetVar="altaDetalle"
+                              showEffect="explode" hideEffect="bounce">
+                        <h:panelGrid id="pnlAltaDetalle" columns="2" cellpadding="4">
+                            <p:outputLabel for="txtCantidad" value="Cantidad: "/>
+                            <p:inputText id="txtCantidad" required="true" value="#{detalleFormBean.detalleFacturaBean.facturaDetalle.codigo}"/>
+                            
+                            <p:outputLabel for="txtProducto" value="Producto: "/>
+                            <p:selectOneMenu id="txtProducto" converter="productoConverter" value="#{detalleFormBean.detalleFacturaBean.facturaDetalle.productos}">
+                                <f:selectItem itemValue="" itemLabel="------------"/>
+                                <f:selectItems value="#{productoFormBean.obtenerProductos()}" var="prod" itemValue="#{prod}" itemLabel="#{prod.nombre}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <p:commandButton id="btnAgregarDetalle" value="Nuevo" type="button" onclick="PF('confirmaAltaDetalle').show()"/>
+                    </p:dialog>
+                    
+                    <p:confirmDialog id="dlgConfirmaAltaDetalle" header="CONFIRMACION DE OPERACION" 
+                                         message="¿Confirma Alta de Detalle?" severity="alert" widgetVar="confirmaAltaDetalle">
+                            <p:commandButton value="SI"  icon="ui-icon-check"
+                                             actionListener="#{detalleFormBean.grabarNuevoDetalle()}"/>
+                            <p:commandButton value="NO" type="button" icon="ui-icon-close" onclick="PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()"/>
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

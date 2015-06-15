@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.unj.fi.apu.controlador.formbeans;
 
 import ar.edu.unj.fi.apu.controlador.beans.FacturaBean;
@@ -19,7 +14,7 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author Ivan
+ * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
 @RequestScoped
