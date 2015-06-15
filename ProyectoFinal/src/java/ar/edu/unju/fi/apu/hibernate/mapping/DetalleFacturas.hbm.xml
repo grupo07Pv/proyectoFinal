@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 08/06/2015 18:13:07 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.FacturaDetalle" optimistic-lock="version" table="factura_detalles">
+  <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura" optimistic-lock="version" table="factura_detalles">
     <id name="codigo" type="int">
       <column name="codigo"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.EncabezadoFactura" fetch="join" cascade="all" name="encabezadoFacturas">
+    <many-to-one cascade="all" class="ar.edu.unju.fi.apu.modelo.dominio.Factura" fetch="join" name="encabezadoFacturas">
       <column length="9" name="factura" not-null="true"/>
     </many-to-one>
     <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.Producto" fetch="join" name="productos">

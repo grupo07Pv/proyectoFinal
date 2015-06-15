@@ -1,9 +1,9 @@
 package ar.edu.unj.fi.apu.controlador.formbeans;
 
 import ar.edu.unj.fi.apu.controlador.beans.FacturaBean;
-import ar.edu.unj.fi.apu.dao.IEncabezadoFacturaDAO;
-import ar.edu.unj.fi.apu.dao.imp.mysql.EncabezadoFacturaDAOImp;
-import ar.edu.unju.fi.apu.modelo.dominio.EncabezadoFactura;
+import ar.edu.unj.fi.apu.dao.IFacturaDAO;
+import ar.edu.unj.fi.apu.dao.imp.mysql.FacturaDAOImp;
+import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -35,13 +35,13 @@ public class FacturaFormBean {
     public void setFacturaBean(FacturaBean facturaBean) {
         this.facturaBean = facturaBean;
     }
-    public List<EncabezadoFactura> obtenerFacturas(){
-        IEncabezadoFacturaDAO encabezadoFacturaDAO = new EncabezadoFacturaDAOImp();
+    public List<Factura> obtenerFacturas(){
+        IFacturaDAO encabezadoFacturaDAO = new FacturaDAOImp();
         return encabezadoFacturaDAO.obtenerTodos();
     }
 
     public void grabarFactura (){
-        IEncabezadoFacturaDAO encabezadoFacturaDAO = new EncabezadoFacturaDAOImp();
+        IFacturaDAO encabezadoFacturaDAO = new FacturaDAOImp();
         encabezadoFacturaDAO.agregarEncabezadoFactura(facturaBean.getEncabezadoFactura());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
     }

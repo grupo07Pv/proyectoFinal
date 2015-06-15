@@ -1,6 +1,6 @@
 package ar.edu.unj.fi.apu.controlador.beans;
 
-import ar.edu.unju.fi.apu.modelo.dominio.FacturaDetalle;
+import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -11,19 +11,19 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean (name = "detalleBean")
 @RequestScoped
 public class DetalleFacturaBean {
-    private FacturaDetalle facturaDetalle;
+    private DetalleFactura facturaDetalle;
     /**
      * Creates a new instance of DetalleFacturaBean
      */
     public DetalleFacturaBean() {
-        facturaDetalle = new FacturaDetalle();
+        facturaDetalle = new DetalleFactura();
     }
 
-    public FacturaDetalle getFacturaDetalle() {
+    public DetalleFactura getFacturaDetalle() {
         return facturaDetalle;
     }
 
-    public void setFacturaDetalle(FacturaDetalle facturaDetalle) {
+    public void setFacturaDetalle(DetalleFactura facturaDetalle) {
         this.facturaDetalle = facturaDetalle;
     }
     

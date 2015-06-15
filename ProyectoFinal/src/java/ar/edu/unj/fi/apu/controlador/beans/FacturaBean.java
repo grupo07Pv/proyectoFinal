@@ -1,6 +1,6 @@
 package ar.edu.unj.fi.apu.controlador.beans;
 
-import ar.edu.unju.fi.apu.modelo.dominio.EncabezadoFactura;
+import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -11,19 +11,19 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class FacturaBean {
-    private EncabezadoFactura encabezadoFactura;
+    private Factura encabezadoFactura;
     /**
      * Creates a new instance of FacturaBean
      */
     public FacturaBean() {
-        encabezadoFactura = new EncabezadoFactura();
+        encabezadoFactura = new Factura();
     }
 
-    public EncabezadoFactura getEncabezadoFactura() {
+    public Factura getEncabezadoFactura() {
         return encabezadoFactura;
     }
 
-    public void setEncabezadoFactura(EncabezadoFactura encabezadoFactura) {
+    public void setEncabezadoFactura(Factura encabezadoFactura) {
         this.encabezadoFactura = encabezadoFactura;
     }
     

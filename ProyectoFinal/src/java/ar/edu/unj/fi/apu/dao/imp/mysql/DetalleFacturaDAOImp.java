@@ -1,8 +1,8 @@
 package ar.edu.unj.fi.apu.dao.imp.mysql;
 
-import ar.edu.unj.fi.apu.dao.IFacturaDetalleDAO;
+import ar.edu.unj.fi.apu.dao.IDetalleFacturaDAO;
 import ar.edu.unju.fi.apu.hibernate.config.HibernateUtil;
-import ar.edu.unju.fi.apu.modelo.dominio.FacturaDetalle;
+import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,10 +12,10 @@ import org.hibernate.criterion.Order;
  *
  * @author Grupo 7 - VeGaMES
  */
-public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
+public class DetalleFacturaDAOImp implements IDetalleFacturaDAO{
 
     @Override
-    public void agregarDetalle(FacturaDetalle facturaDetalle) {
+    public void agregarDetalle(DetalleFactura facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(facturaDetalle);
@@ -24,7 +24,7 @@ public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
     }
 
     @Override
-    public void modificarDetalle(FacturaDetalle facturaDetalle) {
+    public void modificarDetalle(DetalleFactura facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(facturaDetalle);
@@ -33,7 +33,7 @@ public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
     }
 
     @Override
-    public void eliminarDetalle(FacturaDetalle facturaDetalle) {
+    public void eliminarDetalle(DetalleFactura facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(facturaDetalle);
@@ -42,9 +42,9 @@ public class FacturaDetalleDAOImp implements IFacturaDetalleDAO{
     }
     
     @Override
-    public List<FacturaDetalle> obtenerTodos() {
+    public List<DetalleFactura> obtenerTodos() {
          Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(FacturaDetalle.class);
+        Criteria criteria = session.createCriteria(DetalleFactura.class);
         criteria.addOrder(Order.asc("codigo"));
         List productos = criteria.list();
         return productos;
