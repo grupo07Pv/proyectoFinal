@@ -63,7 +63,6 @@
                             
                             <p:outputLabel for="txtProducto" value="Producto: "/>
                             <p:selectOneMenu id="txtProducto" converter="productoConverter" value="#{detalleFormBean.detalleFacturaBean.facturaDetalle.productos}">
-                                <f:selectItem itemValue="" itemLabel="------------"/>
                                 <f:selectItems value="#{productoFormBean.obtenerProductos()}" var="prod" itemValue="#{prod}" itemLabel="#{prod.nombre}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>

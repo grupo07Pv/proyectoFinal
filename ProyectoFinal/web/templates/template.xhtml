@@ -35,12 +35,12 @@
                             <p:submenu style="margin-top: 35px;
                                        margin-left: 40px;
                                        color: #ffffff;" label="Facturas">
-                                <p:menuitem value="Nueva"  outcome="/facturas/facturas"/>
+                                <p:menuitem value="Nueva"  outcome="/facturas/facturas.xhtml"/>
                             </p:submenu>
                             <p:submenu   style="margin-top: 35px;
                                          color:#ffffff" label="Productos" >
-                                <p:menuitem value="Productos" outcome="/productos/productos" />
-                                <p:menuitem  value="Tipo de Productos" outcome="/productos/tipoProductos"/>
+                                <p:menuitem value="Productos" outcome="/productos/productos.xhtml" />
+                                <p:menuitem  value="Tipo de Productos" outcome="/productos/tipoProductos.xhtml"/>
                             </p:submenu>
                             <p:menuitem style="margin-top: 35px;
                                         color: #ffffff;" value="Volver" />     
@@ -53,7 +53,7 @@
                     <ui:insert name="left">
                         <p:imageSwitch effect="fade" id="fadeEffect">
                             <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
-                                <p:graphicImage value="/resources/images/#{imagen}" id="image" style="width: 350px; height: 200px;"/>
+                                <p:graphicImage value="/resources/images/#{imagen}" id="image"/>
                             </ui:repeat>
                         </p:imageSwitch>
                     </ui:insert>

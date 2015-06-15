@@ -23,12 +23,8 @@ public class Producto  implements java.io.Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + this.codigo;
-        hash = 41 * hash + Objects.hashCode(this.tipoProducto);
-        hash = 41 * hash + Objects.hashCode(this.nombre);
-        hash = 41 * hash + Objects.hashCode(this.precio);
-        hash = 41 * hash + this.stock;
-        hash = 41 * hash + Arrays.hashCode(this.foto);
+        hash = 17 * hash + this.codigo;
+        hash = 17 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -44,19 +40,7 @@ public class Producto  implements java.io.Serializable {
         if (this.codigo != other.codigo) {
             return false;
         }
-        if (!Objects.equals(this.tipoProducto, other.tipoProducto)) {
-            return false;
-        }
         if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.precio, other.precio)) {
-            return false;
-        }
-        if (this.stock != other.stock) {
-            return false;
-        }
-        if (!Arrays.equals(this.foto, other.foto)) {
             return false;
         }
         return true;
