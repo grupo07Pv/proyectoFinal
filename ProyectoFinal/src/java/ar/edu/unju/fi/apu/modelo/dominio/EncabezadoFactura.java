@@ -3,6 +3,7 @@ package ar.edu.unju.fi.apu.modelo.dominio;
 
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -13,7 +14,7 @@ public class EncabezadoFactura  implements java.io.Serializable {
      private String codigo;
      private Date fecha;
      private String cliente;
-     
+     private List<FacturaDetalle> listaDetalles;
      
     public EncabezadoFactura() {
     }
@@ -49,6 +50,14 @@ public class EncabezadoFactura  implements java.io.Serializable {
     
     public void setCliente(String cliente) {
         this.cliente = cliente;
+    }
+
+    public List<FacturaDetalle> getListaDetalles() {
+        return listaDetalles;
+    }
+
+    public void setListaDetalles(List<FacturaDetalle> listaDetalles) {
+        this.listaDetalles = listaDetalles;
     }
 
 

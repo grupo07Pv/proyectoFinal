@@ -20,7 +20,7 @@
                     <p:calendar id="txtFecha" value="#{facturaFormBean.facturaBean.encabezadoFactura.fecha}"
                                 locale="es" pattern="dd-MM-yyyy" mask="true" disabled="true"/>
                     <p:outputLabel for="txtCliente" value="Cliente"/>
-                    <p:inputText value="#{facturaFormBean.facturaBean.encabezadoFactura.cliente}"/>
+                    <p:inputText id="txtCliente" value="#{facturaFormBean.facturaBean.encabezadoFactura.cliente}"/>
                     <h:form id="frmDetalleFactura">
                         <p:dataTable id="tblFactura" value="#{detalleFacturaFormBean.obtenerDetalles()}" var="det"
                                      paginator="true" rows="5">
