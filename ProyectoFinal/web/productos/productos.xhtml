@@ -42,9 +42,8 @@
                                     <p:outputLabel value="#{pro.precio}"/>
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
-                                    <p:commandButton  icon="ui-icon-pencil" update=":frmModificaProducto:dlgModificaProducto"
-                                        oncomplete="PF('modificaProducto').show()">
-                                        <f:setPropertyActionListener target="#{productoFormBean.productoBean.producto}" value="#{pro}"/>
+                                    <p:commandButton  icon="ui-icon-pencil" title="Modificar" update=":frmModificaProducto:dlgModificaProducto"
+                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}" oncomplete="PF('modificaProducto').show()">
                                     </p:commandButton>
                                 </p:column>
                             </p:dataTable>
@@ -94,11 +93,12 @@
                                          message="¿Confirma Alta de Producto?" severity="alert" widgetVar="confirmaAltaProducto">
 
                             <p:commandButton value="SI" update=":frmProducto:tblProductos" ajax="false" icon="ui-icon-check"
-                                             actionListener="#{productoFormBean.agregarProducto()}" oncomplete="PF('confirmaAltaProducto').hide();PF('altaProducto').hide()"/>
+                                             actionListener="#{productoFormBean.agregarProducto()}"/>
 
                             <p:commandButton value="NO" icon="ui-icon-close" oncomplete="PF('confirmaAltaProducto').hide()"/>
                         </p:confirmDialog>
                     </h:form>
+                    
                     <h:form id="frmModificaProducto" enctype="multipart/form-data">
                         <p:dialog id="dlgModificaProducto" resizable="false" modal="true"
                                   showEffect="explode" hideEffect="explode"
@@ -129,15 +129,14 @@
                                 <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
                                               style="font-size: 12px; "/>
                             </h:panelGrid>
-                            <p:commandButton id="btnModificarProducto" value="Grabar" update=":frmProductos"
-                                             oncomplete="PF('confirmaModificaProducto').show()"/>
+                            <p:commandButton id="btnModificarProducto" value="Grabar" type="button"
+                                             onclick="PF('confirmaModificaProducto').show()"/>
                         </p:dialog>
                         <p:confirmDialog id="dlgConfirmaModificaProducto" header="CONFIRMACION DE OPERACION"
                                          message="¿Confirma Modificacion de Producto?" severity="alert" 
                                          widgetVar="confirmaModificaProducto">
                             <p:commandButton value="SI" update=":frmProductos:tblProductos" ajax="false" icon="ui-icon-check"
-                                             actionListener="#{productoFormBean.actualizarProducto()}"
-                                             oncomplete="PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()"/>
+                                             actionListener="#{productoFormBean.actualizarProducto()}"/>
                             <p:commandButton value="NO" icon="ui-icon-close" 
                                              oncomplete="PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()"/>
                         </p:confirmDialog>

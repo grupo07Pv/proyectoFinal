@@ -12,7 +12,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import org.primefaces.context.RequestContext;
@@ -25,7 +25,7 @@ import org.primefaces.model.UploadedFile;
  * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ProductoFormBean {
     @ManagedProperty (value = "#{productoBean}")
     private ProductoBean productoBean;
@@ -48,6 +48,11 @@ public class ProductoFormBean {
         IProductoDAO productoDAO =new ProductoDAOImp();
         return productoDAO.obtenerTodos();
     }
+    
+    public void obtenerProducto (Producto producto){
+        productoBean.setProducto(producto);
+    }
+    
     public void agregarProducto (){
         productoBean.getProducto().setEstado(true);
         IProductoDAO productoDAO=new ProductoDAOImp();
@@ -67,6 +72,8 @@ public class ProductoFormBean {
             
         }
         productoDAO.agregarProducto(this.productoBean.getProducto());
+        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
     }
     
     public void eliminarProducto(){
@@ -79,24 +86,29 @@ public class ProductoFormBean {
     public void actualizarProducto(){
         IProductoDAO productoDAO = new ProductoDAOImp();
         try{
-            InputStream inputStream = this.archivo.getInputstream();
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            int nRead;
-            byte[] bytes = new byte [16384];
-            while ((nRead = inputStream.read(bytes,0,bytes.length)) != -1){
-                buffer.write(bytes, 0,nRead);
+            if (archivo.getFileName().isEmpty()==false){
+                InputStream inputStream = this.archivo.getInputstream();
+                //voy leyendo el inputStream con el metodo read hasta que no haya mas datos
+                //cuando llega al final .read retorna -1 y termina.
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] bytes = new byte[16384];
+                while ((nRead = inputStream.read(bytes, 0, bytes.length)) != -1) {
+                    buffer.write(bytes, 0, nRead);
+                }
+                //escribo fisicamente lo que pudiera quedar en almacen temporal
+                buffer.flush();
+                this.productoBean.getProducto().setFoto(buffer.toByteArray());
+                //System.out.println(this.pacienteBean.getPaciente().getFoto().length);
             }
-            buffer.flush();
-            this.productoBean.getProducto().setFoto(buffer.toByteArray());
-            System.out.println(this.productoBean.getProducto().getFoto().length);
         }catch(Exception e){
         
         }
-        this.productoBean.getProducto().setEstado(true);
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaModificacionProducto').hide();PF('modificacionProducto').hide()");
     }
+    
     public void limpiarFormulario(){
         this.productoBean.setProducto(new Producto());
     }

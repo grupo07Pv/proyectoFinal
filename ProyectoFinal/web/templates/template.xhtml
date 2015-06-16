@@ -22,8 +22,10 @@
                 <ui:insert name="top">
                     <p:menubar  id="menuSesion">
                         <f:facet name="options">
-                            <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
-                            <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                            <h:form>
+                                <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
+                                <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                            </h:form>
                         </f:facet>
                     </p:menubar>
                     <h:form rendered="true" id="formTop" >
@@ -31,10 +33,10 @@
                                    background-color:#000000 ;
                                    color: #ffffff;">
                             <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
-                           
+
                             <p:submenu  style="margin-top: 35px;
-                                       margin-left: 40px;
-                                       color: #ffffff;"  class="hvr-float" label="Facturas">
+                                        margin-left: 40px;
+                                        color: #ffffff;"  class="hvr-float" label="Facturas">
                                 <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
                             </p:submenu>
 
@@ -82,7 +84,7 @@
                     <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/geforce.png" alt=""/></a>
                     <a href="https://es-la.facebook.com/"><h:graphicImage style=" margin-right: 105px" url="/resources/images/radeon.png" alt=""/></a>
                     <a href="https://es-la.facebook.com/"><h:graphicImage  url="/resources/images/xfx.png" alt=""/></a>
-                    
+
                     <p id="pie"><p:graphicImage class="pieLogo" style=" height: 40px;"  value="/resources/images/logo.png"/> Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países.<br/>
                         Pagina elaborada por el grupo 7 de visual.</p>
                 </div>
