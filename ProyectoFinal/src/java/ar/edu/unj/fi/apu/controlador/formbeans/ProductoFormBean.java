@@ -92,6 +92,7 @@ public class ProductoFormBean {
         }catch(Exception e){
         
         }
+        this.productoBean.getProducto().setEstado(true);
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaModificacionProducto').hide();PF('modificacionProducto').hide()");
