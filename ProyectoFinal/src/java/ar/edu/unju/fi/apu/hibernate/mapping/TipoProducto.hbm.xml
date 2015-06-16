@@ -5,7 +5,7 @@
   <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" optimistic-lock="version" table="tipo_producto">
     <id name="codigo" type="int">
       <column name="codigo"/>
-      <generator class="assigned"/>
+      <generator class="increment"/>
     </id>
     <property name="nombre" type="string">
       <column length="45" name="nombre" not-null="true"/>

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Grupo 7 - VeGaMES
  */
 public interface IFacturaDAO {
-    public void agregarEncabezadoFactura (Factura encabezadoFactura);
-    public void modificarEncabezadoFactura (Factura encabezadoFactura);
-    public List<Factura> obtenerTodos();
+    public void agregarFactura (Factura factura);
+    public void modificarFactura (Factura factura);
+    public List<Factura> obtenerTodos(String codigo);
 }

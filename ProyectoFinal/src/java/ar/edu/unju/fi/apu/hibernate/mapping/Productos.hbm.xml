@@ -5,7 +5,7 @@
   <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.Producto" optimistic-lock="version" table="productos">
     <id name="codigo" type="int">
       <column name="codigo"/>
-      <generator class="assigned"/>
+      <generator class="increment"/>
     </id>
     <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" fetch="select" name="tipoProducto">
       <column name="producto" not-null="true"/>

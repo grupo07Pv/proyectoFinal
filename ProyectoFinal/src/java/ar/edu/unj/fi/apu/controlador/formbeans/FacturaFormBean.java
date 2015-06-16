@@ -36,13 +36,13 @@ public class FacturaFormBean {
         this.facturaBean = facturaBean;
     }
     public List<Factura> obtenerFacturas(){
-        IFacturaDAO encabezadoFacturaDAO = new FacturaDAOImp();
-        return encabezadoFacturaDAO.obtenerTodos();
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        return facturaDAO.obtenerTodos(facturaBean.getFactura().getCodigo());
     }
 
     public void grabarFactura (){
         IFacturaDAO encabezadoFacturaDAO = new FacturaDAOImp();
-        encabezadoFacturaDAO.agregarEncabezadoFactura(facturaBean.getEncabezadoFactura());
+        encabezadoFacturaDAO.agregarFactura(facturaBean.getFactura());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
     }
 

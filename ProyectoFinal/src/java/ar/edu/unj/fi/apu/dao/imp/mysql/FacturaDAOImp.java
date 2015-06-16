@@ -15,25 +15,25 @@ import org.hibernate.criterion.Order;
 public class FacturaDAOImp implements IFacturaDAO{
 
     @Override
-    public void agregarEncabezadoFactura(Factura encabezadoFactura) {
+    public void agregarFactura(Factura factura) {
       Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(encabezadoFactura);
+        session.save(factura);
         session.getTransaction().commit();
         session.close();  
     }
 
     @Override
-    public void modificarEncabezadoFactura(Factura encabezadoFactura) {
+    public void modificarFactura(Factura factura) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(encabezadoFactura);
+        session.update(factura);
         session.getTransaction().commit();
         session.close();  
     }
 
     @Override
-    public List<Factura> obtenerTodos() {
+    public List<Factura> obtenerTodos(String codigo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Factura.class);
         criteria.addOrder(Order.asc("codigo"));

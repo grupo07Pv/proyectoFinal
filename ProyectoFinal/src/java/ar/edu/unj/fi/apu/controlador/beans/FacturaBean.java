@@ -11,20 +11,20 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class FacturaBean {
-    private Factura encabezadoFactura;
+    private Factura factura;
     /**
      * Creates a new instance of FacturaBean
      */
     public FacturaBean() {
-        encabezadoFactura = new Factura();
+        factura = new Factura();
     }
 
-    public Factura getEncabezadoFactura() {
-        return encabezadoFactura;
+    public Factura getFactura() {
+        return factura;
     }
 
-    public void setEncabezadoFactura(Factura encabezadoFactura) {
-        this.encabezadoFactura = encabezadoFactura;
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
     
 }

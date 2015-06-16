@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -38,14 +37,11 @@
                 </p:panel>
 
                 <h:form id="frmAltaTipoProd">
-                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="slide" hideEffect="bounce"
+                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="explode" hideEffect="bounce"
                               widgetVar="altaTipoProd" header="Alta de Tipo de Producto">
                         <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
-                            <p:outputLabel for="txtCodigo" value="Codigo: "/>
-                            <p:inputText id="txtCodigo" required="true" size="8" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
-
                             <p:outputLabel for="txtNombre" value="Nombre: "/>
-                            <p:inputText id="txtNombre" required="true" size="30" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                            <p:inputText id="txtNombre" required="true" size="15" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
                             <h:panelGroup/>
                             <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="NUEVO"
                                              onclick="PF('confirmarAltaTipo').show()"/>
@@ -81,15 +77,16 @@
                                          actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
                         <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide();"/>
                     </p:confirmDialog>
-
                 </h:form>
                 
-                <p:confirmDialog id="dlgConfirmaBajaTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
-                                 severity="alert" widgetVar="confirmaBajaTipo">
-                    <p:commandButton icon="ui-icon-check" value="SI" update=":frmTipoProd:tblTipoProd"
-                                     actionListener="#{tipoProductoFormBean.eliminarTipoProducto()}"/>
-                    <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaTipo').hide();"/>
-                </p:confirmDialog>
+                <h:form id="frmBajaTipo">
+                    <p:confirmDialog id="dlgConfirmaBajaTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
+                                     severity="alert" widgetVar="confirmaBajaTipo">
+                        <p:commandButton icon="ui-icon-check" value="SI" update=":frmTipoProd:tblTipoProd"
+                                         actionListener="#{tipoProductoFormBean.eliminarTipoProducto()}"/>
+                        <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaTipo').hide();"/>
+                    </p:confirmDialog>
+                </h:form>
             </ui:define>
 
         </ui:composition>

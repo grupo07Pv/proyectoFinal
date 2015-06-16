@@ -5,7 +5,7 @@
   <class catalog="final_visual" name="ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura" optimistic-lock="version" table="factura_detalles">
     <id name="codigo" type="int">
       <column name="codigo"/>
-      <generator class="assigned"/>
+      <generator class="increment"/>
     </id>
     <many-to-one cascade="all" class="ar.edu.unju.fi.apu.modelo.dominio.Factura" fetch="join" name="encabezadoFacturas">
       <column length="9" name="factura" not-null="true"/>
