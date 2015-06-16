@@ -35,13 +35,13 @@
                                 <p:column headerText="Tipo de Producto" style="width: 95px;">
                                     <p:outputLabel value="#{pro.tipoProducto.nombre}"/>
                                 </p:column>
-                                <p:column headerText="Stock" style="width: 85px;">
+                                <p:column headerText="Stock" style="width: 45px;">
                                     <p:outputLabel value="#{pro.stock}"/>
                                 </p:column>
-                                <p:column headerText="Precio" style="width: 65px;">
+                                <p:column headerText="Precio" style="width: 45px;">
                                     <p:outputLabel value="#{pro.precio}"/>
                                 </p:column>
-                                <p:column headerText="Acciones" style="width: 18px;" >
+                                <p:column headerText="Accion" style="width: 28px;" >
                                     <p:commandButton  icon="ui-icon-pencil" update=":frmModificaProducto:dlgModificaProducto"
                                         oncomplete="PF('modificaProducto').show()">
                                         <f:setPropertyActionListener target="#{productoFormBean.productoBean.producto}" value="#{pro}"/>
