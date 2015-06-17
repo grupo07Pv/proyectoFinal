@@ -34,6 +34,15 @@ public class ProductoDAOImp implements IProductoDAO{
     }
 
     @Override
+    public void bajaProducto(Producto producto) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(producto);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
     public void eliminarProducto(Producto producto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -49,6 +58,7 @@ public class ProductoDAOImp implements IProductoDAO{
         criteria.add(Restrictions.eq("estado", true));
         criteria.addOrder(Order.asc("tipoProducto"));
         List productos = criteria.list();
+        session.close();
         return productos;
     }
 
@@ -61,6 +71,7 @@ public class ProductoDAOImp implements IProductoDAO{
         if (!(criteria.list().isEmpty())){
             producto=(Producto) criteria.list().get(0);
         }
+        session.close();
         return producto;
     }
     

@@ -38,6 +38,7 @@ public class FacturaDAOImp implements IFacturaDAO{
         Criteria criteria = session.createCriteria(Factura.class);
         criteria.addOrder(Order.asc("codigo"));
         List productos = criteria.list();
+        session.close();
         return productos;
     }
     

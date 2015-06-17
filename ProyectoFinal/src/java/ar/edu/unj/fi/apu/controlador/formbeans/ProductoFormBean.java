@@ -71,14 +71,16 @@ public class ProductoFormBean {
         }catch(Exception e){
             
         }
+        
         productoDAO.agregarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
     }
     
     public void eliminarProducto(){
+        this.productoBean.getProducto().setEstado(false);
         IProductoDAO productoDAO = new ProductoDAOImp();
-        productoDAO.eliminarProducto(productoBean.getProducto());
+        productoDAO.bajaProducto(productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion concretada","Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaProducto').hide()");
     }
@@ -104,6 +106,7 @@ public class ProductoFormBean {
         }catch(Exception e){
         
         }
+        //this.productoBean.getProducto().setEstado(true);
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaModificacionProducto').hide();PF('modificacionProducto').hide()");

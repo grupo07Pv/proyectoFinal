@@ -24,6 +24,7 @@ public class UsuarioDAOImp implements IUsuarioDAO{
         if (!(criteria.list().isEmpty())){
             usuario =(Usuario) criteria.list().get(0);
         }
+        session.close();
         return usuario;
     }
 
@@ -36,6 +37,7 @@ public class UsuarioDAOImp implements IUsuarioDAO{
         if (!(criteria.list().isEmpty())){
             usuario =(Usuario) criteria.list().get(0);
         }
+        session.close();
         return usuario;
     }
     

@@ -17,14 +17,14 @@
                     <h:form id="frmFactura">
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:outputLabel for="txtCodigoFac" value="Codigo de Factura" />
-                            <p:inputText id="txtCodigoFac" value="#{facturaFormBean.facturaBean.encabezadoFactura.codigo}"/>
+                            <p:inputText id="txtCodigoFac" value="#{facturaFormBean.facturaBean.factura.codigo}"/>
 
                             <p:outputLabel for="txtFecha" value="Fecha"/>
-                            <p:calendar id="txtFecha" value="#{facturaFormBean.facturaBean.encabezadoFactura.fecha}"
+                            <p:calendar id="txtFecha" value="#{facturaFormBean.facturaBean.factura.fecha}"
                                         locale="es" size="8" maxlength="8" pattern="dd-MM-yyyy" mask="true" />
 
                             <p:outputLabel for="txtCliente" value="Cliente"/>
-                            <p:inputText id="txtCliente" value="#{facturaFormBean.facturaBean.encabezadoFactura.cliente}"/>
+                            <p:inputText id="txtCliente" value="#{facturaFormBean.facturaBean.factura.cliente}"/>
                             <h:panelGroup/>
                             <p:commandButton value="Agregar Detalle" actionListener="#{facturaFormBean.grabarFactura()}"/>
                             <br/>

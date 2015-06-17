@@ -49,6 +49,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         criteria.add(Restrictions.eq("estado", true));
         criteria.addOrder(Order.asc("codigo"));
         List productos = criteria.list();
+        session.close();
         return productos;
     }
 
@@ -61,6 +62,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         if (!(criteria.list().isEmpty())){
             tipoProducto=(TipoProducto) criteria.list().get(0);
         }
+        session.close();
         return tipoProducto;
     }
     

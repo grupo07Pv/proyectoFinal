@@ -5,6 +5,7 @@ import ar.edu.unj.fi.apu.dao.IFacturaDAO;
 import ar.edu.unj.fi.apu.dao.imp.mysql.FacturaDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -41,8 +42,8 @@ public class FacturaFormBean {
     }
 
     public void grabarFactura (){
-        IFacturaDAO encabezadoFacturaDAO = new FacturaDAOImp();
-        encabezadoFacturaDAO.agregarFactura(facturaBean.getFactura());
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        facturaDAO.agregarFactura(facturaBean.getFactura());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
     }
 
@@ -52,5 +53,8 @@ public class FacturaFormBean {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+    public Date getFechaActual(){
+        return new Date(System.currentTimeMillis());
     }
 }
