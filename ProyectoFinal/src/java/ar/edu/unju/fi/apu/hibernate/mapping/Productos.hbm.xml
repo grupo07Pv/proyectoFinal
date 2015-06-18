@@ -7,7 +7,7 @@
       <column name="codigo"/>
       <generator class="increment"/>
     </id>
-    <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" fetch="select" name="tipoProducto">
+    <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" fetch="join" name="tipoProducto">
       <column name="producto" not-null="true"/>
     </many-to-one>
     <property name="nombre" type="string">

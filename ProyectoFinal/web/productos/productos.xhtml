@@ -42,9 +42,10 @@
                                     <p:outputLabel value="#{pro.precio}"/>
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
-                                    <p:commandButton  icon="ui-icon-pencil" title="Modificar" update=":frmModificaProducto:dlgModificaProducto"
-                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}" oncomplete="PF('modificaProducto').show()">
-                                    </p:commandButton>
+                                    <p:commandButton  icon="ui-icon-pencil"  type="button" title="Modificar" onclick="PF('modificaProducto').show()"
+                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}"/>
+                                    <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(pro)}" 
+                                                      oncomplete="PF('confirmaBajaProducto').show()"/>
                                 </p:column>
                             </p:dataTable>
                             <br/>
@@ -139,6 +140,14 @@
                                              actionListener="#{productoFormBean.actualizarProducto()}"/>
                             <p:commandButton value="NO" icon="ui-icon-close" 
                                              oncomplete="PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()"/>
+                        </p:confirmDialog>
+                    </h:form>
+                    <h:form id="frmBajaProducto">
+                        <p:confirmDialog id="dlgConfirmaBajaProducto" message="¿Confirma Baja Producto?" 
+                                         header="CONFIRMACION DE BAJA" severity="alert" widgetVar="confirmaBajaProducto">
+                            <p:commandButton  icon="ui-icon-check" value="SI" update=":frmProductos:tblProductos"
+                                              actionListener="#{productoFormBean.eliminarProducto()}"/>
+                            <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaProducto').hide();"/>
                         </p:confirmDialog>
                     </h:form>
                 </div>

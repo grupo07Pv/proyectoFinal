@@ -7,7 +7,7 @@
       <column name="codigo"/>
       <generator class="increment"/>
     </id>
-    <many-to-one cascade="all" class="ar.edu.unju.fi.apu.modelo.dominio.Factura" fetch="join" name="encabezadoFacturas">
+    <many-to-one cascade="all" class="ar.edu.unju.fi.apu.modelo.dominio.Factura" fetch="join" name="facturas">
       <column length="9" name="factura" not-null="true"/>
     </many-to-one>
     <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.Producto" fetch="join" name="productos">
