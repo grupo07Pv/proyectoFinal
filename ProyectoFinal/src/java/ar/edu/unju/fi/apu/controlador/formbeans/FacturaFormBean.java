@@ -10,7 +10,6 @@ import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import ar.edu.unju.fi.apu.modelo.dominio.Producto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -91,6 +90,7 @@ public class FacturaFormBean {
         }
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
 
     public List<Factura> obtenerFacturas() {
