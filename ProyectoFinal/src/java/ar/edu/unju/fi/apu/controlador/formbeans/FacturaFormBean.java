@@ -10,10 +10,14 @@ import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import ar.edu.unju.fi.apu.modelo.dominio.Producto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -22,59 +26,74 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class FacturaFormBean {
-    @ManagedProperty (value = "#{facturaBean}")
+
+    @ManagedProperty(value = "#{facturaBean}")
     private FacturaBean facturaBean;
     private Producto producto;
     private List<DetalleFactura> listaDetalles;
     private BigDecimal total;
+
     /**
      * Creates a new instance of FacturaFormBean
      */
     public FacturaFormBean() {
+        this.producto = new Producto();
+        this.listaDetalles = new ArrayList<>();
+        this.total = new BigDecimal("0");
     }
 
-    public void agregarListaDetalle(int codigo){
+    public void agregarListaDetalle(int codigo) {
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         this.producto = productoDAO.obtenerProducto(codigo);
         this.listaDetalles.add(new DetalleFactura(null, producto, new BigDecimal("0"), 1));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto agregado"));
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
-    
-    public void retirarListaDetalle(int codigo){
-        int i=0;
-        for(DetalleFactura item:this.listaDetalles){
-            if(item.getProductos().getCodigo() == codigo){
+
+    public void retirarListaDetalle(int codigo) {
+        int i = 0;
+        for (DetalleFactura item : this.listaDetalles) {
+            if (item.getProductos().getCodigo() == codigo) {
                 this.listaDetalles.remove(i);
+                break;
             }
             i++;
         }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Producto retirado de la lista de venta"));
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
-    
-    public void calcularTotal(){
+
+    public void calcularTotal() {
         this.total = new BigDecimal("0");
-        for(DetalleFactura item:this.listaDetalles){
+        for (DetalleFactura item : this.listaDetalles) {
             BigDecimal totalVenta = item.getProductos().getPrecio().multiply(new BigDecimal(item.getCantidad()));
             item.setPrecioVenta(totalVenta);
             this.total = this.total.add(totalVenta);
         }
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
-    
-    public void grabarFactura (){
+
+    public void grabarFactura() {
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         FacturaDAOImp facturaDAO = new FacturaDAOImp();
         DetalleFacturaDAOImp detalleDAO = new DetalleFacturaDAOImp();
         facturaDAO.agregarFactura(this.facturaBean.getFactura());
         this.facturaBean.setFactura(facturaDAO.getUltimoRegistro());
-        for(DetalleFactura item: this.listaDetalles){
-            this.producto=productoDAO.obtenerProducto(item.getProductos().getCodigo());
+        for (DetalleFactura item : this.listaDetalles) {
+            this.producto = productoDAO.obtenerProducto(item.getProductos().getCodigo());
             item.setFacturas(this.facturaBean.getFactura());
             item.setProductos(this.producto);
             detalleDAO.agregarDetalle(item);
         }
-        this.listaDetalles= new ArrayList<>();
+        this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
     }
-    
-    public List<Factura> obtenerFacturas(){
+
+    public List<Factura> obtenerFacturas() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
         return facturaDAO.obtenerTodos(facturaBean.getFactura().getCodigo());
     }
@@ -93,8 +112,8 @@ public class FacturaFormBean {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
-    } 
-   
+    }
+
     public List<DetalleFactura> getListaDetalles() {
         return listaDetalles;
     }
@@ -102,7 +121,7 @@ public class FacturaFormBean {
     public void setListaDetalles(List<DetalleFactura> listaDetalles) {
         this.listaDetalles = listaDetalles;
     }
-    
+
     public BigDecimal getTotal() {
         return total;
     }

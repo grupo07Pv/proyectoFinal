@@ -3,7 +3,6 @@ package ar.edu.unju.fi.apu.modelo.dominio;
 
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**

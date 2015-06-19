@@ -110,7 +110,7 @@ public class ProductoFormBean {
         //this.productoBean.getProducto().setEstado(true);
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaModificacionProducto').hide();PF('modificacionProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
     }
     
     public void limpiarFormulario(){

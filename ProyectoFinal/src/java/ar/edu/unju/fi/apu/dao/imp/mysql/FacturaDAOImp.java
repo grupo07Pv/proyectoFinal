@@ -47,7 +47,7 @@ public class FacturaDAOImp implements IFacturaDAO{
     public Factura getUltimoRegistro() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        String hql="from Tventa order by idVenta desc";
+        String hql="from Factura order by codigo desc";
         Query query=session.createQuery(hql).setMaxResults(1);
         Factura factura = (Factura) query.uniqueResult();
         session.getTransaction().commit();
