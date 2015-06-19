@@ -19,7 +19,6 @@ public class Factura  implements java.io.Serializable {
 
     public Factura() {
     }
-
 	
     public Factura(String codigo, Date fecha) {
         this.codigo = codigo;

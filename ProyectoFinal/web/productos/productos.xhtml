@@ -42,8 +42,8 @@
                                     <p:outputLabel value="#{pro.precio}"/>
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
-                                    <p:commandButton  icon="ui-icon-pencil" title="Modificar" update=":frmModificaProducto:dlgModificaProducto"
-                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}" oncomplete="PF('modificaProducto').show()"/>
+                                    <p:commandButton  icon="ui-icon-pencil"  type="button" title="Modificar" onclick="PF('modificaProducto').show()"
+                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}"/>
                                     <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(pro)}" 
                                                       oncomplete="PF('confirmaBajaProducto').show()"/>
                                 </p:column>

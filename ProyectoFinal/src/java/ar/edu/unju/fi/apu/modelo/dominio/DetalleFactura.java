@@ -11,7 +11,7 @@ public class DetalleFactura  implements java.io.Serializable {
 
 
      private int codigo;
-     private Factura encabezadoFacturas;
+     private Factura facturas;
      private Producto productos;
      private BigDecimal precioVenta;
      private int cantidad;
@@ -19,9 +19,8 @@ public class DetalleFactura  implements java.io.Serializable {
     public DetalleFactura() {
     }
 
-    public DetalleFactura(int codigo, Factura encabezadoFacturas, Producto productos, BigDecimal precioVenta, int cantidad) {
-       this.codigo = codigo;
-       this.encabezadoFacturas = encabezadoFacturas;
+    public DetalleFactura(Factura facturas, Producto productos, BigDecimal precioVenta, int cantidad) {
+       this.facturas = facturas;
        this.productos = productos;
        this.precioVenta = precioVenta;
        this.cantidad = cantidad;
@@ -34,12 +33,12 @@ public class DetalleFactura  implements java.io.Serializable {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    public Factura getEncabezadoFacturas() {
-        return this.encabezadoFacturas;
+    public Factura getFacturas() {
+        return this.facturas;
     }
     
-    public void setEncabezadoFacturas(Factura encabezadoFacturas) {
-        this.encabezadoFacturas = encabezadoFacturas;
+    public void setFacturas(Factura facturas) {
+        this.facturas = facturas;
     }
     public Producto getProductos() {
         return this.productos;
