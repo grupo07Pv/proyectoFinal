@@ -2,14 +2,14 @@ package ar.edu.unju.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UsuarioBean {
 private Usuario usuario;
     /**

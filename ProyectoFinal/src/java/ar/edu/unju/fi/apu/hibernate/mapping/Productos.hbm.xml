@@ -8,7 +8,7 @@
       <generator class="increment"/>
     </id>
     <many-to-one class="ar.edu.unju.fi.apu.modelo.dominio.TipoProducto" fetch="join" name="tipoProducto">
-      <column name="producto" not-null="true"/>
+      <column name="tipo_producto" not-null="true"/>
     </many-to-one>
     <property name="nombre" type="string">
       <column length="45" name="nombre" not-null="true"/>
