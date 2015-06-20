@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.apu.controlador.formbeans;
 
+import ar.edu.unju.fi.apu.controlador.beans.UsuarioBean;
 import ar.edu.unju.fi.apu.dao.IUsuarioDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.UsuarioDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
@@ -15,7 +16,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class LoginFormBean {
-    
+    private UsuarioBean usuarioBean;
     private String nombreUsuario;
     private String password;
 
@@ -72,6 +73,19 @@ public class LoginFormBean {
             return true;
         }else{return false;}
     }
+     
+     public void limpiarFormulario(){
+        this.usuarioBean.setUsuario(new Usuario());
+    }
+
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
+    }
+
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
+    }
+     
     /**
      * @return the nombreUsuario
      */
