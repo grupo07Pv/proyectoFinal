@@ -65,24 +65,29 @@
                             <h:panelGrid id="pnlAltaProducto" columns="2" cellpadding="4">
                                 
                                 <p:outputLabel for="txtNombre" value="Nombre: "/>
-                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"/>
+                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"
+                                             required="true"/>
 
                                 <p:outputLabel for="txtStock" value="Stock: "/>
-                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}">
+                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}" required="true">
                                     <f:convertNumber integerOnly="true"/>
+                                    <f:validateLongRange minimum="1"/>
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}"
+                                             required="true">
+                                    <f:validateDoubleRange minimum="0.01"/>
+                                </p:inputMask>
 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
-                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter">
+                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter" required="true">
                                     <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
                                 </h:selectOneMenu>
 
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
                                 <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
-                                              style="font-size: 12px; "/>
+                                              style="font-size: 12px; " required="true"/>
 
                             </h:panelGrid>
                             <p:commandButton id="btnNuevoProducto" type="button" value="Grabar"
@@ -106,28 +111,31 @@
                                   widgetVar="modificaProducto" header="Modificacion de Producto">
                             <h:panelGrid id="pnlModificaProducto" columns="2" cellspacing="3">
                                 <p:outputLabel value="Codigo: " for="txtCodigo"/>
-                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}"/>
+                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}" required="true"/>
                             
                                 <p:outputLabel value="Nombre: " for="txtNombre"/>
-                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"/>
+                                <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}" required="true"/>
                                 
                                 <p:outputLabel value="Stock: " for="txtStock"/>
-                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}">
+                                <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}" required="true">
                                     <f:convertNumber integerOnly="true"/>
+                                    <f:validateLongRange minimum="1"/>
                                 </p:inputText>
                                 
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
-                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
+                                    <f:validateDoubleRange minimum="0.01"/>
+                                </p:inputMask>
                                 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
-                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" 
+                                <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" required="true" 
                                                  id="txtTipoProducto" converter="tipoProductoConverter">
                                     <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" 
                                                    itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
                                 </h:selectOneMenu>
                             
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
-                                <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
+                                <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple" required="true"
                                               style="font-size: 12px; "/>
                             </h:panelGrid>
                             <p:commandButton id="btnModificarProducto" value="Grabar" type="button"
