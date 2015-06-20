@@ -36,13 +36,5 @@ public class UsuarioFormBean {
     public void setUsuarioBean(UsuarioBean usuarioBean) {
         this.usuarioBean = usuarioBean;
     }
-    public boolean validarUsuario (String nombre){
-        Usuario usuario = new Usuario(); 
-        IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-        usuario = usuarioDAO.obtenerUsuario(nombre);
-        if (usuario.getNombreUsuario() != "admin")
-        {   
-            return true;
-        }else{return false;}
-    }
+   
 }

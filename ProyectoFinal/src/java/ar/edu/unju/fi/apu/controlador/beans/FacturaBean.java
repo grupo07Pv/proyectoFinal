@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.apu.controlador.beans;
 
+import ar.edu.unju.fi.apu.controlador.formbeans.LoginFormBean;
 import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
@@ -22,7 +23,7 @@ public class FacturaBean {
         factura = new Factura();
         this.factura.setCodigo("");
         this.factura.setFecha(new Date(System.currentTimeMillis()));
-        this.factura.setCliente("Cliente");
+        this.factura.setCliente(LoginFormBean.getNombreUsuarioCliente());
     }
 
     public Factura getFactura() {
