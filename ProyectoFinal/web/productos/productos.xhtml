@@ -24,6 +24,7 @@
                                         <p:graphicImage width="60" value="#{productoFormBean.archivoFoto}" height="60" cache="false" rendered="#{pro.conFoto}">
                                             <f:param name="codigo" value="#{pro.codigo}"/>
                                         </p:graphicImage>
+                                        
                                     </p:panel>
                                 </p:column>
                                 <p:column headerText="Codigo" style="width: 60px;">
@@ -70,10 +71,13 @@
                                 <p:outputLabel for="txtStock" value="Stock: "/>
                                 <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}">
                                     <f:convertNumber integerOnly="true"/>
+                                    <f:validateLongRange minimum="1"/>
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}">
+                                    <f:validateDoubleRange minimum="0.01"/>
+                                </p:inputMask>
 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
                                 <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter">
@@ -114,10 +118,13 @@
                                 <p:outputLabel value="Stock: " for="txtStock"/>
                                 <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}">
                                     <f:convertNumber integerOnly="true"/>
+                                    <f:validateLongRange minimum="1"/>
                                 </p:inputText>
                                 
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
-                                <p:inputText id="txtPrecio" value="#{productoFormBean.productoBean.producto.precio}"/>
+                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}">
+                                    <f:validateDoubleRange minimum="0.01"/>
+                                </p:inputMask>
                                 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
                                 <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" 

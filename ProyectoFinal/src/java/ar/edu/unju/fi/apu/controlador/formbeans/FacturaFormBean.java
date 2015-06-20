@@ -129,4 +129,5 @@ public class FacturaFormBean {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
 }
