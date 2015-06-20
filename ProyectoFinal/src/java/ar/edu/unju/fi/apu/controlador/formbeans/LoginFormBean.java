@@ -66,8 +66,8 @@ public class LoginFormBean {
         return sesionValida ;
     }
      public boolean validarNombreUsuario(){
-        String nombre = getNombreUsuario();
-        if (nombre == "test")
+        String nombre = getNombreUsuarioValidado();
+        if (nombre.equalsIgnoreCase("test"))
         {   
             return true;
         }else{return false;}
