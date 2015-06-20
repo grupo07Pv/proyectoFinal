@@ -83,6 +83,10 @@ public class LoginFormBean implements Serializable{
         }
         return band;
     }
+     
+     public void limpiarFormulario(){
+        this.usuarioBean.setUsuario(new Usuario());
+    }
 
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;

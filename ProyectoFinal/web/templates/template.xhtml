@@ -58,6 +58,48 @@
                                 <p:submenu  style="margin-top: 35px;
                                             margin-left: 40px;
                                             color: #ffffff;"  class="hvr-float" label="Facturas">
+                                <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/index.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+                            </p:menubar>
+
+                            <h:form id="frmLogin">
+                                <p:growl id="mensajeGeneral" showDetail="true" sticky="true"/>
+                                <p:dialog id="dlgAltaProducto" modal="true" showEffect="slide"
+                                          hideEffect="explode" widgetVar="login" header="Iniciar Sesión VeGaMES">
+                                    <h:panelGrid columns="2" cellpadding="3">
+                                        <p:outputLabel for="txtNombre" value="Usuario: "/>
+                                        <p:inputText id="txtNombre" required="true" value="#{loginFormBean.nombreUsuario}"/>
+
+                                        <p:outputLabel for="txtPassword" value="Password: "/>
+                                        <p:password id="txtPassword" required="true" value="#{loginFormBean.password}"/>
+
+                                        <h:panelGroup/>
+                                        <p:commandButton id="btnValidar" icon="ui-icon-key" value="Iniciar" update="frmLogin" 
+                                                         action="#{loginFormBean.validarUsuario()}"/>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </h:form>
+
+                        </h:form>
+                    </h:form>
+
+                    <h:form rendered="#{loginFormBean.verificarSesion()}">
+                        <p:menubar  id="menuSesion">
+                            <f:facet name="options">
+                                <h:form>
+                                    <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
+                                    <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                                </h:form>
+                            </f:facet>
+                        </p:menubar>
+                        <h:form rendered="true" id="formTop" >
+                            <p:menubar style="padding-top: 10px; 
+                                       background-color:#000000 ;
+                                       color: #ffffff;">
+                                <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+
+                                <p:submenu  style="margin-top: 35px;
+                                            margin-left: 40px;
+                                            color: #ffffff;"  class="hvr-float" label="Facturas" rendered="#{loginFormBean.verificarSesion()}">
                                     <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
                                 </p:submenu>
 
