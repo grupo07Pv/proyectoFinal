@@ -76,7 +76,7 @@
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}"
+                                <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.productoBean.producto.precio}"
                                              required="true">
                                     <f:validateDoubleRange minimum="0.01"/>
                                 </p:inputMask>
@@ -93,7 +93,8 @@
                             </h:panelGrid>
                             <p:commandButton id="btnNuevoProducto" type="button" value="Grabar"
                                              onclick="PF('confirmaAltaProducto').show()">
-                            </p:commandButton>  
+                            </p:commandButton> 
+                            
                         </p:dialog>
 
                         <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION" 
@@ -124,7 +125,7 @@
                                 </p:inputText>
                                 
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
-                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
+                                <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
                                     <f:validateDoubleRange minimum="0.01"/>
                                 </p:inputMask>
                                 
