@@ -9,6 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/login.css"/>
         <script src="../resources/js/calendar_es.js" type="text/javascript"></script>
         <title>Sistema de Ventas</title>
         <style>
@@ -20,32 +21,53 @@
         <div id="contenedor"  >  
             <div id="top">
                 <ui:insert name="top">
-                    <p:menubar  id="menuSesion">
-                        <f:facet name="options">
-                            <h:form>
-                                <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
-                                <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
-                            </h:form>
-                        </f:facet>
-                    </p:menubar>
-                    <h:form rendered="true" id="formTop" >
-                        <p:menubar style="padding-top: 10px; 
-                                   background-color:#000000 ;
-                                   color: #ffffff;">
-                            <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
-
-                            <p:submenu  style="margin-top: 35px;
-                                        margin-left: 40px;
-                                        color: #ffffff;"  class="hvr-float" label="Facturas">
-                                <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
-                            </p:submenu>
-
-                            <p:submenu   style="margin-top: 35px;
-                                         color:#ffffff" label="Productos" class="hvr-float" rendered="#{loginFormBean.validarNombreUsuario()}">
-                                <p:menuitem class="hvr-underline-from-center" value="Productos" outcome="/productos/productos.xhtml" />
-                                <p:menuitem  class="hvr-underline-from-center" value="Tipo de Productos" outcome="/productos/tipoProductos.xhtml"/>
-                            </p:submenu>     
+                    <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
+                        <p:menubar  id="menuSesion">
+                            <f:facet name="options">
+                                <h:form>
+                                    <p:commandButton icon="ui-icon-key" value="Iniciar" title="Iniciar Sesión" action="/login?faces-redirect=true"/>
+                                </h:form>
+                            </f:facet>
                         </p:menubar>
+                        <h:form rendered="true" id="formTop" >
+                            <p:menubar style="padding-top: 10px; 
+                                       background-color:#000000 ;
+                                       color: #ffffff;">
+                                <p:menuitem  ><a href="./index"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+
+                            </p:menubar>
+                        </h:form>
+                    </h:form>
+
+
+                    <h:form rendered="#{loginFormBean.verificarSesion()}">
+                        <p:menubar  id="menuSesion">
+                            <f:facet name="options">
+                                <h:form>
+                                    <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
+                                    <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
+                                </h:form>
+                            </f:facet>
+                        </p:menubar>
+                        <h:form rendered="true" id="formTop" >
+                            <p:menubar style="padding-top: 10px; 
+                                       background-color:#000000 ;
+                                       color: #ffffff;">
+                                <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/pruebaEntrada.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+
+                                <p:submenu  style="margin-top: 35px;
+                                            margin-left: 40px;
+                                            color: #ffffff;"  class="hvr-float" label="Facturas">
+                                    <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
+                                </p:submenu>
+
+                                <p:submenu   style="margin-top: 35px;
+                                             color:#ffffff" label="Productos" class="hvr-float" rendered="#{loginFormBean.validarNombreUsuario()}">
+                                    <p:menuitem class="hvr-underline-from-center" value="Productos" outcome="/productos/productos.xhtml" />
+                                    <p:menuitem  class="hvr-underline-from-center" value="Tipo de Productos" outcome="/productos/tipoProductos.xhtml"/>
+                                </p:submenu>     
+                            </p:menubar>
+                        </h:form>
                     </h:form>
                 </ui:insert>
             </div>
@@ -63,7 +85,6 @@
                     <ui:insert name="content">.</ui:insert>
                 </div>
             </div>
-
             <ui:insert name="bottom">
                 <div class="footer" align="center" id="iconos">
                     <p style="font-size: 20px;
@@ -89,7 +110,6 @@
                         Pagina elaborada por el grupo 7 de visual.</p>
                 </div>
             </ui:insert>
-
         </div>
     </h:body>
 

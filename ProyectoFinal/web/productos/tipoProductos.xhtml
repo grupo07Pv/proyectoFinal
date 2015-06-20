@@ -13,7 +13,7 @@
 
             <ui:define name="content">
                 <p:growl id="grwMensajeTipoProd" showDetail="true" widgetVar="mensajesTipoProd"/>
-                <p:panel id="pnlTipoProd">
+                <p:panel id="pnlTipoProd" rendered="#{loginFormBean.validarNombreUsuario()}">
                     <h:form id="frmTipoProd">
                         <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
                                      paginator="true" rows="5">

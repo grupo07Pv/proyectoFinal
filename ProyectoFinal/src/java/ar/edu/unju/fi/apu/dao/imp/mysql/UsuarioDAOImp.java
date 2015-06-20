@@ -23,6 +23,8 @@ public class UsuarioDAOImp implements IUsuarioDAO{
         criteria.add(Restrictions.eq("password", password));
         if (!(criteria.list().isEmpty())){
             usuario =(Usuario) criteria.list().get(0);
+            System.out.println(usuario.getNombreUsuario());
+            System.out.println(usuario.getPassword());
         }
         session.close();
         return usuario;

@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <div>
                     <p:growl id="grwMensajeProducto" showDetail="true" widgetVar="mensajesProductos"/>
-                    <p:panel id="pnlPaciente" rendered="true">
+                    <p:panel id="pnlProductos" rendered="#{loginFormBean.validarNombreUsuario()}">
                         <h:form id="frmProductos" >
                             <p:dataTable id="tblProductos" value="#{productoFormBean.obtenerProductos()}" 
                                          var="pro" rows="4"  paginator="true" >

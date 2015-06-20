@@ -1,8 +1,10 @@
 package ar.edu.unju.fi.apu.controlador.formbeans;
 
+import ar.edu.unju.fi.apu.controlador.beans.UsuarioBean;
 import ar.edu.unju.fi.apu.dao.IUsuarioDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.UsuarioDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,8 +16,8 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class LoginFormBean {
-    
+public class LoginFormBean implements Serializable{
+    private UsuarioBean usuarioBean;
     private String nombreUsuario;
     private String password;
 
@@ -28,16 +30,21 @@ public class LoginFormBean {
     public String validarUsuario() {
         String resultado = null;
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-        Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, password);
+        System.out.println(nombreUsuario +" "+ password);
+        Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario,password);
+        System.out.println("Valido Usuario");
         if (usuario != null) {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario válido", "Usuario válido");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValido", usuario);
-            resultado = "pruebaEntrada?faces-redirect=true";
+            resultado = "/home?faces-redirect=true";
+            System.out.println("Redirecciona");
         } else {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credencial inválida", "Credencial inválida");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            System.out.println("Entro else");
         }
+        System.out.println("Salio If");
         return resultado;
     }
     
@@ -52,6 +59,8 @@ public class LoginFormBean {
     }
     
     public String cerrarSesion() {
+        this.nombreUsuario = null;
+        this.password = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
@@ -66,12 +75,23 @@ public class LoginFormBean {
         return sesionValida ;
     }
      public boolean validarNombreUsuario(){
+        boolean band = false;
         String nombre = getNombreUsuarioValidado();
         if (nombre.equalsIgnoreCase("test"))
         {   
-            return true;
-        }else{return false;}
+            band=true;
+        }
+        return band;
     }
+
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
+    }
+
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
+    }
+     
     /**
      * @return the nombreUsuario
      */

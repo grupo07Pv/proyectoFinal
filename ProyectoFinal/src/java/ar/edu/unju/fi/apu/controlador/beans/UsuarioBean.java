@@ -16,6 +16,7 @@ private Usuario usuario;
      * Creates a new instance of UsuarioBean
      */
     public UsuarioBean() {
+        usuario = new Usuario();
     }
 
     /**
