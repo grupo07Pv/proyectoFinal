@@ -8,7 +8,7 @@ import java.util.List;
  * @author Grupo 7 - VeGaMES
  */
 public interface IProductoDAO {
-     public void agregarProducto (Producto producto);
+    public void agregarProducto (Producto producto);
     public void modificarProducto (Producto producto);
     public void bajaProducto(Producto producto);
     public void eliminarProducto (Producto producto);

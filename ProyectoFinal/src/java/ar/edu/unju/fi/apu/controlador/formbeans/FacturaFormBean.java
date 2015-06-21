@@ -40,7 +40,7 @@ public class FacturaFormBean {
     public FacturaFormBean() {
         this.producto = new Producto();
         this.listaDetalles = new ArrayList<>();
-        this.total = new BigDecimal("0");
+        this.total = new BigDecimal("100");
     }
 
     public void agregarListaDetalle(Producto prod) {
@@ -65,7 +65,7 @@ public class FacturaFormBean {
         RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
 
-    public void retirarListaDetalle(Producto prod) {
+    public void retirarListaDetalle(Producto prod){
         int i = 0;
         for (DetalleFactura item : this.listaDetalles) {
             if (item.getProductos().getCodigo() == prod.getCodigo()) {
@@ -83,7 +83,7 @@ public class FacturaFormBean {
     public void calcularTotal() {
         this.total = new BigDecimal("0");
         for (DetalleFactura item : listaDetalles) {
-            this.total.add(new BigDecimal(item.getCantidad()).multiply(item.getProductos().getPrecio()));
+            setTotal(total.add(item.getPrecioVenta()));
         }
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
@@ -103,7 +103,6 @@ public class FacturaFormBean {
         }
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblListaProductos");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
 
