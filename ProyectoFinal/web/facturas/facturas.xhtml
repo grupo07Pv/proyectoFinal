@@ -14,49 +14,50 @@
             <ui:define name="content">
                 <h:form id="frmRealizarVentas">
                     <p:growl id="mensajeGeneral" showDetail="true"/>
-                    <h1>Venta de Productos</h1>
-                    <hr />
-                    <p:panelGrid columns="1">
-                        <h:panelGroup>
-                            <br />
-                            <p:dataTable value="#{productoFormBean.obtenerProductos()}" var="prod" style="font-size: 10px;width: 700px;" scrollable="true" scrollHeight="100">
-                                <p:column headerText="CÓDIGO DE BARRAS">
-                                    <h:outputText value="#{prod.codigo}"/>
-                                </p:column>
-                                <p:column headerText="NOMBRE" filterBy="nombre">
-                                    <h:outputText value="#{prod.nombre}"/>
-                                </p:column>
-                                <p:column headerText="PRECIO UNITARIO">
-                                    <h:outputText value="#{prod.precio}"/>
-                                </p:column>
-                                <p:column headerText="STOCK">
-                                    <h:outputText value="#{prod.stock}"/>
-                                </p:column>
-                                <p:column>
-                                    <p:commandButton value="Agregar" ajax="true" actionListener="#{facturaFormBean.agregarListaDetalle(prod)}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:panelGroup>
-                    </p:panelGrid>
+                    <p:fieldset >
+                        <p:panelGrid columns="1">
+                            <h:panelGroup>
+                                <br />
+                                <p:dataTable id="tblListaProductos" value="#{productoFormBean.obtenerProductos()}" var="prod" scrollable="true" scrollHeight="100">
+                                    <p:column headerText="CÓDIGO DE BARRAS">
+                                        <h:outputText value="#{prod.codigo}" class="letra"/>
+                                    </p:column>
+                                    <p:column headerText="NOMBRE" filterBy="nombre" class="letra">
+                                        <h:outputText value="#{prod.nombre}" class="letra"/>
+                                    </p:column>
+                                    <p:column headerText="PRECIO UNITARIO">
+                                        <h:outputText value="#{prod.precio}" class="letra"/>
+
+                                    </p:column>
+                                    <p:column headerText="STOCK">
+                                        <h:outputText value="#{prod.stock}" class="letra"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton value="Agregar" ajax="true" actionListener="#{facturaFormBean.agregarListaDetalle(prod)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </p:fieldset>
                     <hr />
                     <b>Lista de productos a vender</b>
                     <hr />
                     <p:dataTable id="tablaListaProductosVenta" value="#{facturaFormBean.listaDetalles}" var="item" style="font-size: 10px;">
                         <p:column headerText="CÓDIGO DE BARRAS" style="text-align: center;">
-                            <h:outputText value="#{item.productos.codigo}"/>
+                            <h:outputText value="#{item.productos.codigo}" class="letra"/>
                         </p:column>
                         <p:column headerText="NOMBRE" style="text-align: left;">
-                            <h:outputText value="#{item.productos.nombre}"/>
+                            <h:outputText value="#{item.productos.nombre}" class="letra"/>
                         </p:column>
                         <p:column headerText="PRECIO UNITARIO" style="text-align: center;">
-                            <h:outputText value="#{item.productos.precio}"/>
+                            <h:outputText value="#{item.productos.precio}" class="letra"/>
                         </p:column>
                         <p:column headerText="Cantidad" style="text-align: center;">
                             <p:inputText value="#{item.cantidad}" style="text-align: center;" />                    
                         </p:column>
                         <p:column headerText="Total" style="text-align: center;">
                             AR./ 
-                            <h:outputText value="#{item.precioVenta}"/>
+                            <h:outputText value="#{item.precioVenta}" class="letra"/>
                         </p:column>
                         <p:column style="text-align: center;">
                             <p:commandButton value="Retirar" ajax="true" actionListener="#{facturaFormBean.retirarListaDetalle(item)}"/>

@@ -101,6 +101,7 @@ public class FacturaFormBean {
         }
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblListaProductos");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
 

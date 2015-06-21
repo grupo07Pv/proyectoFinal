@@ -2,6 +2,10 @@
     position: relative;
     margin: 0px 0px 10px 0px;
 }
+
+.letra{
+    color:gold;
+}
 #contenedor{
     margin: 0 auto; 
     text-align: left;  
@@ -54,7 +58,7 @@
     font-size: 0.9em;
     padding-bottom: 12px;
     height: 20px;
-    background-color: #E0E0E0;
+    //background-color: #E0E0E0;
     border-color: #E0E0E0;
     margin-bottom: 20px;
  
@@ -77,7 +81,7 @@ body{
 }
 
 #formTop{
-    width: 60em;
+    width: 60%;
     margin:  auto;
     border: 4px;
     border:solid;
