@@ -57,7 +57,6 @@
     background-color: #E0E0E0;
     border-color: #E0E0E0;
     margin-bottom: 20px;
- 
 }
 
 #tooplate_middle{
@@ -76,14 +75,15 @@ body{
     margin: 0px;
 }
 
-#formTop{
-    width: 60em;
+.formTop{
+    width: 55em;
     margin:  auto;
     border: 4px;
     border:solid;
     border-color: #484848;
     border-width: 2px;
     border-radius: 5px;
+    padding-top: 20px;
 }
 
 

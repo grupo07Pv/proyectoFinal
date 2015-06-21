@@ -22,14 +22,14 @@
             <div id="top">
                 <ui:insert name="top">
                     <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
-                        <p:menubar  id="menuSesion">
+                        <p:menubar  id="menuSesion" >
                             <f:facet name="options">
                                 <h:form>
                                     <p:commandButton icon="ui-icon-key" value="Iniciar" title="Iniciar Sesión" action="/login?faces-redirect=true"/>
                                 </h:form>
                             </f:facet>
                         </p:menubar>
-                        <h:form rendered="true" id="formTop" >
+                        <h:form rendered="true" class="formTop" >
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
