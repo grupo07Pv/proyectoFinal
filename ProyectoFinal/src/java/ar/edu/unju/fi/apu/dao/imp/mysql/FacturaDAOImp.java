@@ -3,6 +3,8 @@ package ar.edu.unju.fi.apu.dao.imp.mysql;
 import ar.edu.unju.fi.apu.dao.IFacturaDAO;
 import ar.edu.unju.fi.apu.hibernate.config.HibernateUtil;
 import ar.edu.unju.fi.apu.modelo.dominio.Factura;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -34,7 +36,7 @@ public class FacturaDAOImp implements IFacturaDAO{
     }
 
     @Override
-    public List<Factura> obtenerTodos(String codigo) {
+    public List<Factura> obtenerTodos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Factura.class);
         criteria.addOrder(Order.asc("codigo"));
@@ -53,6 +55,30 @@ public class FacturaDAOImp implements IFacturaDAO{
         session.getTransaction().commit();
         session.close();
         return factura;
+    }
+
+    @Override
+    public List<Factura> obtenerAlgunas(Date desde, Date Hasta) {
+        List <Factura> filtroFactura = new ArrayList();
+        for(Factura unaFactura: obtenerTodos()){
+            boolean resultado = true;
+            
+            if( (resultado == true)&&(desde != null)&&(unaFactura.getFecha() != null)){
+                if(unaFactura.getFecha().compareTo(desde) <= -1){
+                    resultado = false;
+                }
+            }
+            
+            if( (resultado == true)&&(Hasta != null)&&(unaFactura.getFecha() != null)){
+                if(unaFactura.getFecha().compareTo(Hasta) >= 1){
+                    resultado = false;
+                }
+            }
+            if (resultado == true){
+                filtroFactura.add(unaFactura);
+            }
+        }
+        return filtroFactura;
     }
     
 }

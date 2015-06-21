@@ -10,6 +10,7 @@ import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import ar.edu.unju.fi.apu.modelo.dominio.Producto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -31,7 +32,8 @@ public class FacturaFormBean {
     private Producto producto;
     private List<DetalleFactura> listaDetalles;
     private BigDecimal total;
-
+    private Date fechaDesde;
+    private Date fechaHasta;
     /**
      * Creates a new instance of FacturaFormBean
      */
@@ -41,19 +43,32 @@ public class FacturaFormBean {
         this.total = new BigDecimal("0");
     }
 
-    public void agregarListaDetalle(int codigo) {
-        ProductoDAOImp productoDAO = new ProductoDAOImp();
-        this.producto = productoDAO.obtenerProducto(codigo);
-        this.listaDetalles.add(new DetalleFactura(null, producto, new BigDecimal("0"), 1));
+    public void agregarListaDetalle(Producto prod) {
+        boolean bandera = true;
+        for (DetalleFactura item : listaDetalles) {
+            if (item.getProductos().getCodigo() == prod.getCodigo()) {
+                item.setCantidad(item.getCantidad() + 1);
+                item.setPrecioVenta(item.getProductos().getPrecio().multiply(new BigDecimal(item.getCantidad())));
+                bandera = false;
+                break;
+            }
+        }
+        if (bandera) {
+            DetalleFactura detalle = new DetalleFactura();
+            detalle.setCantidad(1);
+            detalle.setProductos(prod);
+            detalle.setPrecioVenta(prod.getPrecio().multiply(new BigDecimal(detalle.getCantidad())));
+            this.listaDetalles.add(detalle);
+        }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto agregado"));
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
 
-    public void retirarListaDetalle(int codigo) {
+    public void retirarListaDetalle(Producto prod) {
         int i = 0;
         for (DetalleFactura item : this.listaDetalles) {
-            if (item.getProductos().getCodigo() == codigo) {
+            if (item.getProductos().getCodigo() == prod.getCodigo()) {
                 this.listaDetalles.remove(i);
                 break;
             }
@@ -67,10 +82,8 @@ public class FacturaFormBean {
 
     public void calcularTotal() {
         this.total = new BigDecimal("0");
-        for (DetalleFactura item : this.listaDetalles) {
-            BigDecimal totalVenta = item.getProductos().getPrecio().multiply(new BigDecimal(item.getCantidad()));
-            item.setPrecioVenta(totalVenta);
-            this.total = this.total.add(totalVenta);
+        for (DetalleFactura item : listaDetalles) {
+            this.total.add(new BigDecimal(item.getCantidad()).multiply(item.getProductos().getPrecio()));
         }
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
@@ -95,7 +108,7 @@ public class FacturaFormBean {
 
     public List<Factura> obtenerFacturas() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
-        return facturaDAO.obtenerTodos(facturaBean.getFactura().getCodigo());
+        return facturaDAO.obtenerTodos();
     }
 
     public FacturaBean getFacturaBean() {
@@ -128,6 +141,22 @@ public class FacturaFormBean {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+
+    public Date getFechaHasta() {
+        return fechaHasta;
+    }
+
+    public void setFechaHasta(Date fechaHasta) {
+        this.fechaHasta = fechaHasta;
     }
 
 }
