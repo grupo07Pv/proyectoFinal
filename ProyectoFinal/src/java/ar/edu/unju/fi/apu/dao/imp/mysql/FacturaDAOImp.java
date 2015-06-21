@@ -80,5 +80,14 @@ public class FacturaDAOImp implements IFacturaDAO{
         }
         return filtroFactura;
     }
+
+    @Override
+    public void eliminarFactura(Factura factura) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(factura);
+        session.getTransaction().commit();
+        session.close();  
+    }
     
 }

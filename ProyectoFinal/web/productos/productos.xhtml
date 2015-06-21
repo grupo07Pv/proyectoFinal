@@ -76,11 +76,12 @@
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                                <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.productoBean.producto.precio}"
+                                <p:inputMask id="txtPrecio" mask="999.99"  value="#{productoFormBean.productoBean.producto.precio}"
                                              required="true">
-                                    <f:validateDoubleRange minimum="0.01"/>
+                                    
+                                    <f:validateDoubleRange minimum="0.01" />
                                 </p:inputMask>
-
+                                
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
                                 <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter" required="true">
                                     <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
@@ -125,7 +126,7 @@
                                 </p:inputText>
                                 
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
-                                <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
+                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
                                     <f:validateDoubleRange minimum="0.01"/>
                                 </p:inputMask>
                                 
