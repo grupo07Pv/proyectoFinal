@@ -27,7 +27,6 @@ public class LoginFormBean implements Serializable{
      * Creates a new instance of LoginFormBean
      */
     public LoginFormBean() {
-        this.nombreUsuario = null;
         HttpSession miSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         miSession.setMaxInactiveInterval(5000);
     }
@@ -86,7 +85,8 @@ public class LoginFormBean implements Serializable{
     public String cerrarSesion() {
         this.nombreUsuario = null;
         this.password = null;
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.invalidate();
         FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         return "/index?faces-redirect=true";

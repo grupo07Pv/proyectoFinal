@@ -12,9 +12,6 @@
         <h:outputStylesheet name="./css/login.css"/>
         <script src="../resources/js/calendar_es.js" type="text/javascript"></script>
         <title>Sistema de Ventas</title>
-        <style>
-
-        </style>
     </h:head>
 
     <h:body >
@@ -26,7 +23,7 @@
                         <p:menubar class="menuSesion">
                             <f:facet name="options">
                                 <p:commandButton id="btnIniciar" value="Iniciar Sesion" type="button" onclick="PF('login').show()"/>
-                                <p:commandButton id="btnRegistrar" type="button" value="Registrarse" action="register"/>
+                                <a href="http://localhost:8084/ProyectoFinal/faces/register.xhtml"><p:commandButton id="btnRegistrar" type="button" ajax="false" value="Registrarse" /></a>
                             </f:facet>
                         </p:menubar>
 
@@ -40,7 +37,7 @@
                                     <p:password id="pass" required="true" value="#{loginFormBean.password}"/>
 
                                     <p:commandButton id="aceptar" value="Ingresar" update="frmLoginPrueba"
-                                                     action="#{loginFormBean.validarUsuarioDos()}"/>
+                                                     action="#{loginFormBean.logIn()}"/>
                                     <p:commandButton id="cancelar" value="Cancelar" type="button" onclick="PF('login').hide()"/>
                                 </h:panelGrid>
                             </p:dialog>
