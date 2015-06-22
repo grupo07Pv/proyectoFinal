@@ -24,8 +24,7 @@
                     <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
                         <p:menubar class="menuSesion">
                             <f:facet name="options">
-                                <p:commandButton id="prueba1" value="IniciarB" type="button" onclick="PF('login').show()"/>
-                                <p:commandButton id="prueba2" value="IniciarS" oncomplete="PF('login').show()"/>
+                                <p:commandButton id="btnIniciar" value="Iniciar Sesion" type="button" onclick="PF('login').show()"/>
                             </f:facet>
                         </p:menubar>
 
@@ -49,7 +48,7 @@
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
-                                <p:menuitem  ><a href="./"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+                                <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
                             </p:menubar>
                         </h:form>
                     </h:form>
