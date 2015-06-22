@@ -34,6 +34,7 @@ public class FacturaFormBean {
     private BigDecimal total;
     private Date fechaDesde;
     private Date fechaHasta;
+    private List<Factura> algunasFacturas;
     /**
      * Creates a new instance of FacturaFormBean
      */
@@ -111,6 +112,24 @@ public class FacturaFormBean {
         return facturaDAO.obtenerTodos();
     }
 
+    public void buscarFacturas(){
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        algunasFacturas = facturaDAO.obtenerAlgunas(fechaDesde, fechaHasta);
+    }
+    
+    public void obtenerFactura(Factura factura){
+        facturaBean.setFactura(factura);
+        //RequestContext.getCurrentInstance().update(null);
+    }
+    public void eliminarFactura(){
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        facturaDAO.eliminarFactura(this.facturaBean.getFactura());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion concretada","Operacion concretada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
+    }
+    public Date getFechaActual(){
+        return new Date(System.currentTimeMillis());
+    }
     public FacturaBean getFacturaBean() {
         return facturaBean;
     }
@@ -157,6 +176,14 @@ public class FacturaFormBean {
 
     public void setFechaHasta(Date fechaHasta) {
         this.fechaHasta = fechaHasta;
+    }
+
+    public List<Factura> getAlgunasFacturas() {
+        return algunasFacturas;
+    }
+
+    public void setAlgunasFacturas(List<Factura> algunasFacturas) {
+        this.algunasFacturas = algunasFacturas;
     }
 
 }

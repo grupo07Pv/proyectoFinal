@@ -8,11 +8,12 @@ package ar.edu.unju.fi.apu.hibernate.config;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
+
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
  * object.
  *
- * @author Ivan
+ * @author  Grupo 7 - VeGaMES
  */
 public class HibernateUtil {
 
