@@ -50,13 +50,13 @@
     margin: 0px 170px 0px 170px;
 }
 
-#menuSesion{
+.menuSesion{
     font-size: 0.9em;
     padding-bottom: 12px;
-    height: 20px;
+    //height: 20px;
     background-color: #E0E0E0;
     border-color: #E0E0E0;
-    margin-bottom: 20px;
+    //margin-bottom: 20px;
 }
 
 #tooplate_middle{
@@ -68,7 +68,7 @@
 
 body{
     background-color: #909090; 
-    background-image: url("#{resource['images/lol.png']}");
+    background-image: url("#{resource['images/lol.jpg']}");
     background-size: cover;
     background-repeat: no-repeat; 
     background-attachment:fixed;
@@ -76,7 +76,7 @@ body{
 }
 
 .formTop{
-    width: 55em;
+    width: 65em;
     margin:  auto;
     border: 4px;
     border:solid;
@@ -84,6 +84,18 @@ body{
     border-width: 2px;
     border-radius: 5px;
     padding-top: 20px;
+}
+
+.formTop2{
+    width: 55em;
+    margin:  auto;
+    border: 4px;
+    border:solid;
+    border-color: #484848;
+    border-width: 2px;
+    border-radius: 15px;
+    padding-top: 20px;
+    font-size: large;
 }
 
 

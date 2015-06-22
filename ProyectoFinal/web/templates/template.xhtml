@@ -22,25 +22,40 @@
             <div id="top">
                 <ui:insert name="top">
                     <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
-                        <p:menubar  id="menuSesion" >
+                        <p:growl id="mensajesTop" showDetail="true" life="3000"/>
+                        <p:menubar class="menuSesion">
                             <f:facet name="options">
-                                <h:form>
-                                    <p:commandButton icon="ui-icon-key" value="Iniciar" title="Iniciar Sesión" action="/login?faces-redirect=true"/>
-                                    <p:commandButton value="Registrarse" action="/register?faces-redirect=true"/>
-                                </h:form>
+                                <p:commandButton id="btnIniciar" value="Iniciar Sesion" type="button" onclick="PF('login').show()"/>
+                                <p:commandButton id="btnRegistrar" value="Registrar" action="/register?faces-redirect=true"/>
                             </f:facet>
                         </p:menubar>
+
+                        <h:form id="frmLoginPrueba">
+                            <p:dialog widgetVar="login" modal="true" header="Iniciar Prueba" showEffect="slide" hideEffect="explode">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel for="name" value="Usuario: "/>
+                                    <p:inputText id="name" required="true" value="#{loginFormBean.nombreUsuario}"/>
+
+                                    <p:outputLabel for="pass" value="Password: "/>
+                                    <p:password id="pass" required="true" value="#{loginFormBean.password}"/>
+
+                                    <p:commandButton id="aceptar" value="Ingresar" update="frmLoginPrueba"
+                                                     action="#{loginFormBean.validarUsuarioDos()}"/>
+                                    <p:commandButton id="cancelar" value="Cancelar" type="button" onclick="PF('login').hide()"/>
+                                </h:panelGrid>
+                            </p:dialog>
+                        </h:form>
                         <h:form rendered="true" class="formTop" >
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
-                                <p:menuitem  ><a href="./index"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+                                <p:menuitem  ><a href="./"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
                             </p:menubar>
                         </h:form>
                     </h:form>
 
                     <h:form rendered="#{loginFormBean.verificarSesion()}">
-                        <p:menubar  id="menuSesion">
+                        <p:menubar  class="menuSesion">
                             <f:facet name="options">
                                 <h:form>
                                     <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
@@ -48,7 +63,7 @@
                                 </h:form>
                             </f:facet>
                         </p:menubar>
-                        <h:form rendered="true" id="formTop" >
+                        <h:form rendered="true" class="formTop" >
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
@@ -85,6 +100,46 @@
                     <ui:insert name="content">.</ui:insert>
                 </div>
             </div>
+
+
+            <p:tabView dynamic="true" cache="true" class="formTop2">
+                <p:tab title="Dark Souls II">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:graphicImage name="/images/ds2.jpg" />
+                        <h:outputText
+                            value="Sigue la estela del primer título de la saga para ofrecernos 
+                            altas dosis de acción en este desafiante RPG. Este juego conserva las bases jugables de 
+                            su antecesor aunque también incorpora novedades como la libertad de exploración, 
+                            que permitirá al jugador organizar las misiones a su antojo. Se trata de una secuela 
+                            continuista que parte del primer título y que promete mantener el nivel de dificultad
+                            que caracteriza a los juegos de FromSoftware pese a la incorporación de elementos como 
+                            los viajes rápidos o el aumento de elementos para recuperar salud. " />
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Dragon Age">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:graphicImage name="/images/da.jpg" />
+                        <h:outputText value="La tercera entrega de esta saga de rol 
+                                      desarrollada por BioWare para PC nos llevará otra vez a este gran mundo épico.
+                                      En esta ocasión la jugabilidad se verá aún más influenciada por las decisiones
+                                      tomadas anteriormente además de tener en cuenta las partidas grabadas de los dos 
+                                      anteriores títulos. Aunque el juego no depende directamente de sus hermanos mayores
+                                      si que existen menciones a hechos ocurridos con anterioridad. Guerra, magia y un gran
+                                      arsenal te esperan en Orlais para sumergirte en este tercer título de la saga. " />
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Battlefield 3">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:graphicImage name="/images/bf.jpg" />
+                        <h:outputText value="Battlefield vuelve a PC con una nueva entrega ambientada de nuevo en 
+                                      la guerra moderna, que usa el motor gráfico Frostbite 2. Su campaña nos llevará 
+                                      a Oriente Medio, y su multijugador tendrá escenarios tanto en lugares clásicos de los
+                                      juegos bélicos como en ciudades como París. El modo multijugador contará con un red social 
+                                      llamada Battlelog, y con numerosos modos de juego, desde el sencillo todos contra todos hasta
+                                      otros que requerirán la coordinación entre los diferentes miembros de un equipo." />
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
             <ui:insert name="bottom">
                 <div class="footer" align="center" id="iconos">
                     <p style="font-size: 20px;
