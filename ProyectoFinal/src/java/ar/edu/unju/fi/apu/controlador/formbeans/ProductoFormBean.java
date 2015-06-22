@@ -152,6 +152,7 @@ public class ProductoFormBean {
     
     public void limpiarFormulario(){
         this.productoBean.setProducto(new Producto());
+        this.precio="";
     }
     
     public StreamedContent getArchivoFoto() throws IOException{

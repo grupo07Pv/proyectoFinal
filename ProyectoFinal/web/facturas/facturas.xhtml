@@ -52,7 +52,7 @@
                             <h:outputText value="#{item.productos.precio}"/>
                         </p:column>
                         <p:column headerText="Cantidad" style="text-align: center;">
-                            <p:inputText value="#{item.cantidad}" style="text-align: center;" />                    
+                            <p:spinner value="#{item.cantidad}" max="#{item.productos.stock}" min="1" style="text-align: center;" />                    
                         </p:column>
                         <p:column headerText="Total" style="text-align: center;">
                             AR./ 
