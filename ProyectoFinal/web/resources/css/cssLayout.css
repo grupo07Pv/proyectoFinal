@@ -68,7 +68,7 @@
 
 body{
     background-color: #909090; 
-    background-image: url("#{resource['images/lol.png']}");
+    background-image: url("#{resource['images/lol.jpg']}");
     background-size: cover;
     background-repeat: no-repeat; 
     background-attachment:fixed;
