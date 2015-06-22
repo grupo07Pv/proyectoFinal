@@ -40,7 +40,7 @@
                                     <p:outputLabel value="#{pro.stock}"/>
                                 </p:column>
                                 <p:column headerText="Precio" style="width: 45px;">
-                                    <p:outputLabel value="#{pro.precio}"/>
+                                    <p:outputLabel value="#{pro.precio}" />
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
                                     <p:commandButton  icon="ui-icon-pencil" title="Modificar" oncomplete="PF('modificaProducto').show()"
@@ -76,10 +76,10 @@
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                                <p:inputMask id="txtPrecio" mask="999.99"  value="#{productoFormBean.productoBean.producto.precio}"
+                          
+                                <p:inputMask id="txtPrecio" mask="999,99"  value="#{productoFormBean.precio}"
                                              required="true">
                                     
-                                    <f:validateDoubleRange minimum="0.01" />
                                 </p:inputMask>
                                 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
@@ -126,8 +126,8 @@
                                 </p:inputText>
                                 
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
-                                <p:inputMask id="txtPrecio" mask="999.99" value="#{productoFormBean.productoBean.producto.precio}" required="true">
-                                    <f:validateDoubleRange minimum="0.01"/>
+                                <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.precio}" required="true">
+                                    
                                 </p:inputMask>
                                 
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>

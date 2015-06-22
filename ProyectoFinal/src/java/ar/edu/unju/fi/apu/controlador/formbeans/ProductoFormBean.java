@@ -8,8 +8,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -53,10 +58,26 @@ public class ProductoFormBean {
     
     public void obtenerProducto (Producto producto){
         productoBean.setProducto(producto);
+        ProductoFormBean.this.setPrecio(producto.getPrecio().toString());
         RequestContext.getCurrentInstance().update("frmModificaProducto:dlgModificaProducto");
     }
     
     public void agregarProducto (){
+        
+        try {
+            
+            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
+            otherSymbols.setDecimalSeparator(',');
+            DecimalFormat df = new DecimalFormat("###,##", otherSymbols);
+            Number numero2 = df.parse(precio);
+            
+            BigDecimal numero = new BigDecimal (numero2.toString());
+        productoBean.getProducto().setPrecio(numero);
+            
+        } catch (ParseException ex) {
+           
+        }
+        
         productoBean.getProducto().setEstado(true);
         IProductoDAO productoDAO=new ProductoDAOImp();
         
@@ -89,6 +110,20 @@ public class ProductoFormBean {
     }
 
     public void actualizarProducto(){
+        
+        try {
+            
+            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
+            otherSymbols.setDecimalSeparator(',');
+            DecimalFormat df = new DecimalFormat("###,##", otherSymbols);
+            Number numero2 = df.parse(precio);
+            
+            BigDecimal numero = new BigDecimal (numero2.toString());
+            productoBean.getProducto().setPrecio(numero);
+            
+        } catch (ParseException ex) {
+           
+        }
         IProductoDAO productoDAO = new ProductoDAOImp();
         try{
             if (archivo.getFileName().isEmpty()==false){
@@ -145,6 +180,14 @@ public class ProductoFormBean {
 
     public void setArchivo(UploadedFile archivo) {
         this.archivo = archivo;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
     
 }
