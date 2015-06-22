@@ -28,19 +28,19 @@ public class UsuarioFormBean {
     public UsuarioFormBean() {
     }
 
-    public void grabarNuevoTipoProducto() {
+    public void registrarUsuario() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         if (usuarioDAO.obtenerUsuario(usuarioBean.getUsuario().getNombreUsuario()) == null) {
             this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
             usuarioDAO.agregarUsuario(usuarioBean.getUsuario());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion Concretada", "Operacion Concretada"));
-            RequestContext.getCurrentInstance().execute("PF('confirmarAltaTipo').hide();PF('altaTipoProd').hide()");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alta Concretada", "Alta Concretada"));
+            RequestContext.getCurrentInstance().execute("PF('altaUsuario').hide()");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Introduzca otro usuario", null));
         }
     }
 
-    public void actualizarTipoProducto() {
+    public void actualizarUsuario() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
         usuarioDAO.modificarUsuario(usuarioBean.getUsuario());

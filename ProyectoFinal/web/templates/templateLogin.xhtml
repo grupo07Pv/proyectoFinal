@@ -24,7 +24,7 @@
                     <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
                         <p:menubar  id="menuSesion">
                             <f:facet name="options">
-                                
+                                <p:commandButton value="Registrarse" type="button" onclick="PF('altaUsuario').show()"/>
                             </f:facet>
                         </p:menubar>
                         <h:form rendered="true" id="formTop" >
@@ -35,7 +35,10 @@
 
                             </p:menubar>
                         </h:form>
+                        
+                        
                     </h:form>
+                    
                 </ui:insert>
             </div>
             <div id="contenedor_central">
