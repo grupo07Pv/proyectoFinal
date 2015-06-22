@@ -102,7 +102,7 @@ public class LoginFormBean implements Serializable{
      public boolean validarNombreUsuario(){
         boolean band = false;
         String nombre = getNombreUsuarioValidado();
-        if (nombre.equals("admin"))
+        if (nombre.equalsIgnoreCase("admin"))
         {   
             band=true;
         }
