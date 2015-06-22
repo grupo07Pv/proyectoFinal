@@ -11,4 +11,6 @@ import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
 public interface IUsuarioDAO {
       public Usuario validarUsuario(String nombreUsuario, String password);
       public Usuario obtenerUsuario(String nombreUsuario);
+      public void agregarUsuario(Usuario usuario);
+      public void modificarUsuario(Usuario usuario);      
 }

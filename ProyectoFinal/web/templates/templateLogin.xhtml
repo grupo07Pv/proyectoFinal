@@ -22,63 +22,27 @@
             <div id="top">
                 <ui:insert name="top">
                     <h:form rendered="#{loginFormBean.verificarSesion() eq false}">
-                        <p:menubar  id="menuSesion" >
-                            <f:facet name="options">
-                                <h:form>
-                                    <p:commandButton icon="ui-icon-key" value="Iniciar" title="Iniciar Sesión" action="/login?faces-redirect=true"/>
-                                    <p:commandButton value="Registrarse" action="/register?faces-redirect=true"/>
-                                </h:form>
-                            </f:facet>
-                        </p:menubar>
-                        <h:form rendered="true" class="formTop" >
-                            <p:menubar style="padding-top: 10px; 
-                                       background-color:#000000 ;
-                                       color: #ffffff;">
-                                <p:menuitem  ><a href="./index"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
-                            </p:menubar>
-                        </h:form>
-                    </h:form>
-
-                    <h:form rendered="#{loginFormBean.verificarSesion()}">
                         <p:menubar  id="menuSesion">
                             <f:facet name="options">
-                                <h:form>
-                                    <p:outputLabel value="Bienvenido   #{loginFormBean.nombreUsuarioValidado}"/>
-                                    <p:commandButton icon="ui-icon-power" title="Cerrar Sesión" action="#{loginFormBean.cerrarSesion()}"/>
-                                </h:form>
                             </f:facet>
                         </p:menubar>
                         <h:form rendered="true" id="formTop" >
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
-                                <p:menuitem  ><a href="http://localhost:8084/ProyectoFinal/faces/home.xhtml"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+                                <p:menuitem  ><a href="./index"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
 
-                                <p:submenu  style="margin-top: 35px;
-                                            margin-left: 40px;
-                                            color: #ffffff;"  class="hvr-float" label="Facturas" rendered="#{loginFormBean.verificarSesion()}">
-                                    <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
-                                    <p:menuitem class="hvr-underline-from-center" value="Consulta"  outcome="/facturas/busquedaFactura.xhtml" rendered="#{loginFormBean.validarNombreUsuario()}"/>
-                                </p:submenu>
-
-                                <p:submenu   style="margin-top: 35px;
-                                             color:#ffffff" label="Productos" class="hvr-float" rendered="#{loginFormBean.validarNombreUsuario()}">
-                                    <p:menuitem class="hvr-underline-from-center" value="Productos" outcome="/productos/productos.xhtml" />
-                                    <p:menuitem  class="hvr-underline-from-center" value="Tipo de Productos" outcome="/productos/tipoProductos.xhtml"/>
-                                </p:submenu>     
                             </p:menubar>
                         </h:form>
+                        
+                        
                     </h:form>
+                    
                 </ui:insert>
             </div>
             <div id="contenedor_central">
                 <div id="left">
                     <ui:insert name="left">
-                        <p:imageSwitch effect="fade" id="fadeEffect">
-                            <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
-                                <p:graphicImage value="/resources/images/#{imagen}" id="image"/>
-                            </ui:repeat>
-                        </p:imageSwitch>
                     </ui:insert>
                 </div>
                 <div id="content" class="left_content">

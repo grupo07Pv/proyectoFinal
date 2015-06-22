@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -10,7 +11,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class UsuarioBean {
+public class UsuarioBean implements Serializable{
 private Usuario usuario;
     /**
      * Creates a new instance of UsuarioBean
