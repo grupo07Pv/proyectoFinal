@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,27 +27,26 @@ public class LoginFormBean implements Serializable{
      * Creates a new instance of LoginFormBean
      */
     public LoginFormBean() {
+        this.nombreUsuario = null;
+        HttpSession miSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        miSession.setMaxInactiveInterval(5000);
     }
 
-    public String validarUsuario() {
-        String resultado = "/index?faces-redirect=true";
+    public String logIn() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         setPassword(Encrypt.sha512(getPassword()));
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario,password);
         System.out.println("Valido Usuario");
         if (usuario != null) {
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario válido", "Usuario válido");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            httpSession.setAttribute("usuario", this.nombreUsuario);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValido", usuario);
-            resultado = "/home?faces-redirect=true";
-            System.out.println("Redirecciona");
+            return "/home?faces-redirect=true";
         } else {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credencial inválida", "Credencial inválida");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-            System.out.println("Entro else");
         }
-        System.out.println("Salio If");
-        return resultado;
+        return "/index?faces-redirect=true";
     }
     
     public String validarUsuarioDos() {

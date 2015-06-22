@@ -26,12 +26,12 @@
                         <p:menubar class="menuSesion">
                             <f:facet name="options">
                                 <p:commandButton id="btnIniciar" value="Iniciar Sesion" type="button" onclick="PF('login').show()"/>
-                                <p:commandButton id="btnRegistrar" value="Registrar" action="/register?faces-redirect=true"/>
+                                <p:commandButton id="btnRegistrar" type="button" value="Registrarse" action="register"/>
                             </f:facet>
                         </p:menubar>
 
                         <h:form id="frmLoginPrueba">
-                            <p:dialog widgetVar="login" modal="true" header="Iniciar Prueba" showEffect="slide" hideEffect="explode">
+                            <p:dialog widgetVar="login" modal="true" header="Iniciar Session" showEffect="slide" hideEffect="explode">
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <p:outputLabel for="name" value="Usuario: "/>
                                     <p:inputText id="name" required="true" value="#{loginFormBean.nombreUsuario}"/>
@@ -49,7 +49,7 @@
                             <p:menubar style="padding-top: 10px; 
                                        background-color:#000000 ;
                                        color: #ffffff;">
-                                <p:menuitem  ><a href="./"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
+                                <p:menuitem  ><a href="#"><p:graphicImage style="padding-top: 10px; height: 75px;"  value="/resources/images/logo.png" title="Home"/></a></p:menuitem>
                             </p:menubar>
                         </h:form>
                     </h:form>
