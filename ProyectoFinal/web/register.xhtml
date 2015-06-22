@@ -26,7 +26,7 @@
                                 <p:outputLabel for="txtNom" value="Nombre: "/>
                                 <p:inputText id="txtNom" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreReal}"/>
 
-                                <p:commandButton id="btnRegistrar" value="Registrar" actionListener="#{usuarioFormBean.registrarUsuario()}"/>
+                                <p:commandButton id="btnRegistrar" ajax="false" value="Registrar" update="frmAltaUsuario:mensajeUsuario" action="#{usuarioFormBean.registrarUsuarioAction()}"/>
                                 <p:commandButton value="Cancelar" action="/index?faces-redirect=true"/>
                             </h:panelGrid>
                         </p:panel>

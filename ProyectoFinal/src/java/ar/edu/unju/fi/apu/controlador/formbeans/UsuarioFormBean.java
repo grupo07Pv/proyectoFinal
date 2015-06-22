@@ -46,8 +46,10 @@ public class UsuarioFormBean implements Serializable{
     }
 
     public String registrarUsuarioAction() {
+        System.out.println("Entro");
         String id = usuarioBean.getUsuario().getNombreUsuario();
         String pass = usuarioBean.getUsuario().getPassword();
+        System.out.println(id+" "+pass);
         String pagina = "/index?faces-redirect=true";
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         if (usuarioDAO.obtenerUsuario(usuarioBean.getUsuario().getNombreUsuario()) == null) {
@@ -56,8 +58,11 @@ public class UsuarioFormBean implements Serializable{
             usuarioDAO.agregarUsuario(usuarioBean.getUsuario());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alta Concretada", "Alta Concretada"));
             usuarioBean = new UsuarioBean();
+                    System.out.println(id+" "+pass+"2do");
             Usuario usuario = usuarioDAO.validarUsuario(id, pass);
+            System.out.println(usuario);
             if (usuario != null){
+                System.out.println("Entro al if de la validacion");
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValido", usuario);
                 pagina = "/home?faces-redirect=true";
             }

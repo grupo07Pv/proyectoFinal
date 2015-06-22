@@ -52,7 +52,7 @@
                                 <p:outputLabel for="txtNom" value="Nombre: "/>
                                 <p:inputText id="txtNom" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreReal}"/>
 
-                                <p:commandButton id="btnRegistrar" value="Registrar" action="#{usuarioFormBean.registrarUsuarioAction()}"/>
+                                <p:commandButton id="btnRegistrar" ajax="false" value="Registrar" action="#{usuarioFormBean.registrarUsuarioAction()}"/>
                                 <p:commandButton value="Cancelar" type="button" onclick="PF('register').hide()"/>
                             </h:panelGrid>
                         </p:dialog>
