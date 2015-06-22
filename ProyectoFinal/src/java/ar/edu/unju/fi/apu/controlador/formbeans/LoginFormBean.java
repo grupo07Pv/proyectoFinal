@@ -29,7 +29,28 @@ public class LoginFormBean implements Serializable{
     }
 
     public String validarUsuario() {
-        String resultado = null;
+        String resultado = "/index?faces-redirect=true";
+        IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
+        setPassword(Encrypt.sha512(getPassword()));
+        Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario,password);
+        System.out.println("Valido Usuario");
+        if (usuario != null) {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario válido", "Usuario válido");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValido", usuario);
+            resultado = "/home?faces-redirect=true";
+            System.out.println("Redirecciona");
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Credencial inválida", "Credencial inválida");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            System.out.println("Entro else");
+        }
+        System.out.println("Salio If");
+        return resultado;
+    }
+    
+    public String validarUsuarioDos() {
+        String resultado = "/index?faces-redirect=true";
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         setPassword(Encrypt.sha512(getPassword()));
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario,password);
@@ -51,6 +72,9 @@ public class LoginFormBean implements Serializable{
     
     public String getNombreUsuarioValidado() {
         Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
+        if (usuario == null){
+            usuario = new Usuario();
+        }
         return usuario.getNombreUsuario();
     }
     
@@ -78,7 +102,7 @@ public class LoginFormBean implements Serializable{
      public boolean validarNombreUsuario(){
         boolean band = false;
         String nombre = getNombreUsuarioValidado();
-        if (nombre.equalsIgnoreCase("test"))
+        if (nombre.equals("admin"))
         {   
             band=true;
         }

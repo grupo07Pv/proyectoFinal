@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./templates/templateLogin.xhtml">
+
+            <ui:define name="left"/>
+
+            <ui:define name="content">
+                <h:form>
+                    <p:menubar class="menuSesion">
+                        <f:facet name="options">
+                            <p:commandButton id="otro1" value="IniciarB" type="button" onclick="PF('login').show()"/>
+                            <p:commandButton id="otro2" value="RegistrarB" type="button" onclick="PF('register').show()"/>
+                            <p:commandButton id="otro3" value="RegistrarS" oncomplete="PF('register').show()"/>
+                        </f:facet>
+                    </p:menubar>
+
+                    <h:form id="frmLoginPrueba">
+                        <p:growl id="mensajePrueba" showDetail="true" life="3000"/>
+                        <p:dialog widgetVar="login" modal="true" header="Iniciar Prueba" showEffect="slide" hideEffect="explode">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:outputLabel for="name" value="Usuario: "/>
+                                <p:inputText id="name" required="true" value="#{loginFormBean.nombreUsuario}"/>
+
+                                <p:outputLabel for="pass" value="Password: "/>
+                                <p:password id="pass" required="true" value="#{loginFormBean.password}"/>
+
+                                <p:commandButton id="aceptar" value="Ingresar" update="frmLoginPrueba"
+                                                 action="#{loginFormBean.validarUsuarioDos()}"/>
+                                <p:commandButton id="cancelar" value="Cancelar" type="button" onclick="PF('login').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                   <h:form id="frmAltaUsuario">
+                        <p:dialog widgetVar="register">
+                            <h:panelGrid id="pnlAltaUsuario" columns="2" cellpadding="5">
+                                <p:outputLabel for="txtUsuario" value="Usuario: "/>
+                                <p:inputText id="txtUsuario" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreUsuario}"/>
+
+                                <p:outputLabel for="txtPass" value="Password: "/>
+                                <p:password id="txtPass" required="true" value="#{usuarioFormBean.usuarioBean.usuario.password}"/>
+
+                                <p:outputLabel for="txtNom" value="Nombre: "/>
+                                <p:inputText id="txtNom" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreReal}"/>
+
+                                <p:commandButton id="btnRegistrar" value="Registrar" action="#{usuarioFormBean.registrarUsuarioAction()}"/>
+                                <p:commandButton value="Cancelar" type="button" onclick="PF('register').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
