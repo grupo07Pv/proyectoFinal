@@ -12,24 +12,26 @@
             <ui:define name="left"/>
 
             <ui:define name="content">
-                <h:form id="frmAltaUsuario">
-                    <p:dialog id="dlgAltaUsuario" header="Registro de Usuario" showEffect="explode" hideEffect="explode"
-                              widgetVar="altaUsuario">
-                        <h:panelGrid id="pnlAltaUsuario" columns="2" cellpadding="5">
-                            <p:outputLabel for="txtUsuario" value="Usuario: "/>
-                            <p:inputText id="txtUsuario" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreUsuario}"/>
+                <div class="contenedorLogin">
+                    <h:form id="frmAltaUsuario">
+                        <p:growl id="mensajeUsuario" showDetail="false" sticky="false"/>
+                        <p:panel header="Registro de Usuario">
+                            <h:panelGrid id="pnlAltaUsuario" columns="2" cellpadding="5">
+                                <p:outputLabel for="txtUsuario" value="Usuario: "/>
+                                <p:inputText id="txtUsuario" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreUsuario}"/>
 
-                            <p:outputLabel for="txtPass" value="Password: "/>
-                            <p:password id="txtPass" required="true" value="#{usuarioFormBean.usuarioBean.usuario.password}"/>
+                                <p:outputLabel for="txtPass" value="Password: "/>
+                                <p:password id="txtPass" required="true" value="#{usuarioFormBean.usuarioBean.usuario.password}"/>
 
-                            <p:outputLabel for="txtNom" value="Nombre: "/>
-                            <p:inputText id="txtNom" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreReal}"/>
+                                <p:outputLabel for="txtNom" value="Nombre: "/>
+                                <p:inputText id="txtNom" required="true" value="#{usuarioFormBean.usuarioBean.usuario.nombreReal}"/>
 
-                            <p:commandButton id="btnRegistrar" value="Registrar" actionListener="#{usuarioFormBean.registrarUsuario()}"/>
-                            <p:commandButton value="Cancelar" type="button" onclick="PF('altaUsuario').hide()"/>
-                        </h:panelGrid>
-                    </p:dialog>
-                </h:form>
+                                <p:commandButton id="btnRegistrar" value="Registrar" actionListener="#{usuarioFormBean.registrarUsuario()}"/>
+                                <p:commandButton value="Cancelar" action="/index?faces-redirect=true"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
             </ui:define>
 
         </ui:composition>

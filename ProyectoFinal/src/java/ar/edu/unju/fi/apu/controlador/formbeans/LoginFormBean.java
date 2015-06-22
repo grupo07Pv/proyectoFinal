@@ -4,6 +4,7 @@ import ar.edu.unju.fi.apu.controlador.beans.UsuarioBean;
 import ar.edu.unju.fi.apu.dao.IUsuarioDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.UsuarioDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Usuario;
+import ar.edu.unju.fi.apu.modelo.dominio.util.Encrypt;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +31,7 @@ public class LoginFormBean implements Serializable{
     public String validarUsuario() {
         String resultado = null;
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-        System.out.println(nombreUsuario +" "+ password);
+        setPassword(Encrypt.sha512(getPassword()));
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario,password);
         System.out.println("Valido Usuario");
         if (usuario != null) {
