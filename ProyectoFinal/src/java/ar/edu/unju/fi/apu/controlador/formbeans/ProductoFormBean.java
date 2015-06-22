@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -30,6 +31,7 @@ public class ProductoFormBean {
     @ManagedProperty (value = "#{productoBean}")
     private ProductoBean productoBean;
     private UploadedFile archivo;
+    private String precio;
     /**
      * Creates a new instance of ProductoFormBean
      */

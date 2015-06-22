@@ -57,6 +57,7 @@
                                             margin-left: 40px;
                                             color: #ffffff;"  class="hvr-float" label="Facturas" rendered="#{loginFormBean.verificarSesion()}">
                                     <p:menuitem class="hvr-underline-from-center" value="Nueva"  outcome="/facturas/facturas.xhtml"/>
+                                    <p:menuitem class="hvr-underline-from-center" value="Consulta"  outcome="/facturas/busquedaFactura.xhtml" rendered="#{loginFormBean.validarNombreUsuario()}"/>
                                 </p:submenu>
 
                                 <p:submenu   style="margin-top: 35px;
