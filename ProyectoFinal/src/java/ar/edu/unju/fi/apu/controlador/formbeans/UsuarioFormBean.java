@@ -34,7 +34,7 @@ public class UsuarioFormBean {
             this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
             usuarioDAO.agregarUsuario(usuarioBean.getUsuario());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alta Concretada", "Alta Concretada"));
-            RequestContext.getCurrentInstance().execute("PF('altaUsuario').hide()");
+            RequestContext.getCurrentInstance().update("frmAltaUsuario:mensajeUsuario");
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Introduzca otro usuario", null));
         }
