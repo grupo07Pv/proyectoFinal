@@ -85,6 +85,46 @@
                     <ui:insert name="content">.</ui:insert>
                 </div>
             </div>
+            
+ 
+    <p:tabView dynamic="true" cache="true" class="formTop">
+        <p:tab title="Dark Souls II">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="/images/ds2.jpg" />
+                <h:outputText
+                    value="Sigue la estela del primer título de la saga para ofrecernos 
+                    altas dosis de acción en este desafiante RPG. Este juego conserva las bases jugables de 
+                    su antecesor aunque también incorpora novedades como la libertad de exploración, 
+                    que permitirá al jugador organizar las misiones a su antojo. Se trata de una secuela 
+                    continuista que parte del primer título y que promete mantener el nivel de dificultad
+                    que caracteriza a los juegos de FromSoftware pese a la incorporación de elementos como 
+                    los viajes rápidos o el aumento de elementos para recuperar salud. " />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Dragon Age">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="/images/da.jpg" />
+                <h:outputText value="La tercera entrega de esta saga de rol 
+                              desarrollada por BioWare para PC nos llevará otra vez a este gran mundo épico.
+                              En esta ocasión la jugabilidad se verá aún más influenciada por las decisiones
+                              tomadas anteriormente además de tener en cuenta las partidas grabadas de los dos 
+                              anteriores títulos. Aunque el juego no depende directamente de sus hermanos mayores
+                              si que existen menciones a hechos ocurridos con anterioridad. Guerra, magia y un gran
+                              arsenal te esperan en Orlais para sumergirte en este tercer título de la saga. " />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Battlefield 3">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="/images/bf.jpg" />
+                <h:outputText value="Battlefield vuelve a PC con una nueva entrega ambientada de nuevo en 
+                              la guerra moderna, que usa el motor gráfico Frostbite 2. Su campaña nos llevará 
+                              a Oriente Medio, y su multijugador tendrá escenarios tanto en lugares clásicos de los
+                              juegos bélicos como en ciudades como París. El modo multijugador contará con un red social 
+                              llamada Battlelog, y con numerosos modos de juego, desde el sencillo todos contra todos hasta
+                              otros que requerirán la coordinación entre los diferentes miembros de un equipo." />
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
             <ui:insert name="bottom">
                 <div class="footer" align="center" id="iconos">
                     <p style="font-size: 20px;
