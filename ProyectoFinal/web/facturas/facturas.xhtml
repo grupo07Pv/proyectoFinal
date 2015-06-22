@@ -18,21 +18,21 @@
                         <h:panelGroup>
                             <br />
                             <p:fieldset legend="Productos">
-                                <p:dataTable value="#{productoFormBean.obtenerProductos()}" var="prod" style="font-size: 10px;width: 700px;" scrollable="true" scrollHeight="100">
+                                <p:dataTable id="tblProductosDisponibles" value="#{facturaFormBean.productoFormBean.obtenerProductos()}" var="prodSel" style="font-size: 10px;width: 700px;" scrollable="true" scrollHeight="100">
                                     <p:column headerText="CÓDIGO DE BARRAS">
-                                        <h:outputText value="#{prod.codigo}"/>
+                                        <h:outputText value="#{prodSel.codigo}"/>
                                     </p:column>
                                     <p:column headerText="NOMBRE" filterBy="nombre">
-                                        <h:outputText value="#{prod.nombre}"/>
+                                        <h:outputText value="#{prodSel.nombre}"/>
                                     </p:column>
                                     <p:column headerText="PRECIO UNITARIO">
-                                        <h:outputText value="#{prod.precio}"/>
+                                        <h:outputText value="#{prodSel.precio}"/>
                                     </p:column>
                                     <p:column headerText="STOCK">
-                                        <h:outputText value="#{prod.stock}"/>
+                                        <h:outputText value="#{prodSel.stock}"/>
                                     </p:column>
                                     <p:column>
-                                        <p:commandButton value="Agregar" ajax="true" actionListener="#{facturaFormBean.agregarListaDetalle(prod)}"/>
+                                        <p:commandButton value="Agregar" ajax="true" actionListener="#{facturaFormBean.agregarListaDetalle(prodSel)}"/>
                                     </p:column>
                                 </p:dataTable>
                             </p:fieldset>

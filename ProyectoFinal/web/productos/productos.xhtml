@@ -12,13 +12,13 @@
             <ui:define name="left">
 
             </ui:define>
-            <ui:define name="content">
+            <ui:define name="content" >
                 <div>
                     <p:growl id="grwMensajeProducto" showDetail="true" widgetVar="mensajesProductos"/>
                     <p:panel id="pnlProductos" rendered="#{loginFormBean.validarNombreUsuario()}">
                         <h:form id="frmProductos" >
                             <p:dataTable id="tblProductos" value="#{productoFormBean.obtenerProductos()}" 
-                                         var="pro" rows="4"  paginator="true" >
+                                         var="pro" rows="5"  paginator="true" >
                                 <p:column headerText="Foto" style="width: 90px;" >
                                     <p:panel rendered="#{pro.conFoto}" style="border-style: none; height: 70px;">
                                         <p:graphicImage width="60" value="#{productoFormBean.archivoFoto}" height="60" cache="false" rendered="#{pro.conFoto}">

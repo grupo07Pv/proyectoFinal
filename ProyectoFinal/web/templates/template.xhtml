@@ -85,23 +85,16 @@
             </div>
             <div id="contenedor_central">
                 <div id="left">
-                    <ui:insert name="left">
+                    <ui:insert name="left" >
                         <p:imageSwitch effect="fade" id="fadeEffect">
                             <ui:repeat value="#{imagenViewBean.imagenes}" var="imagen" id="fadeEffectImages">
                                 <p:graphicImage value="/resources/images/#{imagen}" id="image"/>
                             </ui:repeat>
                         </p:imageSwitch>
-                    </ui:insert>
-                </div>
-                <div id="content" class="left_content">
-                    <ui:insert name="content">.</ui:insert>
-                </div>
-            </div>
-
-
-            <p:tabView dynamic="true" cache="true" class="formTop2">
-                <p:tab title="Dark Souls II">
-                    <h:panelGrid columns="2" cellpadding="10">
+                        <br/>
+                                   <p:tabView dynamic="true" cache="true" class="formTop2"  >
+                <p:tab title="Dark Souls II" >
+                    <h:panelGrid columns="2" cellpadding="10"  >
                         <p:graphicImage name="/images/ds2.jpg" />
                         <h:outputText
                             value="Sigue la estela del primer título de la saga para ofrecernos 
@@ -137,8 +130,18 @@
                     </h:panelGrid>
                 </p:tab>
             </p:tabView>
+                    </ui:insert>
+                </div>
+                <div id="content" class="left_content">
+                    <ui:insert name="content">.</ui:insert>
+                </div>
+            </div>
+            
+  
+
+           
             <ui:insert name="bottom">
-                <div class="footer" align="center" id="iconos">
+                <div class="footer" align="center" id="iconos" style="margin-top:  25em; ">
                     <p style="font-size: 20px;
                        font-weight: bold;
                        color: #ffffff">Tambien puedes seguirnos en</p>

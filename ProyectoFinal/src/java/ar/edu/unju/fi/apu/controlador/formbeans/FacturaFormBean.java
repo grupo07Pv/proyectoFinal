@@ -26,7 +26,8 @@ import org.primefaces.context.RequestContext;
 @ManagedBean
 @ViewScoped
 public class FacturaFormBean {
-
+    @ManagedProperty(value = "#{productoFormBean}")
+    private ProductoFormBean productoFormBean;
     @ManagedProperty(value = "#{facturaBean}")
     private FacturaBean facturaBean;
     private Producto producto;
@@ -105,6 +106,7 @@ public class FacturaFormBean {
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblProductosDisponibles");
     }
 
     public List<Factura> obtenerFacturas() {
@@ -184,6 +186,20 @@ public class FacturaFormBean {
 
     public void setAlgunasFacturas(List<Factura> algunasFacturas) {
         this.algunasFacturas = algunasFacturas;
+    }
+
+    /**
+     * @return the productoFormBean
+     */
+    public ProductoFormBean getProductoFormBean() {
+        return productoFormBean;
+    }
+
+    /**
+     * @param productoFormBean the productoFormBean to set
+     */
+    public void setProductoFormBean(ProductoFormBean productoFormBean) {
+        this.productoFormBean = productoFormBean;
     }
 
 }
