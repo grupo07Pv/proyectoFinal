@@ -44,20 +44,9 @@
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:outputLabel>
                             </p:column>
-                            <p:column>
-                                <p:commandButton  icon="ui-icon-trash" title="Eliminar"  actionListener="#{facturaFormBean.obtenerFactura(fact)}"
-                                                      oncomplete="PF('confirmaBajaFactura').show()"/>
-                            </p:column>
                         </p:dataTable>
                     </h:form>
-                    <h:form id="frmBajaFactura">
-                        <p:confirmDialog id="dlgConfirmaBajaFactura" message="¿Confirma Eliminacion de la Factura?" 
-                                         header="CONFIRMACION DE BAJA" severity="alert" widgetVar="confirmaBajaFactura">
-                            <p:commandButton  icon="ui-icon-check" value="SI" update=":frmTabla:tblFacturas"
-                                              actionListener="#{facturaFormBean.eliminarFactura()}"/>
-                            <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaFactura').hide();"/>
-                        </p:confirmDialog>
-                    </h:form>
+                    
                 </p:panel>
             </ui:define>
 
