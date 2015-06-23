@@ -18,7 +18,7 @@
                         <h:panelGroup>
                             <br />
                             <p:fieldset legend="Productos">
-                                <p:dataTable value="#{productoFormBean.obtenerProductos()}" var="prod" style="font-size: 10px;width: 700px;" scrollable="true" scrollHeight="100">
+                                <p:dataTable id="tblVentaProd" value="#{productoFormBean.obtenerProductos()}" var="prod" style="font-size: 10px;width: 700px;" scrollable="true" scrollHeight="100">
                                     <p:column headerText="CÓDIGO DE BARRAS">
                                         <h:outputText value="#{prod.codigo}"/>
                                     </p:column>

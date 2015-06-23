@@ -35,6 +35,7 @@ public class FacturaFormBean {
     private Date fechaDesde;
     private Date fechaHasta;
     private List<Factura> algunasFacturas;
+
     /**
      * Creates a new instance of FacturaFormBean
      */
@@ -66,7 +67,7 @@ public class FacturaFormBean {
         RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
 
-    public void retirarListaDetalle(Producto prod){
+    public void retirarListaDetalle(Producto prod) {
         int i = 0;
         for (DetalleFactura item : this.listaDetalles) {
             if (item.getProductos().getCodigo() == prod.getCodigo()) {
@@ -104,6 +105,7 @@ public class FacturaFormBean {
         }
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblVentaProd");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
 
@@ -112,24 +114,27 @@ public class FacturaFormBean {
         return facturaDAO.obtenerTodos();
     }
 
-    public void buscarFacturas(){
+    public void buscarFacturas() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
         algunasFacturas = facturaDAO.obtenerAlgunas(fechaDesde, fechaHasta);
     }
-    
-    public void obtenerFactura(Factura factura){
+
+    public void obtenerFactura(Factura factura) {
         facturaBean.setFactura(factura);
         //RequestContext.getCurrentInstance().update(null);
     }
-    public void eliminarFactura(){
+
+    public void eliminarFactura() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
         facturaDAO.eliminarFactura(this.facturaBean.getFactura());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion concretada","Operacion concretada"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion concretada", "Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
     }
-    public Date getFechaActual(){
+
+    public Date getFechaActual() {
         return new Date(System.currentTimeMillis());
     }
+
     public FacturaBean getFacturaBean() {
         return facturaBean;
     }
