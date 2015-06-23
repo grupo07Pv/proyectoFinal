@@ -46,7 +46,7 @@
                                 <h:panelGroup/>
                                 <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="Agregar"
                                                  onclick="PF('confirmarAltaTipo').show()" update="frmAltaTipoProd"/>
-                                <p:commandButton id="btnCancelarTipo" type="button" value="Cancelar" onclick="PF('altaTipoProd').hide()"
+                                <p:commandButton id="btnCancelarTipo" type="button" value="Cancelar" onclick="PF('altaTipoProd').hide()"/>
                             </h:panelGrid>
                         </p:dialog>
 
@@ -76,7 +76,7 @@
 
                         <p:confirmDialog id="dlgConfirmaModiTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
                                          severity="alert" widgetVar="confirmaModificarTipo">
-                            <p:commandButton icon="ui-icon-check" value="SI"actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
+                            <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
                             <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide();"/>
                         </p:confirmDialog>
                     </h:form>
