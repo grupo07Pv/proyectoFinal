@@ -13,8 +13,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -33,6 +31,8 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @SessionScoped
 public class ProductoFormBean {
+    @ManagedProperty (value = "#{tipoProductoFormBean}")
+    TipoProductoFormBean tipoProducto;
     @ManagedProperty (value = "#{productoBean}")
     private ProductoBean productoBean;
     private UploadedFile archivo;
@@ -43,44 +43,35 @@ public class ProductoFormBean {
     public ProductoFormBean() {
     }
 
-    public ProductoBean getProductoBean() {
-        return productoBean;
-    }
-
-    public void setProductoBean(ProductoBean productoBean) {
-        this.productoBean = productoBean;
-    }
-    
-    public List<Producto> obtenerProductos(){
-        IProductoDAO productoDAO =new ProductoDAOImp();
-        return productoDAO.obtenerTodos();
-    }
-    
-    public void obtenerProducto (Producto producto){
-        productoBean.setProducto(producto);
-        ProductoFormBean.this.setPrecio(producto.getPrecio().toString());
-        RequestContext.getCurrentInstance().update("frmModificaProducto:dlgModificaProducto");
+    //Metodos
+    public void actualizarProducto(){
+        convertirPrecio();
+        IProductoDAO productoDAO = new ProductoDAOImp();
+        try{
+            if (archivo.getFileName().isEmpty()==false){
+                InputStream inputStream = this.archivo.getInputstream();
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] bytes = new byte[16384];
+                while ((nRead = inputStream.read(bytes, 0, bytes.length)) != -1) {
+                    buffer.write(bytes, 0, nRead);
+                }
+                buffer.flush();
+                this.productoBean.getProducto().setFoto(buffer.toByteArray());
+            }
+        }catch(Exception e){
+        }
+        productoDAO.modificarProducto(this.productoBean.getProducto());
+        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Modificado", "Operacion Realizada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
+        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
+        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
     }
     
     public void agregarProducto (){
-        
-        try {
-            
-            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
-            otherSymbols.setDecimalSeparator(',');
-            DecimalFormat df = new DecimalFormat("###,##", otherSymbols);
-            Number numero2 = df.parse(precio);
-            
-            BigDecimal numero = new BigDecimal (numero2.toString());
-        productoBean.getProducto().setPrecio(numero);
-            
-        } catch (ParseException ex) {
-           
-        }
-        
+        convertirPrecio();
         productoBean.getProducto().setEstado(true);
         IProductoDAO productoDAO=new ProductoDAOImp();
-        
         try{
             InputStream inputStream = this.archivo.getInputstream();
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -93,66 +84,35 @@ public class ProductoFormBean {
             this.productoBean.getProducto().setFoto(buffer.toByteArray());
             System.out.println(this.productoBean.getProducto().getFoto().length);
         }catch(Exception e){
-            
         }
         
         productoDAO.agregarProducto(this.productoBean.getProducto());
-        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
+        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Agregado", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
+        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
+        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
+    }
+    
+    public void convertirPrecio(){
+        try {
+            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
+            otherSymbols.setDecimalSeparator(',');
+            DecimalFormat df = new DecimalFormat("###,##", otherSymbols);
+            Number numero2 = df.parse(precio);
+            BigDecimal numero = new BigDecimal (numero2.toString());
+            productoBean.getProducto().setPrecio(numero);
+        } catch (ParseException ex) {
+        }
     }
     
     public void eliminarProducto(){
         this.productoBean.getProducto().setEstado(false);
         IProductoDAO productoDAO = new ProductoDAOImp();
         productoDAO.bajaProducto(productoBean.getProducto());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion concretada","Operacion concretada"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Eliminado","Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaProducto').hide()");
-    }
-
-    public void actualizarProducto(){
-        
-        try {
-            
-            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
-            otherSymbols.setDecimalSeparator(',');
-            DecimalFormat df = new DecimalFormat("###,##", otherSymbols);
-            Number numero2 = df.parse(precio);
-            
-            BigDecimal numero = new BigDecimal (numero2.toString());
-            productoBean.getProducto().setPrecio(numero);
-            
-        } catch (ParseException ex) {
-           
-        }
-        IProductoDAO productoDAO = new ProductoDAOImp();
-        try{
-            if (archivo.getFileName().isEmpty()==false){
-                InputStream inputStream = this.archivo.getInputstream();
-                //voy leyendo el inputStream con el metodo read hasta que no haya mas datos
-                //cuando llega al final .read retorna -1 y termina.
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                int nRead;
-                byte[] bytes = new byte[16384];
-                while ((nRead = inputStream.read(bytes, 0, bytes.length)) != -1) {
-                    buffer.write(bytes, 0, nRead);
-                }
-                //escribo fisicamente lo que pudiera quedar en almacen temporal
-                buffer.flush();
-                this.productoBean.getProducto().setFoto(buffer.toByteArray());
-                //System.out.println(this.pacienteBean.getPaciente().getFoto().length);
-            }
-        }catch(Exception e){
-        
-        }
-        //this.productoBean.getProducto().setEstado(true);
-        productoDAO.modificarProducto(this.productoBean.getProducto());
-        FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Realizada", "Operacion Realizada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
-    }
-    
-    public void limpiarFormulario(){
-        this.productoBean.setProducto(new Producto());
-        this.precio="";
+        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
+        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
     }
     
     public StreamedContent getArchivoFoto() throws IOException{
@@ -173,6 +133,40 @@ public class ProductoFormBean {
     }
     public StreamedContent getArchivoFotoModif() throws IOException{
         return (new DefaultStreamedContent(new ByteArrayInputStream(this.productoBean.getProducto().getFoto())));
+    }
+    
+    public void limpiarFormulario(){
+        this.productoBean.setProducto(new Producto());
+        this.precio="";
+    }
+    
+    public void obtenerProducto (Producto producto){
+        productoBean.setProducto(producto);
+        ProductoFormBean.this.setPrecio(producto.getPrecio().toString());
+        RequestContext.getCurrentInstance().update("frmModificaProducto:dlgModificaProducto");
+    }
+    
+    public List<Producto> obtenerProductos(){
+        IProductoDAO productoDAO =new ProductoDAOImp();
+        return productoDAO.obtenerTodos();
+    }
+    
+    // Getters & Setters
+
+    public TipoProductoFormBean getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProductoFormBean tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+    
+    public ProductoBean getProductoBean() {
+        return productoBean;
+    }
+
+    public void setProductoBean(ProductoBean productoBean) {
+        this.productoBean = productoBean;
     }
     
     public UploadedFile getArchivo() {

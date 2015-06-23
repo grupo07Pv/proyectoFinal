@@ -46,6 +46,7 @@ public class FacturaFormBean {
         this.total = new BigDecimal("100");
     }
 
+    // Metodos
     public void agregarListaDetalle(Producto prod) {
         boolean bandera = true;
         for (DetalleFactura item : listaDetalles) {
@@ -68,21 +69,11 @@ public class FacturaFormBean {
         RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
 
-    public void retirarListaDetalle(Producto prod) {
-        int i = 0;
-        for (DetalleFactura item : this.listaDetalles) {
-            if (item.getProductos().getCodigo() == prod.getCodigo()) {
-                this.listaDetalles.remove(i);
-                break;
-            }
-            i++;
-        }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Producto retirado de la lista de venta"));
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+    public void buscarFacturas() {
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        algunasFacturas = facturaDAO.obtenerAlgunas(fechaDesde, fechaHasta);
     }
-
+    
     public void calcularTotal() {
         this.total = new BigDecimal("0");
         for (DetalleFactura item : listaDetalles) {
@@ -91,7 +82,18 @@ public class FacturaFormBean {
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
-
+    
+    public void eliminarFactura() {
+        IFacturaDAO facturaDAO = new FacturaDAOImp();
+        facturaDAO.eliminarFactura(this.facturaBean.getFactura());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion concretada", "Operacion concretada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
+    }
+    
+    public Date getFechaActual() {
+        return new Date(System.currentTimeMillis());
+    }
+    
     public void grabarFactura() {
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         FacturaDAOImp facturaDAO = new FacturaDAOImp();
@@ -110,33 +112,34 @@ public class FacturaFormBean {
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tblProductosDisponibles");
     }
-
-    public List<Factura> obtenerFacturas() {
-        IFacturaDAO facturaDAO = new FacturaDAOImp();
-        return facturaDAO.obtenerTodos();
-    }
-
-    public void buscarFacturas() {
-        IFacturaDAO facturaDAO = new FacturaDAOImp();
-        algunasFacturas = facturaDAO.obtenerAlgunas(fechaDesde, fechaHasta);
-    }
-
+    
     public void obtenerFactura(Factura factura) {
         facturaBean.setFactura(factura);
         //RequestContext.getCurrentInstance().update(null);
     }
 
-    public void eliminarFactura() {
+    public List<Factura> obtenerFacturas() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
-        facturaDAO.eliminarFactura(this.facturaBean.getFactura());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion concretada", "Operacion concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
+        return facturaDAO.obtenerTodos();
+    }
+    
+    public void retirarListaDetalle(Producto prod) {
+        int i = 0;
+        for (DetalleFactura item : this.listaDetalles) {
+            if (item.getProductos().getCodigo() == prod.getCodigo()) {
+                this.listaDetalles.remove(i);
+                break;
+            }
+            i++;
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Producto retirado de la lista de venta"));
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
+        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
     }
 
-    public Date getFechaActual() {
-        return new Date(System.currentTimeMillis());
-    }
-
+    // Getters & Setters
+    
     public FacturaBean getFacturaBean() {
         return facturaBean;
     }

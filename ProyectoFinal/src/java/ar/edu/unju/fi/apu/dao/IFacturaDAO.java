@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface IFacturaDAO {
     public void agregarFactura (Factura factura);
-    public void modificarFactura (Factura factura);
     public void eliminarFactura (Factura factura);
-    public List<Factura> obtenerTodos();
-    public List<Factura> obtenerAlgunas(Date desde,Date Hasta);
     public Factura getUltimoRegistro();
+    public void modificarFactura (Factura factura);
+    public List<Factura> obtenerAlgunas(Date desde,Date Hasta);
+    public List<Factura> obtenerTodos();
 }

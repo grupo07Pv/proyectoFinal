@@ -13,39 +13,40 @@
 
             </ui:define>
             <ui:define name="content" >
-                <div>
+                <h:form id="frmGralProd">
                     <p:growl id="grwMensajeProducto" showDetail="true" widgetVar="mensajesProductos"/>
                     <p:panel id="pnlProductos" rendered="#{loginFormBean.validarNombreUsuario()}">
                         <h:form id="frmProductos" >
                             <p:dataTable id="tblProductos" value="#{productoFormBean.obtenerProductos()}" 
-                                         var="pro" rows="5"  paginator="true" >
+                                         var="prod" rows="5"  paginator="true" >
                                 <p:column headerText="Foto" style="width: 90px;" >
-                                    <p:panel rendered="#{pro.conFoto}" style="border-style: none; height: 70px;">
-                                        <p:graphicImage width="60" value="#{productoFormBean.archivoFoto}" height="60" cache="false" rendered="#{pro.conFoto}">
-                                            <f:param name="codigo" value="#{pro.codigo}"/>
+                                    <p:panel rendered="#{prod.conFoto}" style="border-style: none; height: 70px;">
+                                        <p:graphicImage width="60" value="#{productoFormBean.archivoFoto}" height="60" cache="false" rendered="#{prod.conFoto}">
+                                            <f:param name="codigo" value="#{prod.codigo}"/>
                                         </p:graphicImage>
-                                        
                                     </p:panel>
                                 </p:column>
                                 <p:column headerText="Codigo" style="width: 60px;">
-                                    <p:outputLabel value="#{pro.codigo}"/>
+                                    <p:outputLabel value="#{prod.codigo}"/>
                                 </p:column>
                                 <p:column headerText="Nombre" style="width: 95px;">
-                                    <p:outputLabel value="#{pro.nombre}"/>
+                                    <p:outputLabel value="#{prod.nombre}"/>
                                 </p:column>
                                 <p:column headerText="Tipo de Producto" style="width: 95px;">
-                                    <p:outputLabel value="#{pro.tipoProducto.nombre}"/>
+                                    <p:outputLabel value="#{prod.tipoProducto.nombre}"/>
                                 </p:column>
                                 <p:column headerText="Stock" style="width: 45px;">
-                                    <p:outputLabel value="#{pro.stock}"/>
+                                    <p:outputLabel value="#{prod.stock}"/>
                                 </p:column>
                                 <p:column headerText="Precio" style="width: 45px;">
-                                    <p:outputLabel value="#{pro.precio}" />
+                                    <p:outputLabel value="#{prod.precio}">
+                                        <f:convertNumber currencySymbol="$ "/>
+                                    </p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
                                     <p:commandButton  icon="ui-icon-pencil" title="Modificar" oncomplete="PF('modificaProducto').show()"
-                                                      actionListener="#{productoFormBean.obtenerProducto(pro)}" update=":frmModificaProducto"/>
-                                    <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(pro)}" 
+                                                      actionListener="#{productoFormBean.obtenerProducto(prod)}" update=":frmModificaProducto"/>
+                                    <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(prod)}" 
                                                       oncomplete="PF('confirmaBajaProducto').show()"/>
                                 </p:column>
                             </p:dataTable>
@@ -58,13 +59,11 @@
                     </p:panel>
 
                     <h:form id="frmAltaProducto"  enctype="multipart/form-data">
-                        <p:dialog id="dlgAltaProducto" modal="true"
-                                  header="Alta de Producto"
-                                  showEffect="explode"
-                                  hideEffect="explode"
-                                  widgetVar="altaProductos">
+                        <p:growl id="msjAlta" showDetail="true" sticky="true"/>
+                        <p:dialog id="dlgAltaProducto" modal="true" header="Alta de Producto" showEffect="explode"
+                                  hideEffect="explode" widgetVar="altaProductos">
                             <h:panelGrid id="pnlAltaProducto" columns="2" cellpadding="4">
-                                
+
                                 <p:outputLabel for="txtNombre" value="Nombre: "/>
                                 <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}"
                                              required="true"/>
@@ -76,15 +75,16 @@
                                 </p:inputText>
 
                                 <p:outputLabel for="txtPrecio" value="Precio: "/>
-                          
+
                                 <p:inputMask id="txtPrecio" mask="999,99"  value="#{productoFormBean.precio}"
                                              required="true">
-                                    
+
                                 </p:inputMask>
-                                
+
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
                                 <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" id="txtTipoProducto" converter="tipoProductoConverter" required="true">
-                                    <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
+                                    <f:selectItem itemValue="" itemLabel="Seleccione uno..."/>
+                                    <f:selectItems value="#{productoFormBean.tipoProducto.obtenerTipoProductos()}" var="tip" itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
                                 </h:selectOneMenu>
 
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
@@ -92,76 +92,72 @@
                                               style="font-size: 12px; " required="true"/>
 
                             </h:panelGrid>
-                            <p:commandButton id="btnNuevoProducto" type="button" value="Grabar"
-                                             onclick="PF('confirmaAltaProducto').show()">
-                            </p:commandButton> 
-                            
+                            <p:commandButton id="btnNuevoProducto" type="button" value="Grabar" update="frmAltaProducto:msjAlta"
+                                             onclick="PF('confirmaAltaProducto').show()"/>
+                            <p:commandButton id="btnCancelarProd" type="button" value="Cancelar" onclick="PF('altaProductos').hide()"> 
+
                         </p:dialog>
 
                         <p:confirmDialog id="dlgConfirmaAltaProducto" header="CONFIRMACION DE OPERACION" 
                                          message="¿Confirma Alta de Producto?" severity="alert" widgetVar="confirmaAltaProducto">
 
-                            <p:commandButton value="SI" update=":frmProducto:tblProductos" ajax="false" icon="ui-icon-check"
-                                             actionListener="#{productoFormBean.agregarProducto()}"/>
+                            <p:commandButton value="SI" ajax="false" icon="ui-icon-check" actionListener="#{productoFormBean.agregarProducto()}"/>
 
-                            <p:commandButton value="NO" icon="ui-icon-close" oncomplete="PF('confirmaAltaProducto').hide()"/>
+                            <p:commandButton value="NO" icon="ui-icon-close" oncomplete="PF('confirmaAltaProducto').hide();PF('altaProductos').hide()"/>
                         </p:confirmDialog>
                     </h:form>
-                    
+
                     <h:form id="frmModificaProducto" enctype="multipart/form-data">
+                        <p:growl id="mensajeModifProd" showDetail="false" sticky="false"/>
                         <p:dialog id="dlgModificaProducto" resizable="false" modal="true"
                                   showEffect="explode" hideEffect="explode"
                                   widgetVar="modificaProducto" header="Modificacion de Producto">
                             <h:panelGrid id="pnlModificaProducto" columns="2" cellspacing="3">
-                                <p:outputLabel value="Codigo: " for="txtCodigo"/>
-                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}" required="true"/>
-                            
+                                <p:outputLabel value="Codigo:  #{productoFormBean.productoBean.producto.codigo}"/>
+
                                 <p:outputLabel value="Nombre: " for="txtNombre"/>
                                 <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}" required="true"/>
-                                
+
                                 <p:outputLabel value="Stock: " for="txtStock"/>
                                 <p:inputText id="txtStock" value="#{productoFormBean.productoBean.producto.stock}" required="true">
                                     <f:convertNumber integerOnly="true"/>
                                     <f:validateLongRange minimum="1"/>
                                 </p:inputText>
-                                
+
                                 <p:outputLabel value="Precio: " for="txtPrecio"/>
                                 <p:inputMask id="txtPrecio" mask="999,99" value="#{productoFormBean.precio}" required="true">
-                                    
+
                                 </p:inputMask>
-                                
+
                                 <p:outputLabel for="txtTipoProducto" value="Tipo de Producto: "/>
                                 <h:selectOneMenu value="#{productoFormBean.productoBean.producto.tipoProducto}" required="true" 
                                                  id="txtTipoProducto" converter="tipoProductoConverter">
                                     <f:selectItems value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tip" 
                                                    itemValue="#{tip}" itemLabel="#{tip.nombre}"></f:selectItems>  
                                 </h:selectOneMenu>
-                            
+
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
                                 <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple" required="true"
                                               style="font-size: 12px; "/>
                             </h:panelGrid>
-                            <p:commandButton id="btnModificarProducto" value="Grabar" type="button"
+                            <p:commandButton id="btnModificarProducto" value="Grabar" type="button" update="frmModificaProducto:mensajeModifProd"
                                              onclick="PF('confirmaModificaProducto').show()"/>
                         </p:dialog>
                         <p:confirmDialog id="dlgConfirmaModificaProducto" header="CONFIRMACION DE OPERACION"
                                          message="¿Confirma Modificacion de Producto?" severity="alert" 
                                          widgetVar="confirmaModificaProducto">
-                            <p:commandButton value="SI" update=":frmProductos:tblProductos" ajax="false" icon="ui-icon-check"
-                                             actionListener="#{productoFormBean.actualizarProducto()}"/>
-                            <p:commandButton value="NO" icon="ui-icon-close" 
-                                             oncomplete="PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()"/>
+                            <p:commandButton value="SI" ajax="false" icon="ui-icon-check" actionListener="#{productoFormBean.actualizarProducto()}"/>
+                            <p:commandButton value="NO" icon="ui-icon-close"  type="button" onclick="PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()"/>
                         </p:confirmDialog>
                     </h:form>
                     <h:form id="frmBajaProducto">
                         <p:confirmDialog id="dlgConfirmaBajaProducto" message="¿Confirma Baja Producto?" 
                                          header="CONFIRMACION DE BAJA" severity="alert" widgetVar="confirmaBajaProducto">
-                            <p:commandButton  icon="ui-icon-check" value="SI" update=":frmProductos:tblProductos"
-                                              actionListener="#{productoFormBean.eliminarProducto()}"/>
-                            <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaProducto').hide();"/>
+                            <p:commandButton  icon="ui-icon-check" value="SI"  actionListener="#{productoFormBean.eliminarProducto()}"/>
+                            <p:commandButton icon="ui-icon-cancel" value="NO" type="button" onclick="PF('confirmaBajaProducto').hide();"/>
                         </p:confirmDialog>
                     </h:form>
-                </div>
+                </h:form>>
             </ui:define>
 
         </ui:composition>

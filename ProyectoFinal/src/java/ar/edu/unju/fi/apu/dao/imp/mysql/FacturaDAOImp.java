@@ -15,15 +15,36 @@ import org.hibernate.criterion.Order;
  *
  * @author Grupo 7 - VeGaMES
  */
-public class FacturaDAOImp implements IFacturaDAO{
+public class FacturaDAOImp implements IFacturaDAO {
 
     @Override
     public void agregarFactura(Factura factura) {
-      Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(factura);
         session.getTransaction().commit();
-        session.close();  
+        session.close();
+    }
+
+    @Override
+    public void eliminarFactura(Factura factura) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(factura);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public Factura getUltimoRegistro() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "from Factura order by codigo desc";
+        Query query = session.createQuery(hql).setMaxResults(1);
+        Factura factura = (Factura) query.uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return factura;
     }
 
     @Override
@@ -32,7 +53,31 @@ public class FacturaDAOImp implements IFacturaDAO{
         session.beginTransaction();
         session.update(factura);
         session.getTransaction().commit();
-        session.close();  
+        session.close();
+    }
+
+    @Override
+    public List<Factura> obtenerAlgunas(Date desde, Date Hasta) {
+        List<Factura> filtroFactura = new ArrayList();
+        for (Factura unaFactura : obtenerTodos()) {
+            boolean resultado = true;
+
+            if ((resultado == true) && (desde != null) && (unaFactura.getFecha() != null)) {
+                if (unaFactura.getFecha().compareTo(desde) <= -1) {
+                    resultado = false;
+                }
+            }
+
+            if ((resultado == true) && (Hasta != null) && (unaFactura.getFecha() != null)) {
+                if (unaFactura.getFecha().compareTo(Hasta) >= 1) {
+                    resultado = false;
+                }
+            }
+            if (resultado == true) {
+                filtroFactura.add(unaFactura);
+            }
+        }
+        return filtroFactura;
     }
 
     @Override
@@ -44,50 +89,4 @@ public class FacturaDAOImp implements IFacturaDAO{
         session.close();
         return productos;
     }
-
-    @Override
-    public Factura getUltimoRegistro() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        String hql="from Factura order by codigo desc";
-        Query query=session.createQuery(hql).setMaxResults(1);
-        Factura factura = (Factura) query.uniqueResult();
-        session.getTransaction().commit();
-        session.close();
-        return factura;
-    }
-
-    @Override
-    public List<Factura> obtenerAlgunas(Date desde, Date Hasta) {
-        List <Factura> filtroFactura = new ArrayList();
-        for(Factura unaFactura: obtenerTodos()){
-            boolean resultado = true;
-            
-            if( (resultado == true)&&(desde != null)&&(unaFactura.getFecha() != null)){
-                if(unaFactura.getFecha().compareTo(desde) <= -1){
-                    resultado = false;
-                }
-            }
-            
-            if( (resultado == true)&&(Hasta != null)&&(unaFactura.getFecha() != null)){
-                if(unaFactura.getFecha().compareTo(Hasta) >= 1){
-                    resultado = false;
-                }
-            }
-            if (resultado == true){
-                filtroFactura.add(unaFactura);
-            }
-        }
-        return filtroFactura;
-    }
-
-    @Override
-    public void eliminarFactura(Factura factura) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(factura);
-        session.getTransaction().commit();
-        session.close();  
-    }
-    
 }

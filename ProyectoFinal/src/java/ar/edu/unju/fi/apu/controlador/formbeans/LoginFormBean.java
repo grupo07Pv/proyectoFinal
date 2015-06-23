@@ -31,6 +31,34 @@ public class LoginFormBean implements Serializable{
         miSession.setMaxInactiveInterval(5000);
     }
 
+    // Metodos
+    public String cerrarSesion() {
+        this.nombreUsuario = null;
+        this.password = null;
+        HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.invalidate();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        return "/index?faces-redirect=true";
+    }
+    
+    public static String getNombreUsuarioCliente() {
+        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
+        return usuario.getNombreUsuario();
+    }
+    
+    public String getNombreUsuarioValidado() {
+        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
+        if (usuario == null){
+            usuario = new Usuario();
+        }
+        return usuario.getNombreUsuario();
+    }
+    
+    public void limpiarFormulario(){
+        this.usuarioBean.setUsuario(new Usuario());
+    }
+    
     public String logIn() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
         setPassword(Encrypt.sha512(getPassword()));
@@ -46,6 +74,16 @@ public class LoginFormBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         }
         return "/index?faces-redirect=true";
+    }
+    
+    public boolean validarNombreUsuario(){
+        boolean band = false;
+        String nombre = getNombreUsuarioValidado();
+        if (nombre.equalsIgnoreCase("admin"))
+        {   
+            band=true;
+        }
+        return band;
     }
     
     public String validarUsuarioDos() {
@@ -69,28 +107,6 @@ public class LoginFormBean implements Serializable{
         return resultado;
     }
     
-    public String getNombreUsuarioValidado() {
-        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
-        if (usuario == null){
-            usuario = new Usuario();
-        }
-        return usuario.getNombreUsuario();
-    }
-    
-    public static String getNombreUsuarioCliente() {
-        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
-        return usuario.getNombreUsuario();
-    }
-    
-    public String cerrarSesion() {
-        this.nombreUsuario = null;
-        this.password = null;
-        HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        httpSession.invalidate();
-        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sesión Cerrada", "Sesión Cerrada");
-        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-        return "/index?faces-redirect=true";
-    }
     public boolean verificarSesion() {
         boolean sesionValida = false;
         Usuario usuario = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValido");
@@ -99,20 +115,9 @@ public class LoginFormBean implements Serializable{
         }
         return sesionValida ;
     }
-     public boolean validarNombreUsuario(){
-        boolean band = false;
-        String nombre = getNombreUsuarioValidado();
-        if (nombre.equalsIgnoreCase("admin"))
-        {   
-            band=true;
-        }
-        return band;
-    }
      
-     public void limpiarFormulario(){
-        this.usuarioBean.setUsuario(new Usuario());
-    }
-
+    // Getters & Setters
+     
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;
     }

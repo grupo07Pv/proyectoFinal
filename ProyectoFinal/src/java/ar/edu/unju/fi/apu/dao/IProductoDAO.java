@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface IProductoDAO {
     public void agregarProducto (Producto producto);
-    public void modificarProducto (Producto producto);
     public void bajaProducto(Producto producto);
     public void eliminarProducto (Producto producto);
-    public List<Producto> obtenerTodos();
+    public void modificarProducto (Producto producto);
     public Producto obtenerProducto(int codigo);
+    public List<Producto> obtenerTodos();
 }

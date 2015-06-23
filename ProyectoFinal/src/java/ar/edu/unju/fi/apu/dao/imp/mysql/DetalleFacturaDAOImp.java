@@ -24,19 +24,19 @@ public class DetalleFacturaDAOImp implements IDetalleFacturaDAO{
     }
 
     @Override
-    public void modificarDetalle(DetalleFactura facturaDetalle) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.update(facturaDetalle);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
     public void eliminarDetalle(DetalleFactura facturaDetalle) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(facturaDetalle);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
+    public void modificarDetalle(DetalleFactura facturaDetalle) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(facturaDetalle);
         session.getTransaction().commit();
         session.close();
     }

@@ -11,35 +11,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Grupo 7 - VeGaMES
  */
-
-public class UsuarioDAOImp implements IUsuarioDAO{
-
-    @Override
-    public Usuario validarUsuario(String nombreUsuario, String password) {
-        Usuario usuario = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Usuario.class);
-        criteria.add(Restrictions.eq("nombreUsuario", nombreUsuario));
-        criteria.add(Restrictions.eq("password", password));
-        if (!(criteria.list().isEmpty())){
-            usuario =(Usuario) criteria.list().get(0);
-        }
-        session.close();
-        return usuario;
-    }
-
-    @Override
-    public Usuario obtenerUsuario(String nombreUsuario) {
-        Usuario usuario = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Usuario.class);
-        criteria.add(Restrictions.eq("nombreUsuario", nombreUsuario));
-        if (!(criteria.list().isEmpty())){
-            usuario =(Usuario) criteria.list().get(0);
-        }
-        session.close();
-        return usuario;
-    }
+public class UsuarioDAOImp implements IUsuarioDAO {
 
     @Override
     public void agregarUsuario(Usuario usuario) {
@@ -58,5 +30,31 @@ public class UsuarioDAOImp implements IUsuarioDAO{
         session.getTransaction().commit();
         session.close();
     }
-    
+
+    @Override
+    public Usuario obtenerUsuario(String nombreUsuario) {
+        Usuario usuario = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Usuario.class);
+        criteria.add(Restrictions.eq("nombreUsuario", nombreUsuario));
+        if (!(criteria.list().isEmpty())) {
+            usuario = (Usuario) criteria.list().get(0);
+        }
+        session.close();
+        return usuario;
+    }
+
+    @Override
+    public Usuario validarUsuario(String nombreUsuario, String password) {
+        Usuario usuario = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Usuario.class);
+        criteria.add(Restrictions.eq("nombreUsuario", nombreUsuario));
+        criteria.add(Restrictions.eq("password", password));
+        if (!(criteria.list().isEmpty())) {
+            usuario = (Usuario) criteria.list().get(0);
+        }
+        session.close();
+        return usuario;
+    }
 }

@@ -13,7 +13,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Grupo 7 - VeGaMES
  */
-public class TipoProductoDAOImp implements ITipoProductoDAO{
+public class TipoProductoDAOImp implements ITipoProductoDAO {
 
     @Override
     public void agregarTipoProducto(TipoProducto tipoProducto) {
@@ -21,16 +21,7 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         session.beginTransaction();
         session.save(tipoProducto);
         session.getTransaction().commit();
-        session.close();   
-    }
-
-    @Override
-    public void modificarTipoProducto(TipoProducto tipoProducto) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.update(tipoProducto);
-        session.getTransaction().commit();
-        session.close();   
+        session.close();
     }
 
     @Override
@@ -39,7 +30,29 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         session.beginTransaction();
         session.delete(tipoProducto);
         session.getTransaction().commit();
-        session.close();   
+        session.close();
+    }
+
+    @Override
+    public void modificarTipoProducto(TipoProducto tipoProducto) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(tipoProducto);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public TipoProducto obtenerTipoProducto(int codigo) {
+        TipoProducto tipoProducto = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(TipoProducto.class);
+        criteria.add(Restrictions.eq("codigo", codigo));
+        if (!(criteria.list().isEmpty())) {
+            tipoProducto = (TipoProducto) criteria.list().get(0);
+        }
+        session.close();
+        return tipoProducto;
     }
 
     @Override
@@ -52,18 +65,4 @@ public class TipoProductoDAOImp implements ITipoProductoDAO{
         session.close();
         return productos;
     }
-
-    @Override
-    public TipoProducto obtenerTipoProducto(int codigo) {
-        TipoProducto tipoProducto = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria =session.createCriteria(TipoProducto.class);
-        criteria.add(Restrictions.eq("codigo", codigo));
-        if (!(criteria.list().isEmpty())){
-            tipoProducto=(TipoProducto) criteria.list().get(0);
-        }
-        session.close();
-        return tipoProducto;
-    }
-    
 }

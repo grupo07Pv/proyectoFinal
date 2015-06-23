@@ -13,22 +13,13 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Grupo 7 - VeGaMES
  */
-public class ProductoDAOImp implements IProductoDAO{
+public class ProductoDAOImp implements IProductoDAO {
 
     @Override
     public void agregarProducto(Producto producto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(producto);
-        session.getTransaction().commit();
-        session.close();   
-    }
-
-    @Override
-    public void modificarProducto(Producto producto) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.update(producto);
         session.getTransaction().commit();
         session.close();
     }
@@ -41,7 +32,7 @@ public class ProductoDAOImp implements IProductoDAO{
         session.getTransaction().commit();
         session.close();
     }
-    
+
     @Override
     public void eliminarProducto(Producto producto) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -49,6 +40,28 @@ public class ProductoDAOImp implements IProductoDAO{
         session.delete(producto);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public void modificarProducto(Producto producto) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(producto);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public Producto obtenerProducto(int codigo) {
+        Producto producto = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Producto.class);
+        criteria.add(Restrictions.eq("codigo", codigo));
+        if (!(criteria.list().isEmpty())) {
+            producto = (Producto) criteria.list().get(0);
+        }
+        session.close();
+        return producto;
     }
 
     @Override
@@ -61,18 +74,4 @@ public class ProductoDAOImp implements IProductoDAO{
         session.close();
         return productos;
     }
-
-    @Override
-    public Producto obtenerProducto(int codigo) {
-        Producto producto=null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria =session.createCriteria(Producto.class);
-        criteria.add(Restrictions.eq("codigo", codigo));
-        if (!(criteria.list().isEmpty())){
-            producto=(Producto) criteria.list().get(0);
-        }
-        session.close();
-        return producto;
-    }
-    
 }

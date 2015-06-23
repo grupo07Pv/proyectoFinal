@@ -30,19 +30,13 @@ public class UsuarioFormBean implements Serializable{
     public UsuarioFormBean() {
     }
 
-    public void registrarUsuario() {
+    //Metodos
+    public void actualizarUsuario() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-        if (usuarioDAO.obtenerUsuario(usuarioBean.getUsuario().getNombreUsuario()) == null) {
-            System.out.println("Entro al if");
-            this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
-            usuarioDAO.agregarUsuario(usuarioBean.getUsuario());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alta Concretada", "Alta Concretada"));
-            RequestContext.getCurrentInstance().update("mensajeUsuario");
-            RequestContext.getCurrentInstance().execute("PF('register').hide()");
-            usuarioBean = new UsuarioBean();
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Introduzca otro usuario", null));
-        }
+        this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
+        usuarioDAO.modificarUsuario(usuarioBean.getUsuario());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion Concretada", "Operacion Concretada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide()");
     }
 
     public String registrarUsuarioAction() {
@@ -72,14 +66,23 @@ public class UsuarioFormBean implements Serializable{
         return pagina;
     }
     
-    public void actualizarUsuario() {
+    public void registrarUsuario() {
         IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-        this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
-        usuarioDAO.modificarUsuario(usuarioBean.getUsuario());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide()");
+        if (usuarioDAO.obtenerUsuario(usuarioBean.getUsuario().getNombreUsuario()) == null) {
+            System.out.println("Entro al if");
+            this.usuarioBean.getUsuario().setPassword(Encrypt.sha512(this.usuarioBean.getUsuario().getPassword()));
+            usuarioDAO.agregarUsuario(usuarioBean.getUsuario());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alta Concretada", "Alta Concretada"));
+            RequestContext.getCurrentInstance().update("mensajeUsuario");
+            RequestContext.getCurrentInstance().execute("PF('register').hide()");
+            usuarioBean = new UsuarioBean();
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Introduzca otro usuario", null));
+        }
     }
-
+    
+    // Getters & Setters
+    
     /**
      * @return the usuarioBean
      */

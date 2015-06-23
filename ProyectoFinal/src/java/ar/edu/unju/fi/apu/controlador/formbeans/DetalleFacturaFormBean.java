@@ -14,7 +14,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  *
- * @author Ivan, Gabriel, Gustavo
+ * @author Grupo 7 - VeGaMES
  */
 @ManagedBean (name = "detalleFormBean")
 @RequestScoped
@@ -27,23 +27,19 @@ public class DetalleFacturaFormBean {
     public DetalleFacturaFormBean() {
     }
 
-    public DetalleFacturaBean getDetalleFacturaBean() {
-        return detalleFacturaBean;
-    }
-
-    public void setDetalleFacturaBean(DetalleFacturaBean detalleFacturaBean) {
-        this.detalleFacturaBean = detalleFacturaBean;
-    }
-    public List<DetalleFactura> obtenerDetalles(){
+    // Metodos
+    public void actualizarTipoProducto (){
         IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
-        return detalleDAO.obtenerTodos();
+        detalleDAO.agregarDetalle(detalleFacturaBean.getFacturaDetalle());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()");
     }
     
-    public void obtenerDetalle (DetalleFactura detalleFactura){
-        detalleFacturaBean.setFacturaDetalle(detalleFactura);
-    }
-    public void limpiarFormulario (){
-        detalleFacturaBean.setFacturaDetalle(new DetalleFactura());
+    public void eliminarTipoProducto (){
+        IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
+        detalleDAO.agregarDetalle(detalleFacturaBean.getFacturaDetalle());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
+        RequestContext.getCurrentInstance().execute("PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()");
     }
     
     public void grabarNuevoDetalle (){
@@ -52,17 +48,26 @@ public class DetalleFacturaFormBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()");
     }
-    public void actualizarTipoProducto (){
-        IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
-        detalleDAO.agregarDetalle(detalleFacturaBean.getFacturaDetalle());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()");
-    }
-    public void eliminarTipoProducto (){
-        IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
-        detalleDAO.agregarDetalle(detalleFacturaBean.getFacturaDetalle());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Operacion Concretada", "Operacion Concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaAltaDetalle').hide();PF('altaDetalle').hide()");
+    
+    public void limpiarFormulario (){
+        detalleFacturaBean.setFacturaDetalle(new DetalleFactura());
     }
     
+    public void obtenerDetalle (DetalleFactura detalleFactura){
+        detalleFacturaBean.setFacturaDetalle(detalleFactura);
+    }
+    
+    public List<DetalleFactura> obtenerDetalles(){
+        IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
+        return detalleDAO.obtenerTodos();
+    }
+    
+    // Getters & Setters
+    public DetalleFacturaBean getDetalleFacturaBean() {
+        return detalleFacturaBean;
+    }
+
+    public void setDetalleFacturaBean(DetalleFacturaBean detalleFacturaBean) {
+        this.detalleFacturaBean = detalleFacturaBean;
+    }
 }
