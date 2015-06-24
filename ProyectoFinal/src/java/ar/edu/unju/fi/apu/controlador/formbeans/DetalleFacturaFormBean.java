@@ -4,6 +4,8 @@ import ar.edu.unju.fi.apu.controlador.beans.DetalleFacturaBean;
 import ar.edu.unju.fi.apu.dao.IDetalleFacturaDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.DetalleFacturaDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
+import ar.edu.unju.fi.apu.modelo.dominio.Factura;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -62,6 +64,18 @@ public class DetalleFacturaFormBean {
         return detalleDAO.obtenerTodos();
     }
     
+    public List<DetalleFactura> obtenerDetallesDeFactura(Factura factura){
+        System.out.println(factura.getCodigo());
+        IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
+        List<DetalleFactura> filtroDetalle = new ArrayList();
+        for(DetalleFactura deta: detalleDAO.obtenerTodos()){
+            if (deta.getFacturas().getCodigo().equalsIgnoreCase(factura.getCodigo())){
+                filtroDetalle.add(deta);
+            }
+        }
+       
+        return filtroDetalle;
+    }
     // Getters & Setters
     public DetalleFacturaBean getDetalleFacturaBean() {
         return detalleFacturaBean;

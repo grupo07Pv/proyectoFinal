@@ -84,8 +84,9 @@ public class FacturaFormBean {
     }
     
     public void eliminarFactura() {
+        this.facturaBean.getFactura().setEstado(false);
         IFacturaDAO facturaDAO = new FacturaDAOImp();
-        facturaDAO.eliminarFactura(this.facturaBean.getFactura());
+        facturaDAO.modificarFactura(this.facturaBean.getFactura());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion concretada", "Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
     }
@@ -98,6 +99,7 @@ public class FacturaFormBean {
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         FacturaDAOImp facturaDAO = new FacturaDAOImp();
         DetalleFacturaDAOImp detalleDAO = new DetalleFacturaDAOImp();
+        this.facturaBean.getFactura().setEstado(true);
         facturaDAO.agregarFactura(this.facturaBean.getFactura());
         this.facturaBean.setFactura(facturaDAO.getUltimoRegistro());
         for (DetalleFactura item : this.listaDetalles) {

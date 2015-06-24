@@ -18,35 +18,71 @@
                         <h:form id="frmBuscar">
                             <p:outputLabel value="Fecha desde: " for="fechaDesde"/>
                             <p:calendar mask="true" value="#{facturaFormBean.fechaDesde}" id="fechaDesde" locale="es" size="8" 
-                                        maxlength="8" pattern="dd-MM-yyyy"/>
-                            
+                                        maxlength="8" pattern="dd-MM-yyyy" maxdate="#{facturaFormBean.fechaActual}"/>
+
                             <p:outputLabel value="Fecha Hasta: " for="fechaHasta"/>
                             <p:calendar mask="true" value="#{facturaFormBean.fechaHasta}" id="fechaHasta" locale="es" size="8" 
                                         maxlength="8" pattern="dd-MM-yyyy" maxdate="#{facturaFormBean.fechaActual}"/>
-                            
+
                             <p:commandButton value="Buscar"  actionListener="#{facturaFormBean.buscarFacturas()}"
                                              update=":frmTabla:tblFacturas"/>
                         </h:form>
                     </h:panelGrid>
-                    
+
                     <h:form id="frmTabla">
                         <p:dataTable id="tblFacturas" value="#{facturaFormBean.algunasFacturas}" var="fact" rows="5" paginator="true">
                             <p:column headerText="Codigo" >
                                 <p:outputLabel value="#{fact.codigo}"/>
                             </p:column> 
-                            
+
                             <p:column headerText="Cliente" >
                                 <p:outputLabel value="#{fact.cliente}"/>
                             </p:column>
-                            
+
                             <p:column headerText="Fecha" >
                                 <p:outputLabel value="#{fact.fecha}">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:outputLabel>
                             </p:column>
+                            <p:column headerText="Detalles" style="width: 60px;">
+                                <p:commandButton icon="ui-icon-tag" title="Detalles" update=":frmDetalles:dlgDetalles"
+                                                 actionListener="#{facturaFormBean.obtenerFactura(fact)}"
+                                                 oncomplete="PF('detalles').show()" />
+                                <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{facturaFormBean.obtenerFactura(fact)}" 
+                                                  oncomplete="PF('confirmaBajaFactura').show()"/>
+                            </p:column>
                         </p:dataTable>
                     </h:form>
-                    
+                    <h:form id="frmDetalles">
+                        <p:dialog id="dlgDetalles" resizable="false" modal="true"
+                                  widgetVar="detalles" header="Detalles">
+                            <p:dataTable id="tblDetalles" value="#{detalleFormBean.obtenerDetallesDeFactura(facturaFormBean.facturaBean.factura)}" 
+                                         var="det" rows="4" paginator="true">
+                                <p:column headerText="Codigo Producto">
+                                    <p:outputLabel value="#{det.productos.codigo}" />
+                                </p:column>
+                                <p:column headerText="Cantidad">
+                                    <p:outputLabel value="#{det.cantidad}"/>
+                                </p:column>
+                                <p:column headerText="Precio de Venta">
+                                    <p:outputLabel value="#{det.productos.precio}"/>
+                                </p:column>
+                                <p:column headerText="Subtotal">
+                                    <p:outputLabel value="#{det.precioVenta}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton value="Atras" icon="ui-icon-close"  type="button" onclick="PF('detalles').hide()" />
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="frmBajaProducto">
+                        <p:confirmDialog id="dlgConfirmaBajaProducto" message="¿Confirma Baja Factura?" 
+                                         header="CONFIRMACION DE BAJA" severity="alert" widgetVar="confirmaBajaFactura">
+                            <p:commandButton  icon="ui-icon-check" value="SI"  actionListener="#{facturaFormBean.eliminarFactura()}"/>
+                            <p:commandButton icon="ui-icon-cancel" value="NO" type="button" onclick="PF('confirmaBajaFactura').hide();"/>
+                        </p:confirmDialog>
+                    </h:form>
                 </p:panel>
             </ui:define>
 
