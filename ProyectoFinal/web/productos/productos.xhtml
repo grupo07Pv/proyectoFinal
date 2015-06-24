@@ -13,7 +13,7 @@
 
             </ui:define>
             <ui:define name="content" >
-                <h:form id="frmGralProd">
+                
                     <p:growl id="grwMensajeProducto" showDetail="true" widgetVar="mensajesProductos"/>
                     <p:panel id="pnlProductos" rendered="#{loginFormBean.validarNombreUsuario()}">
                         <h:form id="frmProductos" >
@@ -45,7 +45,7 @@
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
                                     <p:commandButton  icon="ui-icon-pencil" title="Modificar" oncomplete="PF('modificaProducto').show()"
-                                                      actionListener="#{productoFormBean.obtenerProducto(prod)}" update=":frmGralProd:frmModificaProducto"/>
+                                                      actionListener="#{productoFormBean.obtenerProducto(prod)}" update=":frmModificaProducto"/>
                                     <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(prod)}" 
                                                       oncomplete="PF('confirmaBajaProducto').show()"/>
                                 </p:column>
@@ -53,7 +53,7 @@
                             <br/>
                             <p:commandButton id="btnCrearProducto" icon="ui-icon-plus" value="Nuevo Producto"
                                              actionListener="#{productoFormBean.limpiarFormulario()}"
-                                             oncomplete="PF('altaProductos').show();"
+                                              oncomplete="PF('altaProductos').show();"
                                              update=":frmGralProd:frmAltaProducto:dlgAltaProducto"/>
                         </h:form>
                     </p:panel>
@@ -159,7 +159,7 @@
                             <p:commandButton icon="ui-icon-cancel" value="NO" type="button" onclick="PF('confirmaBajaProducto').hide();"/>
                         </p:confirmDialog>
                     </h:form>
-                </h:form>>
+                
             </ui:define>
 
         </ui:composition>

@@ -11,7 +11,7 @@
             </ui:define>
 
             <ui:define name="content">
-                <h:form id="frmGeneralTipo">
+               
                     <p:growl id="grwMensajeTipoProd" showDetail="true" sticky="true"/>
                     <p:panel id="pnlTipoProd" rendered="#{loginFormBean.validarNombreUsuario()}">
                         <h:form id="frmTipoProd">
@@ -24,7 +24,7 @@
                                     <p:outputLabel value="#{tipo.nombre}"/>
                                 </p:column>
                                 <p:column headerText="Editar" style="width: 18px;">
-                                    <p:commandButton icon="ui-icon-pencil" title="Modificar" update=":frmGeneralTipo:frmModificaTipoProd:dlgModificaTipoProd" 
+                                    <p:commandButton icon="ui-icon-pencil" title="Modificar" update=":frmModificaTipoProd:dlgModificaTipoProd" 
                                                      actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}" oncomplete="PF('modificarTipoProd').show()"/>
                                     <p:commandButton icon="ui-icon-trash" title="Eliminar" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
                                                      oncomplete="PF('confirmaBajaTipo').show()"/>
@@ -88,7 +88,7 @@
                             <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaTipo').hide();"/>
                         </p:confirmDialog>
                     
-                </h:form>
+                
             </ui:define>
 
         </ui:composition>

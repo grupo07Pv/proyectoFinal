@@ -13,6 +13,9 @@
     <property name="cliente" type="string">
       <column length="45" name="cliente"/>
     </property>
+    <property name="estado" type="boolean">
+      <column name="estado" not-null="true" />
+    </property>
     <set name="detalles" table="factura_detalles" fetch="join" lazy="false" inverse="true">
         <key>
             <column name="codigo" length="9" not-null="true"/>

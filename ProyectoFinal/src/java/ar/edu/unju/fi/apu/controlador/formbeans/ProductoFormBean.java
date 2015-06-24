@@ -65,7 +65,7 @@ public class ProductoFormBean {
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Modificado", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
         RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
+        RequestContext.getCurrentInstance().update("grwMensajeProducto");
     }
     
     public void agregarProducto (){
@@ -90,7 +90,7 @@ public class ProductoFormBean {
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Agregado", "Operacion Realizada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
         RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
+        RequestContext.getCurrentInstance().update("grwMensajeProducto");
     }
     
     public void convertirPrecio(){

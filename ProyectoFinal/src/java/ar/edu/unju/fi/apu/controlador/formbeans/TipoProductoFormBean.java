@@ -19,7 +19,7 @@ import org.primefaces.context.RequestContext;
  * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class TipoProductoFormBean implements Serializable {
 
     @ManagedProperty(value = "#{tipoProductoBean}")

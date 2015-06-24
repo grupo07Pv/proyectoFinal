@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
  * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class TipoProductoBean implements Serializable{
     private TipoProducto tipoProducto;
     /**

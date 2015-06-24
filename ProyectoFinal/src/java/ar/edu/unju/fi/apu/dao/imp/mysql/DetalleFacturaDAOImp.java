@@ -3,10 +3,12 @@ package ar.edu.unju.fi.apu.dao.imp.mysql;
 import ar.edu.unju.fi.apu.dao.IDetalleFacturaDAO;
 import ar.edu.unju.fi.apu.hibernate.config.HibernateUtil;
 import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
+import ar.edu.unju.fi.apu.modelo.dominio.Factura;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -49,4 +51,5 @@ public class DetalleFacturaDAOImp implements IDetalleFacturaDAO{
         List productos = criteria.list();
         return productos;
     }    
+
 }

@@ -13,4 +13,5 @@ public interface IDetalleFacturaDAO {
     public void eliminarDetalle(DetalleFactura facturaDetalle);
     public void modificarDetalle(DetalleFactura facturaDetalle);
     public List<DetalleFactura> obtenerTodos();
+  
 }
