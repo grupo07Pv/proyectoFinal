@@ -3,6 +3,7 @@ package ar.edu.unju.fi.apu.controlador.beans;
 import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**

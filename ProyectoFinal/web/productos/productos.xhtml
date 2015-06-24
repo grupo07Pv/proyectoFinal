@@ -45,7 +45,7 @@
                                 </p:column>
                                 <p:column headerText="Accion" style="width: 28px;" >
                                     <p:commandButton  icon="ui-icon-pencil" title="Modificar" oncomplete="PF('modificaProducto').show()"
-                                                      actionListener="#{productoFormBean.obtenerProducto(prod)}" update=":frmModificaProducto"/>
+                                                      actionListener="#{productoFormBean.obtenerProducto(prod)}" update=":frmGralProd:frmModificaProducto"/>
                                     <p:commandButton  icon="ui-icon-trash" title="Eliminar" actionListener="#{productoFormBean.obtenerProducto(prod)}" 
                                                       oncomplete="PF('confirmaBajaProducto').show()"/>
                                 </p:column>
@@ -54,7 +54,7 @@
                             <p:commandButton id="btnCrearProducto" icon="ui-icon-plus" value="Nuevo Producto"
                                              actionListener="#{productoFormBean.limpiarFormulario()}"
                                              oncomplete="PF('altaProductos').show();"
-                                             update=":frmAltaProducto:dlgAltaProducto"/>
+                                             update=":frmGralProd:frmAltaProducto:dlgAltaProducto"/>
                         </h:form>
                     </p:panel>
 
@@ -90,11 +90,12 @@
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
                                 <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple"
                                               style="font-size: 12px; " required="true"/>
+                              
 
                             </h:panelGrid>
                             <p:commandButton id="btnNuevoProducto" type="button" value="Grabar" update="frmAltaProducto:msjAlta"
                                              onclick="PF('confirmaAltaProducto').show()"/>
-                            <p:commandButton id="btnCancelarProd" type="button" value="Cancelar" onclick="PF('altaProductos').hide()"> 
+                            <p:commandButton id="btnCancelarProd" type="button" value="Cancelar" onclick="PF('altaProductos').hide()"/> 
 
                         </p:dialog>
 
@@ -113,8 +114,8 @@
                                   showEffect="explode" hideEffect="explode"
                                   widgetVar="modificaProducto" header="Modificacion de Producto">
                             <h:panelGrid id="pnlModificaProducto" columns="2" cellspacing="3">
-                                <p:outputLabel value="Codigo:  #{productoFormBean.productoBean.producto.codigo}"/>
-
+                                <p:outputLabel value="Codigo:  " for="txtCodigo"/>
+                                <p:inputText id="txtCodigo" value="#{productoFormBean.productoBean.producto.codigo}" readonly="true"/>
                                 <p:outputLabel value="Nombre: " for="txtNombre"/>
                                 <p:inputText id="txtNombre" value="#{productoFormBean.productoBean.producto.nombre}" required="true"/>
 
@@ -139,6 +140,7 @@
                                 <p:outputLabel for="txtFoto" value="Asigne Foto: "/>
                                 <p:fileUpload id="txtFoto" value="#{productoFormBean.archivo}" mode="simple" required="true"
                                               style="font-size: 12px; "/>
+                            
                             </h:panelGrid>
                             <p:commandButton id="btnModificarProducto" value="Grabar" type="button" update="frmModificaProducto:mensajeModifProd"
                                              onclick="PF('confirmaModificaProducto').show()"/>
