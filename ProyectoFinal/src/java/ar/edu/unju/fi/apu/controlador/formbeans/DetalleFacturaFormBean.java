@@ -5,6 +5,7 @@ import ar.edu.unju.fi.apu.dao.IDetalleFacturaDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.DetalleFacturaDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
 import ar.edu.unju.fi.apu.modelo.dominio.Factura;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -20,7 +21,7 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean (name = "detalleFormBean")
 @RequestScoped
-public class DetalleFacturaFormBean {
+public class DetalleFacturaFormBean implements java.io.Serializable{
     @ManagedProperty (value="#{detalleBean}")
     private DetalleFacturaBean detalleFacturaBean;
     /**
@@ -65,10 +66,10 @@ public class DetalleFacturaFormBean {
     }
     
     public List<DetalleFactura> obtenerDetallesDeFactura(Factura factura){
-        System.out.println(factura.getCodigo());
         IDetalleFacturaDAO detalleDAO = new DetalleFacturaDAOImp();
         List<DetalleFactura> filtroDetalle = new ArrayList();
         for(DetalleFactura deta: detalleDAO.obtenerTodos()){
+            deta.setPrecioVenta(deta.getProductos().getPrecio().multiply(new BigDecimal(deta.getCantidad())));
             if (deta.getFacturas().getCodigo().equalsIgnoreCase(factura.getCodigo())){
                 filtroDetalle.add(deta);
             }

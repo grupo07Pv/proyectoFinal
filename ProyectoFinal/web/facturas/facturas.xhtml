@@ -54,7 +54,6 @@
                         <p:column headerText="Cantidad" style="text-align: center;">
                             <p:spinner value="#{item.cantidad}" min="1" max="#{item.productos.stock}" style="text-align: center;" >
                                 <f:convertNumber integerOnly="true"/>
-                                <f:validateLongRange maximum="#{item.productos.stock}"/>
                             </p:spinner>                    
                             
                         </p:column>

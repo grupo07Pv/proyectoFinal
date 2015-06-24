@@ -25,7 +25,7 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean
 @ViewScoped
-public class FacturaFormBean {
+public class FacturaFormBean implements java.io.Serializable{
     @ManagedProperty(value = "#{productoFormBean}")
     private ProductoFormBean productoFormBean;
     @ManagedProperty(value = "#{facturaBean}")
@@ -96,6 +96,7 @@ public class FacturaFormBean {
     }
     
     public void grabarFactura() {
+        this.facturaBean.getFactura().setEstado(true);
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         FacturaDAOImp facturaDAO = new FacturaDAOImp();
         DetalleFacturaDAOImp detalleDAO = new DetalleFacturaDAOImp();
@@ -107,6 +108,10 @@ public class FacturaFormBean {
             item.setFacturas(this.facturaBean.getFactura());
             item.setProductos(this.producto);
             detalleDAO.agregarDetalle(item);
+            if((item.getProductos().getStock()-item.getCantidad()) == 0){
+                this.producto.setEstado(false);
+                productoDAO.modificarProducto(this.producto);
+            }
         }
         this.listaDetalles = new ArrayList<>();
         this.facturaBean = new FacturaBean();

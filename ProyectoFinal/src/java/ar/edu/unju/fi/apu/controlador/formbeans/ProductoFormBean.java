@@ -33,7 +33,7 @@ import org.primefaces.model.UploadedFile;
  */
 @ManagedBean
 @SessionScoped
-public class ProductoFormBean {
+public class ProductoFormBean implements java.io.Serializable{
     @ManagedProperty (value = "#{productoBean}")
     private ProductoBean productoBean;
     private UploadedFile archivo;
@@ -67,7 +67,7 @@ public class ProductoFormBean {
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Modificado", "Operacion Realizada"));
         setProductos(productoDAO.obtenerTodos());
-        RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmaModificaProd').hide();PF('modificaProducto').hide()");
     }
     
     public void agregarProducto (){
@@ -91,7 +91,7 @@ public class ProductoFormBean {
         productoDAO.agregarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Agregado", "Operacion Realizada"));
         setProductos(productoDAO.obtenerTodos());
-        RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
+        RequestContext.getCurrentInstance().execute("PF('confirmaAltaProd').hide();PF('altaProducto').hide()");
     }
     
     public void convertirPrecio(){
@@ -111,9 +111,7 @@ public class ProductoFormBean {
         IProductoDAO productoDAO = new ProductoDAOImp();
         productoDAO.bajaProducto(productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Eliminado","Operacion concretada"));
-        RequestContext.getCurrentInstance().execute("PF('confirmaBajaProducto').hide()");
-        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("grwMensajeProducto");
+        RequestContext.getCurrentInstance().execute("PF('confirmaBajaProd').hide()");
     }
     
     public StreamedContent getArchivoFoto() throws IOException{

@@ -57,9 +57,9 @@
                         <p:dialog id="dlgDetalles" resizable="false" modal="true"
                                   widgetVar="detalles" header="Detalles">
                             <p:dataTable id="tblDetalles" value="#{detalleFormBean.obtenerDetallesDeFactura(facturaFormBean.facturaBean.factura)}" 
-                                         var="det" rows="4" paginator="true">
-                                <p:column headerText="Codigo Producto">
-                                    <p:outputLabel value="#{det.productos.codigo}" />
+                                         var="det" rows="4" paginator="true" style="width: 800px; text-align: center;">
+                                <p:column headerText="Producto">
+                                    <p:outputLabel value="#{det.productos.nombre}" />
                                 </p:column>
                                 <p:column headerText="Cantidad">
                                     <p:outputLabel value="#{det.cantidad}"/>

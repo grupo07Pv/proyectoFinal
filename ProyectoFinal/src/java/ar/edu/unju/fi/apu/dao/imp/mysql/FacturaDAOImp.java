@@ -73,6 +73,10 @@ public class FacturaDAOImp implements IFacturaDAO {
                     resultado = false;
                 }
             }
+            
+            if (!(unaFactura.isEstado())){
+                resultado = false;
+            }
             if (resultado == true) {
                 filtroFactura.add(unaFactura);
             }
