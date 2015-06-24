@@ -25,7 +25,8 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean
 @ViewScoped
-public class FacturaFormBean implements java.io.Serializable{
+public class FacturaFormBean implements java.io.Serializable {
+
     @ManagedProperty(value = "#{productoFormBean}")
     private ProductoFormBean productoFormBean;
     @ManagedProperty(value = "#{facturaBean}")
@@ -65,15 +66,15 @@ public class FacturaFormBean implements java.io.Serializable{
             this.listaDetalles.add(detalle);
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Producto agregado"));
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+        RequestContext.getCurrentInstance().update("frmListaCompra:tblListaCompra");
+        RequestContext.getCurrentInstance().update(":mensajeGeneral");
     }
 
     public void buscarFacturas() {
         IFacturaDAO facturaDAO = new FacturaDAOImp();
         algunasFacturas = facturaDAO.obtenerAlgunas(fechaDesde, fechaHasta);
     }
-    
+
     public void calcularTotal() {
         this.total = new BigDecimal("0");
         for (DetalleFactura item : listaDetalles) {
@@ -82,7 +83,7 @@ public class FacturaFormBean implements java.io.Serializable{
         RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
         RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
     }
-    
+
     public void eliminarFactura() {
         this.facturaBean.getFactura().setEstado(false);
         IFacturaDAO facturaDAO = new FacturaDAOImp();
@@ -90,36 +91,41 @@ public class FacturaFormBean implements java.io.Serializable{
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacion concretada", "Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaFactura').hide()");
     }
-    
+
     public Date getFechaActual() {
         return new Date(System.currentTimeMillis());
     }
-    
+
     public void grabarFactura() {
         this.facturaBean.getFactura().setEstado(true);
         ProductoDAOImp productoDAO = new ProductoDAOImp();
         FacturaDAOImp facturaDAO = new FacturaDAOImp();
         DetalleFacturaDAOImp detalleDAO = new DetalleFacturaDAOImp();
         this.facturaBean.getFactura().setEstado(true);
-        facturaDAO.agregarFactura(this.facturaBean.getFactura());
-        this.facturaBean.setFactura(facturaDAO.getUltimoRegistro());
-        for (DetalleFactura item : this.listaDetalles) {
-            this.producto = productoDAO.obtenerProducto(item.getProductos().getCodigo());
-            item.setFacturas(this.facturaBean.getFactura());
-            item.setProductos(this.producto);
-            detalleDAO.agregarDetalle(item);
-            if((item.getProductos().getStock()-item.getCantidad()) == 0){
-                this.producto.setEstado(false);
-                productoDAO.modificarProducto(this.producto);
+        if (this.listaDetalles.size() > 0) {
+            facturaDAO.agregarFactura(this.facturaBean.getFactura());
+            this.facturaBean.setFactura(facturaDAO.getUltimoRegistro());
+            for (DetalleFactura item : this.listaDetalles) {
+                this.producto = productoDAO.obtenerProducto(item.getProductos().getCodigo());
+                item.setFacturas(this.facturaBean.getFactura());
+                item.setProductos(this.producto);
+                detalleDAO.agregarDetalle(item);
+                if ((item.getProductos().getStock() - item.getCantidad()) == 0) {
+                    this.producto.setEstado(false);
+                    productoDAO.modificarProducto(this.producto);
+                }
             }
+            this.listaDetalles = new ArrayList<>();
+            this.facturaBean = new FacturaBean();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada", "Muchas Gracias"));
+            RequestContext.getCurrentInstance().update("frmVentasProd:tblProductosDisponibles");
+            RequestContext.getCurrentInstance().update("frmListaCompra:tblListaCompra");
+            RequestContext.getCurrentInstance().update("mensajeGeneral");
         }
-        this.listaDetalles = new ArrayList<>();
-        this.facturaBean = new FacturaBean();
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblVentaProd");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tblProductosDisponibles");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Cargue un Detalle", "De la Lista"));
+        RequestContext.getCurrentInstance().update("mensajeGeneral");
     }
-    
+
     public void obtenerFactura(Factura factura) {
         facturaBean.setFactura(factura);
         //RequestContext.getCurrentInstance().update(null);
@@ -129,7 +135,7 @@ public class FacturaFormBean implements java.io.Serializable{
         IFacturaDAO facturaDAO = new FacturaDAOImp();
         return facturaDAO.obtenerTodos();
     }
-    
+
     public void retirarListaDetalle(Producto prod) {
         int i = 0;
         for (DetalleFactura item : this.listaDetalles) {
@@ -140,13 +146,11 @@ public class FacturaFormBean implements java.io.Serializable{
             i++;
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Producto retirado de la lista de venta"));
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
-        RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+        RequestContext.getCurrentInstance().update("frmListaCompra:tblListaCompra");
+        RequestContext.getCurrentInstance().update("mensajeGeneral");
     }
 
     // Getters & Setters
-    
     public FacturaBean getFacturaBean() {
         return facturaBean;
     }
