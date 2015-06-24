@@ -24,7 +24,7 @@
                                     <p:outputLabel value="#{tipo.nombre}"/>
                                 </p:column>
                                 <p:column headerText="Editar" style="width: 18px;">
-                                    <p:commandButton icon="ui-icon-pencil" title="Modificar" update=":frmModificaTipoProd:dlgModificaTipoProd" 
+                                    <p:commandButton icon="ui-icon-pencil" title="Modificar" update="frmModificaTipoProd:dlgModificaTipoProd" 
                                                      actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}" oncomplete="PF('modificarTipoProd').show()"/>
                                     <p:commandButton icon="ui-icon-trash" title="Eliminar" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
                                                      oncomplete="PF('confirmaBajaTipo').show()"/>
