@@ -2,8 +2,11 @@ package ar.edu.unju.fi.apu.controlador.formbeans;
 
 import ar.edu.unju.fi.apu.controlador.beans.ProductoBean;
 import ar.edu.unju.fi.apu.dao.IProductoDAO;
+import ar.edu.unju.fi.apu.dao.ITipoProductoDAO;
 import ar.edu.unju.fi.apu.dao.imp.mysql.ProductoDAOImp;
+import ar.edu.unju.fi.apu.dao.imp.mysql.TipoProductoDAOImp;
 import ar.edu.unju.fi.apu.modelo.dominio.Producto;
+import ar.edu.unju.fi.apu.modelo.dominio.TipoProducto;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,12 +34,12 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @SessionScoped
 public class ProductoFormBean {
-    @ManagedProperty (value = "#{tipoProductoFormBean}")
-    TipoProductoFormBean tipoProducto;
     @ManagedProperty (value = "#{productoBean}")
     private ProductoBean productoBean;
     private UploadedFile archivo;
     private String precio;
+    private List<TipoProducto> tipos;
+    private List<Producto> productos;
     /**
      * Creates a new instance of ProductoFormBean
      */
@@ -63,9 +66,8 @@ public class ProductoFormBean {
         }
         productoDAO.modificarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Modificado", "Operacion Realizada"));
+        setProductos(productoDAO.obtenerTodos());
         RequestContext.getCurrentInstance().execute("PF('confirmaModificaProducto').hide();PF('modificaProducto').hide()");
-        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
     }
     
     public void agregarProducto (){
@@ -88,9 +90,8 @@ public class ProductoFormBean {
         
         productoDAO.agregarProducto(this.productoBean.getProducto());
         FacesContext.getCurrentInstance().addMessage(null, new  FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Agregado", "Operacion Realizada"));
+        setProductos(productoDAO.obtenerTodos());
         RequestContext.getCurrentInstance().execute("PF('confirmaAltaProducto').hide();PF('altaProducto').hide()");
-        RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
     }
     
     public void convertirPrecio(){
@@ -112,7 +113,7 @@ public class ProductoFormBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Producto Eliminado","Operacion concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaProducto').hide()");
         RequestContext.getCurrentInstance().update("frmProductos:tblProductos");
-        RequestContext.getCurrentInstance().update("frmGralProd:grwMensajeProducto");
+        RequestContext.getCurrentInstance().update("grwMensajeProducto");
     }
     
     public StreamedContent getArchivoFoto() throws IOException{
@@ -135,6 +136,11 @@ public class ProductoFormBean {
         return (new DefaultStreamedContent(new ByteArrayInputStream(this.productoBean.getProducto().getFoto())));
     }
     
+    public List<TipoProducto> tipoProd(){
+        ITipoProductoDAO tipoDAO = new TipoProductoDAOImp();
+        return tipoDAO.obtenerTodos();
+    }
+    
     public void limpiarFormulario(){
         this.productoBean.setProducto(new Producto());
         this.precio="";
@@ -152,15 +158,6 @@ public class ProductoFormBean {
     }
     
     // Getters & Setters
-
-    public TipoProductoFormBean getTipoProducto() {
-        return tipoProducto;
-    }
-
-    public void setTipoProducto(TipoProductoFormBean tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
-    
     public ProductoBean getProductoBean() {
         return productoBean;
     }
@@ -184,5 +181,22 @@ public class ProductoFormBean {
     public void setPrecio(String precio) {
         this.precio = precio;
     }
-    
+
+    public List<TipoProducto> getTipos() {
+        return tipos;
+    }
+
+    public void setTipos(List<TipoProducto> tipos) {
+        this.tipos = tipos;
+    }
+
+    public List<Producto> getProductos() {
+        IProductoDAO productoDAO = new ProductoDAOImp();
+        this.productos = productoDAO.obtenerTodos();
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 }

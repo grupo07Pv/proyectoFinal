@@ -2,6 +2,7 @@ package ar.edu.unju.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.controlador.formbeans.LoginFormBean;
 import ar.edu.unju.fi.apu.modelo.dominio.Factura;
+import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,7 +13,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class FacturaBean {
+public class FacturaBean implements Serializable{
 
     private Factura factura;
 

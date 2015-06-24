@@ -1,12 +1,13 @@
 package ar.edu.unju.fi.apu.controlador.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
  
 @ManagedBean
-public class ImagenViewBean {
+public class ImagenViewBean implements Serializable{
      
     private List<String> images;
      

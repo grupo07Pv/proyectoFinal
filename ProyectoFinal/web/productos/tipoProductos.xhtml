@@ -11,83 +11,83 @@
             </ui:define>
 
             <ui:define name="content">
-                <h:form id="frmGeneralTipo">
-                    <p:growl id="grwMensajeTipoProd" showDetail="true" sticky="true"/>
-                    <p:panel id="pnlTipoProd" rendered="#{loginFormBean.validarNombreUsuario()}">
-                        <h:form id="frmTipoProd">
-                            <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
-                                         paginator="true" rows="5">
-                                <p:column headerText="CODIGO" style="width: 35px;">
-                                    <p:outputLabel value="#{tipo.codigo}"/>
-                                </p:column>
-                                <p:column headerText="NOMBRE" style="width: 50px;">
-                                    <p:outputLabel value="#{tipo.nombre}"/>
-                                </p:column>
-                                <p:column headerText="Editar" style="width: 18px;">
-                                    <p:commandButton icon="ui-icon-pencil" title="Modificar" update="frmModificaTipoProd:dlgModificaTipoProd" 
-                                                     actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}" oncomplete="PF('modificarTipoProd').show()"/>
-                                    <p:commandButton icon="ui-icon-trash" title="Eliminar" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
-                                                     oncomplete="PF('confirmaBajaTipo').show()"/>
-                                </p:column>
-                            </p:dataTable>
-                            <br/>
-                            <p:commandButton id="btnAgregarTipoProd" type="button" value="Agregar" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
-                                             onclick="PF('altaTipoProd').show()"/>
-                        </h:form>   
-                    </p:panel>
+                <p:growl id="grwMensajeTipoProd" showDetail="true" sticky="true"/>
+                <p:panel id="pnlTipoProd" rendered="#{loginFormBean.validarNombreUsuario()}">
+                    <h:form id="frmTipoProd">
+                        <p:dataTable id="tblTipoProd" value="#{tipoProductoFormBean.obtenerTipoProductos()}" var="tipo"
+                                     paginator="true" rows="5">
+                            <p:column headerText="CODIGO" style="width: 35px;">
+                                <p:outputLabel value="#{tipo.codigo}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" style="width: 50px;">
+                                <p:outputLabel value="#{tipo.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Editar" style="width: 18px;">
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" update=":frmModificaTipoProd:dlgModificaTipoProd" 
+                                                 actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}" oncomplete="PF('modificarTipoProd').show()"/>
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" actionListener="#{tipoProductoFormBean.obtenerTipoProducto(tipo)}"
+                                                 oncomplete="PF('confirmaBajaTipo').show()"/>
+                            </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <p:commandButton id="btnAgregarTipoProd" value="Agregar" actionListener="#{tipoProductoFormBean.limpiarFormulario()}"
+                                         update=":frmAltaTipoProd:dlgAltaTipoProd" oncomplete="PF('altaTipoProd').show()"/>
+                    </h:form>   
+                </p:panel>
 
-                    <h:form id="frmAltaTipoProd">
-                        <p:growl id="mensajeAlta" showDetail="true" sticky="false"/>
-                        <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="slide" hideEffect="explode"
-                                  widgetVar="altaTipoProd" header="Alta de Tipo de Producto">
-                            <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
-                                <p:outputLabel for="txtNombre" value="Nombre: "/>
-                                <p:inputText id="txtNombre" required="true" size="15" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
-                                <h:panelGroup/>
-                                <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="Agregar"
-                                                 onclick="PF('confirmarAltaTipo').show()" update="frmAltaTipoProd"/>
-                                <p:commandButton id="btnCancelarTipo" type="button" value="Cancelar" onclick="PF('altaTipoProd').hide()"/>
-                            </h:panelGrid>
-                        </p:dialog>
+                <h:form id="frmAltaTipoProd">
+                    <p:growl id="mensajeAlta" showDetail="true" sticky="false"/>
+                    <p:dialog id="dlgAltaTipoProd" resizable="false" modal="true" showEffect="slide" hideEffect="explode"
+                              widgetVar="altaTipoProd" header="Alta de Tipo de Producto">
+                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
+                            <p:outputLabel for="txtNombre" value="Nombre: "/>
+                            <p:inputText id="txtNombre" required="true" size="15" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                            <h:panelGroup/>
+                            <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="Agregar"
+                                             onclick="PF('confirmarAltaTipo').show()" update="frmAltaTipoProd"/>
+                            <p:commandButton id="btnCancelarTipo" type="button" value="Cancelar" onclick="PF('altaTipoProd').hide()"/>
+                        </h:panelGrid>
+                    </p:dialog>
 
-                        <p:confirmDialog id="dlgConfirmarAltaTipo" message="¿Confirma Alta del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
-                                         severity="alert" widgetVar="confirmarAltaTipo">
-                            <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.grabarTipoProducto()}"/>
-                            <p:commandButton icon="ui-icon-cancel" type="button" value="NO" onclick="PF('confirmarAltaTipo').hide();PF('altaTipoProd').hide();"/>
-                        </p:confirmDialog>
-                    </h:form>
+                    <p:confirmDialog id="dlgConfirmarAltaTipo" message="¿Confirma Alta del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
+                                     severity="alert" widgetVar="confirmarAltaTipo">
+                        <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.grabarTipoProducto()}"/>
+                        <p:commandButton icon="ui-icon-cancel" type="button" value="NO" onclick="PF('confirmarAltaTipo').hide();
+                                PF('altaTipoProd').hide();"/>
+                    </p:confirmDialog>
+                </h:form>
 
-                    <h:form id="frmModificaTipoProd">
-                        <p:growl id="mensajeModif" showDetail="true" sticky="true"/>
-                        <p:dialog id="dlgModificaTipoProd" resizable="false" modal="true" showEffect="explode" hideEffect="bounce"
-                                  widgetVar="modificarTipoProd" header="Modificación de Tipo de Producto">
-                            <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
-                                <p:outputLabel for="txtCodigo" value="Codigo: "/>
-                                <p:inputText id="txtCodigo" required="true" size="8" readonly="true"
-                                             value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
+                <h:form id="frmModificaTipoProd">
+                    <p:growl id="mensajeModif" showDetail="true" sticky="true"/>
+                    <p:dialog id="dlgModificaTipoProd" resizable="false" modal="true" showEffect="explode" hideEffect="bounce"
+                              widgetVar="modificarTipoProd" header="Modificación de Tipo de Producto">
+                        <h:panelGrid id="pnlAltaTipoProd" columns="2" cellpadding="3">
+                            <p:outputLabel for="txtCodigo" value="Codigo: "/>
+                            <p:inputText id="txtCodigo" required="true" size="8" readonly="true"
+                                         value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.codigo}"/>
 
-                                <p:outputLabel for="txtNombre" value="Nombre: "/>
-                                <p:inputText id="txtNombre" required="true" size="30" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
-                                <h:panelGroup/>
-                                <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="GRABAR"
-                                                 onclick="PF('confirmaModificarTipo').show()" update="frmModificaTipoProd"/>
-                            </h:panelGrid>
-                        </p:dialog>
+                            <p:outputLabel for="txtNombre" value="Nombre: "/>
+                            <p:inputText id="txtNombre" required="true" size="30" value="#{tipoProductoFormBean.tipoProductoBean.tipoProducto.nombre}"/>
+                            <h:panelGroup/>
+                            <p:commandButton id="btnNuevoTipoProd" type="button" icon="ui-icon-plus" value="GRABAR"
+                                             onclick="PF('confirmaModificarTipo').show()" update="frmModificaTipoProd"/>
+                        </h:panelGrid>
+                    </p:dialog>
 
-                        <p:confirmDialog id="dlgConfirmaModiTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
-                                         severity="alert" widgetVar="confirmaModificarTipo">
-                            <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
-                            <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide();"/>
-                        </p:confirmDialog>
-                    </h:form>
+                    <p:confirmDialog id="dlgConfirmaModiTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
+                                     severity="alert" widgetVar="confirmaModificarTipo">
+                        <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.actualizarTipoProducto()}"/>
+                        <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide();"/>
+                    </p:confirmDialog>
+                </h:form>
 
-                    
-                        <p:confirmDialog id="dlgConfirmaBajaTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
-                                         severity="alert" widgetVar="confirmaBajaTipo">
-                            <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.eliminarTipoProducto()}"/>
-                            <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaTipo').hide();"/>
-                        </p:confirmDialog>
-                    
+                <h:form>
+                    <p:confirmDialog id="dlgConfirmaBajaTipo" message="¿Confirma Modificación del Tipo?" header="CONFIRMACIÓN DE OPERACIÓN"
+                                     severity="alert" widgetVar="confirmaBajaTipo">
+                        <p:commandButton icon="ui-icon-check" value="SI" actionListener="#{tipoProductoFormBean.eliminarTipoProducto()}"/>
+                        <p:commandButton icon="ui-icon-cancel" value="NO" oncomplete="PF('confirmaBajaTipo').hide();"/>
+                    </p:confirmDialog>
+
                 </h:form>
             </ui:define>
 

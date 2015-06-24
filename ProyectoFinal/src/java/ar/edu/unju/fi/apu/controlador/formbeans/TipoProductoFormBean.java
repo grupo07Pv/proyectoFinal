@@ -9,7 +9,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
@@ -18,7 +18,7 @@ import org.primefaces.context.RequestContext;
  * @author Grupo 7 - VeGaMES
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class TipoProductoFormBean implements Serializable {
 
     @ManagedProperty(value = "#{tipoProductoBean}")
@@ -37,7 +37,7 @@ public class TipoProductoFormBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo Producto Modificado", "Operacion Concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaModificarTipo').hide();PF('modificarTipoProd').hide()");
         RequestContext.getCurrentInstance().update("frmTipoProd:tblTipoProd");
-        RequestContext.getCurrentInstance().update("frmGeneralTipo:grwMensajeTipoProd");
+        RequestContext.getCurrentInstance().update("grwMensajeTipoProd");
     }
 
     public void eliminarTipoProducto() {
@@ -47,7 +47,7 @@ public class TipoProductoFormBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo Producto Eliminado", "Operacion Concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmaBajaTipo').hide()");
         RequestContext.getCurrentInstance().update("frmTipoProd:tblTipoProd");
-        RequestContext.getCurrentInstance().update("frmGeneralTipo:grwMensajeTipoProd");
+        RequestContext.getCurrentInstance().update("grwMensajeTipoProd");
     }
 
     public void grabarTipoProducto() {
@@ -57,7 +57,7 @@ public class TipoProductoFormBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo Producto Agregado", "Operacion Concretada"));
         RequestContext.getCurrentInstance().execute("PF('confirmarAltaTipo').hide();PF('altaTipoProd').hide()");
         RequestContext.getCurrentInstance().update("frmTipoProd:tblTipoProd");
-        RequestContext.getCurrentInstance().update("frmGeneralTipo:grwMensajeTipoProd");
+        RequestContext.getCurrentInstance().update("grwMensajeTipoProd");
     }
 
     public void limpiarFormulario() {
