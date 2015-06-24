@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.apu.controlador.beans;
 
 import ar.edu.unju.fi.apu.modelo.dominio.DetalleFactura;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -10,7 +11,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean (name = "detalleBean")
 @RequestScoped
-public class DetalleFacturaBean {
+public class DetalleFacturaBean implements Serializable{
     private DetalleFactura facturaDetalle;
     /**
      * Creates a new instance of DetalleFacturaBean
